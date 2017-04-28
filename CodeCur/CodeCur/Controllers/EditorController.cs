@@ -6,13 +6,14 @@ using System.Web.Mvc;
 
 namespace CodeCur.Controllers
 {
-    public class HomeController : Controller
+    public class EditorController : Controller
     {
+        // GET: Editor
         public ActionResult Index()
         {
             return View();
         }
-        public ActionResult Project()
+        public ActionResult Editor()
         {
             //TODO
             return View();
