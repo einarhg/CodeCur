@@ -8,8 +8,9 @@ namespace CodeCur.Models.Entities
     public class Project
     {
         public int ID { get; set; }
-        public string name { get; set; }
-        public string type { get; set; }
-        public List<File> files { get; set; }
+        public int AccountID { get; set; }
+        public string Name { get; set; }
+        public string Type { get; set; }
+        public DateTime DateCreated { get; set; }
     }
 }

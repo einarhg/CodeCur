@@ -3,6 +3,7 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
+using CodeCur.Models.Entities;
 
 namespace CodeCur.Models
 {
@@ -20,6 +21,10 @@ namespace CodeCur.Models
 
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
+        public DbSet<Account> Accounts { get; set; }
+        public DbSet<Project> Projects { get; set; }
+        public DbSet<File> Files { get; set; }
+
         public ApplicationDbContext()
             : base("DefaultConnection", throwIfV1Schema: false)
         {
