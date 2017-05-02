@@ -47,6 +47,14 @@
     margin-left: 2.5%;
 }
 
+.text-danger span {
+    margin-left: 5%;
+}
+
+.text-danger li {
+    margin-right: 5%;
+}
+
 .account-form-group input[type=text], .account-form-group input[type=password] {
     background: #eee;
     border: 1px solid #ddd;

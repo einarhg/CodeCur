@@ -11,6 +11,7 @@
             {
                 @Html.AntiForgeryToken()
                 <h2>Create a new account</h2>
+                @Html.ValidationSummary(true, "Please fix the following:", new { @class = "text-danger" });
                 <div class="account-form-group">
                     @Html.LabelFor(m => m.FirstName, new { @class = "" })
                     <div class="">
@@ -23,13 +24,6 @@
                     <div class="">
                         @Html.TextBoxFor(m => m.LastName, new { @class = "", @placeholder = "Last name" })
                         @Html.ValidationMessageFor(m => m.LastName, "", new { @class = "text-danger" })
-                    </div>
-                </div>
-                <div class="account-form-group">
-                    @Html.LabelFor(m => m.Username, new { @class = "" })
-                    <div class="">
-                        @Html.TextBoxFor(m => m.Username, new { @class = "", @placeholder = "Username" })
-                        @Html.ValidationMessageFor(m => m.Username, "", new { @class = "text-danger" })
                     </div>
                 </div>
                 <div class="account-form-group">
