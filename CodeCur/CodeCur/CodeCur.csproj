@@ -196,7 +196,6 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
-    <Compile Include="Models\Entities\Account.cs" />
     <Compile Include="Models\Entities\File.cs" />
     <Compile Include="Models\Entities\Project.cs" />
     <Compile Include="Models\IdentityModels.cs" />
