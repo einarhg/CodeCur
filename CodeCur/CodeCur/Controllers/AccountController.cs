@@ -151,11 +151,7 @@ namespace CodeCur.Controllers
         {
             if (ModelState.IsValid)
             {
-<<<<<<< HEAD
-                var user = new ApplicationUser { UserName = model.Email, Email = model.Email }; 
-=======
                 var user = new ApplicationUser { UserName = model.Email, FirstName = model.FirstName, LastName = model.LastName, Email = model.Email };
->>>>>>> origin/master
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
