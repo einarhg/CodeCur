@@ -1,0 +1,106 @@
+﻿.custom-container {
+    /*max-width: 1200px;*/
+}
+
+.account-body {
+    background: #222;
+    height: 100vh;
+    overflow: auto;
+    padding-bottom: 70px;
+    width: 100%;
+}
+
+.account-container {
+    margin: auto;
+    max-width: 560px;
+    padding: 12vh 20px 0 20px; 
+    width: 100%;
+}
+
+.account-container img {
+    padding-bottom: 15px;
+    width: 220px;
+}
+
+.about-text {
+    color: #fff;
+    padding-top: 15px;
+}
+
+.account-login-box {
+    background: #fff;
+    border-radius: 2px;
+    padding: 10px;
+}
+
+.account-login-box h2 {
+    font-weight: 200;
+    margin: 15px 0 20px 0;
+    text-align: center;
+}
+
+.account-form-group {
+    padding: 5px 0;
+}
+
+.account-form-group span {
+    margin-left: 2.5%;
+}
+
+.account-form-group input[type=text], .account-form-group input[type=password] {
+    background: #eee;
+    border: 1px solid #ddd;
+    box-sizing: border-box;
+    font-size: 18px;
+    margin-left: 5%;
+    max-width: 100%;
+    padding: 8px 10px;
+    width: 90%;
+    transition: border 0.5s;
+    -webkit-transition: border 0.3s;
+}
+
+.account-form-group input:focus {
+    outline: none;
+}
+
+.account-form-group input[type=text]:focus, .account-form-group input[type=password]:focus {
+    border: 1px solid #6cc3d0;
+}
+
+.account-form-group label {
+    margin-left: 5%;
+    font-weight: 500;
+    margin-bottom: 1px;
+}
+
+.account-form-group .checkbox {
+    margin-left: 5%;
+}
+
+.account-form-group .checkbox label {
+    font-size: 15px;
+    margin-left: 3px;
+}
+
+.account-button {
+    background: #6cc3d0;
+    border: none;
+    border-radius: 2px;
+    color: #fff;
+    font-size: 18px;
+    margin: 10px 5% 5px 5%;
+    max-width: 100%;
+    padding: 7px 0;
+    width: 90%;
+    transition: background 0.2s;
+    -webkit-transition: background 0.2s;
+}
+
+.account-button:hover {
+    background: #5cb6c3;
+}
+
+.account-login-box p {
+    margin: 5px 5% 15px 5%;
+}
