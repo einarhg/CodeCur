@@ -8,8 +8,8 @@ namespace CodeCur.Models.ViewModels
 {
     public class EditorViewModel
     {
-        public File file { get; set; }
-        public string projectName { get; set; }
-        public string username { get; set; }
+        public File File { get; set; }
+        public string ProjectName { get; set; }
+        public string UserName { get; set; }
     }
 }
