@@ -11,7 +11,7 @@
             {
                 @Html.AntiForgeryToken()
                 <h2>Create a new account</h2>
-                @Html.ValidationSummary(true, "Please fix the following:", new { @class = "text-danger" });
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" });
                 <div class="account-form-group">
                     @Html.LabelFor(m => m.FirstName, new { @class = "" })
                     <div class="">

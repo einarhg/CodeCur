@@ -12,6 +12,7 @@
             {
                 @Html.AntiForgeryToken()
                 <h2>Log in</h2>
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" });
                 <div class="account-form-group">
                     @Html.LabelFor(m => m.UserName, new { @class = "" })
                     <div class="">
