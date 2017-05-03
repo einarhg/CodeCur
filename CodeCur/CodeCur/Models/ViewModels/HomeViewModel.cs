@@ -3,12 +3,24 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.ComponentModel.DataAnnotations;
 
 namespace CodeCur.Models.ViewModels
 {
     public class HomeViewModel
     {
-        public List<Project> projects { get; set; }
-        public string username { get; set; }
+        public List<Project> Projects { get; set; }
+        public string UserName { get; set; }
+    }
+
+    public class CreateProjectViewModel
+    {
+        [Required]
+        [Display(Name = "Name")]
+        public string Name { get; set; }
+
+        [Required]
+        [Display(Name = "Type")]
+        public string ProjectType { get; set; }
     }
 }

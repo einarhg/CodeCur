@@ -8,8 +8,8 @@ namespace CodeCur.Models.ViewModels
 {
     public class ProjectViewModel
     {
-        public List<File> files { get; set; }
-        public string username { get; set; }
-        public string projectName { get; set; }
+        public List<File> Files { get; set; }
+        public string UserName { get; set; }
+        public string ProjectName { get; set; }
     }
 }
