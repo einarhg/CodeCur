@@ -45,7 +45,7 @@ namespace CodeCur.Services
         public static void AddFileToDb(File file)
         {
             _db.Files.Add(file);
-            //Fail check?   
+            //Fail check?
             _db.SaveChanges();
         }
 
