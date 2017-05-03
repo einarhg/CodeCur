@@ -118,11 +118,19 @@
     background-size: cover;
     display: block;
     height: 30px;
-    margin: 10px 10px 4px 10px;
+    margin: 12px 10px 0 10px;
     text-indent: -9999px;
-    width: 170px;
+    width: 140px;
 }
 
 .nav a {
     font-size: 16px;
+}
+
+#navUserName {
+    color: #6cc3d0;
+}
+
+#navUserName:hover {
+    color: #7bdeed;
 }
