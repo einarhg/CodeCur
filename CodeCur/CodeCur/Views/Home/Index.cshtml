@@ -2,3 +2,12 @@
     ViewBag.Title = "Home Page";
 }
 
+<div class="list-container">
+    <div class="list-head">
+        <h1>My projects</h1>
+        @Html.ActionLink("New project", "CreateProject", "Home", new { @class = "custom-new-button" })
+    </div>
+    <div class="list-content">
+
+    </div>
+</div>
