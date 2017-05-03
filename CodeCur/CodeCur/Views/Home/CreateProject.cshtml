@@ -5,7 +5,7 @@
 }
 
 
-@using (Html.BeginForm("CreateProject", "Home", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+@using (Html.BeginForm("CreateProject", "Home", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
             {
     @Html.AntiForgeryToken()
     <h2>Create project</h2>
