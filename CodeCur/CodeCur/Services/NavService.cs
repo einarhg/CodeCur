@@ -9,13 +9,9 @@ namespace CodeCur.Services
 {
     public class NavService
     {
-        private static ApplicationDbContext _db;
-        public NavService()
-        {
-            _db = new ApplicationDbContext();
-        }
         public static void AddProjectToDb(Project project)
         {
+            ApplicationDbContext _db = new ApplicationDbContext();
             // Add the new object to the Orders collection.
             _db.Projects.Add(project);
 

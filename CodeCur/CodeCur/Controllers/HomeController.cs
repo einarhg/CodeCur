@@ -31,8 +31,6 @@ namespace CodeCur.Controllers
             return View();
         }
 
-        //
-        // POST: /Account/Login
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
@@ -47,19 +45,10 @@ namespace CodeCur.Controllers
                     DateCreated =  DateTime.Now,
                     UserID = User.Identity.GetUserId()
                 };
-                /*
+              
                 NavService.AddProjectToDb(project);
-
-                var result = await UserManager.CreateAsync(user, model.Password);
-                if (result.Succeeded)
-                {
-                    await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
-
-                    return RedirectToAction("Index", "Home");
-                }
-                AddErrors(result);*/
+                return RedirectToAction("Index", "Home");
             }
-
             // If we got this far, something failed, redisplay form
             return View(model);
         }
