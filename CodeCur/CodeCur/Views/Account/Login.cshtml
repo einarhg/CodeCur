@@ -13,10 +13,10 @@
                 @Html.AntiForgeryToken()
                 <h2>Log in</h2>
                 <div class="account-form-group">
-                    @Html.LabelFor(m => m.Email, new { @class = "" })
+                    @Html.LabelFor(m => m.UserName, new { @class = "" })
                     <div class="">
-                        @Html.TextBoxFor(m => m.Email, new { @class = "", @placeholder="Email" })
-                        @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
+                        @Html.TextBoxFor(m => m.UserName, new { @class = "", @placeholder="Username" })
+                        @Html.ValidationMessageFor(m => m.UserName, "", new { @class = "text-danger" })
                     </div>
                 </div>
                 <div class="account-form-group">
