@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 using CodeCur.Models.ViewModels;
 using CodeCur.Models.Entities;
 using Microsoft.AspNet.Identity;
-
+using CodeCur.Services;
 
 namespace CodeCur.Controllers
 {
@@ -26,9 +26,8 @@ namespace CodeCur.Controllers
         }
 
         [AllowAnonymous]
-        public ActionResult CreateProject(string returnUrl)
+        public ActionResult CreateProject()
         {
-            ViewBag.ReturnUrl = returnUrl;
             return View();
         }
 
@@ -37,7 +36,7 @@ namespace CodeCur.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> CreateProject(CreateProjectViewModel model)
+        public ActionResult CreateProject(CreateProjectViewModel model)
         {
             if (ModelState.IsValid)
             {
@@ -48,9 +47,10 @@ namespace CodeCur.Controllers
                     DateCreated =  DateTime.Now,
                     UserID = User.Identity.GetUserId()
                 };
+                /*
+                NavService.AddProjectToDb(project);
 
-
-                /*var result = await UserManager.CreateAsync(user, model.Password);
+                var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
                     await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);

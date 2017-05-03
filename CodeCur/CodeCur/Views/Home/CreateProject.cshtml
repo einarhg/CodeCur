@@ -5,8 +5,8 @@
 }
 
 <div class="new-input-container">
-    @using (Html.BeginForm("CreateProject", "Home", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "new-input-form", role = "form" }))
-            {
+    @using (Html.BeginForm("CreateProject", "Home", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+    {
         @Html.AntiForgeryToken()
         <h2>Create new project</h2>
         @Html.ValidationSummary(true, "", new { @class = "text-danger" });
