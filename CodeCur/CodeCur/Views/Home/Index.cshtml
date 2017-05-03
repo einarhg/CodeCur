@@ -1,4 +1,5 @@
-﻿@{
+﻿@model IEnumerable<CodeCur.Models.ViewModels.HomeViewModel>
+@{
     ViewBag.Title = "Home Page";
 }
 
@@ -8,6 +9,6 @@
         @Html.ActionLink("New project", "CreateProject", "Home", new { @class = "custom-new-button" })
     </div>
     <div class="list-content">
-
+        
     </div>
 </div>

@@ -1,4 +1,6 @@
-﻿@model CodeCur.Models.IndexViewModel
+﻿@using Microsoft.AspNet.Identity;
+
+@model CodeCur.Models.IndexViewModel
 @{
     ViewBag.Title = "Manage";
 }
@@ -10,10 +12,29 @@
     <h4>Change your account settings</h4>
     <hr />
     <dl class="dl-horizontal">
-        <dt>Username:</dt>
         <dd>
 
+            @using (Html.BeginForm("Index", "Manage", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+            {
+                @Html.Label("Username:")
+                <div class="ChangeBasic">
+                    @Html.TextBoxFor(m => User.Identity.Name, new { @class = "form-control" })
+                </div>
+
+                @*
+    @Html.Label("Email:")
+    <div>
+        @Html.TextBoxFor(m => User.Identity., new { @class = "form-control" })
+    </div>
+                *@
+                <div class="ChangeBasic">
+                    <div>
+                        <input type="submit" value="Submit" class="btn btn-success btn-lg" />
+                    </div>
+                </div>
+            }
         </dd>
+
 
         <dt>Password:</dt>
         <dd>
