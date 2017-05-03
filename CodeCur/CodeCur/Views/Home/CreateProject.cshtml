@@ -1,0 +1,38 @@
+﻿@using CodeCur.Models.ViewModels
+@model CreateProjectViewModel
+@{
+    ViewBag.Title = "CreateProject";
+}
+
+<div class="new-input-container">
+    @using (Html.BeginForm("CreateProject", "Home", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+    {
+        @Html.AntiForgeryToken()
+        <h2>Create new project</h2>
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" });
+        <div class="new-input-form-group">
+            @Html.LabelFor(m => m.Name, new { @class = "" })
+            <div>
+                @Html.TextBoxFor(m => m.Name, new { @class = "", @placeholder = "Name of project" })
+                @Html.ValidationMessageFor(m => m.Name, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="new-input-form-group">
+            <div>
+                @Html.LabelFor(m => m.ProjectType, new { @class = "" })
+                <div class="dropdown">
+                    @Html.DropDownListFor(x => x.ProjectType, new List<SelectListItem>
+                    {
+                        new SelectListItem() {Text = "JavaScript", Value="JavaScript"},
+                    })
+                </div>
+            </div>
+        </div>
+        <div class="new-input-form-group">
+            <div>
+                @Html.ActionLink("Cancel", "Index", "Home", new { @class = "new-input-cancel-button"})
+                <input type="submit" value="Create" class="new-input-button" />
+            </div>
+        </div>
+    }
+</div>
