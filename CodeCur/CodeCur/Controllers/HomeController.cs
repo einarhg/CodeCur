@@ -17,7 +17,7 @@ namespace CodeCur.Controllers
     {
         public ActionResult Index()
         {
-            HomeViewModel model = new HomeViewModel();
+            ListProjectsViewModel model = new ListProjectsViewModel();
             model.Projects = NavService.GetUserProjects(User.Identity.GetUserId());
             return View(model);
         }
