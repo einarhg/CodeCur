@@ -17,16 +17,17 @@ namespace CodeCur.Controllers
     {
         public ActionResult Index()
         {
-            ListProjectsViewModel model = new ListProjectsViewModel();
+            ProjectViewModel model = new ProjectViewModel();
             model.Projects = NavService.GetUserProjects(User.Identity.GetUserId());
             return View(model);
         }
 
         public ActionResult Project(int ID)
         {
-            ProjectViewModel model = new ProjectViewModel();
+            ProjectDetailsViewModel model = new ProjectDetailsViewModel();
             model.Files = NavService.GetProjectFiles(ID);
             return View(model);
+
         }
 
         [AllowAnonymous]
