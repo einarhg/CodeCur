@@ -16,6 +16,7 @@ namespace CodeCur.Models.ViewModels
     {
         public IEnumerable<File> Files { get; set; }
         public int ProjectID { get; set; }
+        public string ProjectName { get; set; }
     }
 
     public class CreateProjectViewModel

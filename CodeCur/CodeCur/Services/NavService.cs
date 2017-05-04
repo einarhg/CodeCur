@@ -68,6 +68,10 @@ namespace CodeCur.Services
             return files;
         }
 
-
+        public static string GetProjectName(int ID)
+        {
+            string name = "Get from data";
+            return name;
+        }
     }
 }

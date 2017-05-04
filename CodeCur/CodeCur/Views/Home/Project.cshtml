@@ -3,11 +3,19 @@
     ViewBag.Title = "Project";
 }
 
-<h2>Project</h2>
-@Html.ActionLink("New File", "CreateFile", "Home", new { id = Model.ProjectID}, new { @class = "custom-new-button" })
-<div class="list-content">
-    @foreach (var file in Model.Files)
-    {
-        <p>@file.Name</p>
-    }
+<div class="list-container">
+    <div class="list-head">
+        <h1>@Model.ProjectName</h1>
+        @Html.ActionLink("New File", "CreateFile", "Home", new { id = Model.ProjectID }, new { @class = "custom-new-button" })
+    </div>
+    <div class="list-content">
+        @foreach (var file in Model.Files)
+        {
+            <a href="#">
+                <p class="project-name">@file.Name</p>
+                <p class="project-type">@file.Type</p>
+                <p class="project-date">@file.DateCreated</p>
+            </a>
+        }
+    </div>
 </div>

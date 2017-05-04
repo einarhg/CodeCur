@@ -173,6 +173,11 @@
     text-decoration: none;
 }
 
+.custom-new-button:focus {
+    color: #fff;
+    text-decoration: none;
+}
+
 .new-input-container {
     margin: auto;
     max-width: 420px;
@@ -257,6 +262,11 @@
     background: #5cb6c3;
 }
 
+.new-input-button:focus {
+    color: #fff;
+    text-decoration: none;
+}
+
 .new-input-cancel-button {
     background: #e64f4f;
     border-radius: 2px;
@@ -273,6 +283,11 @@
 
 .new-input-cancel-button:hover {
     background: #d54848;
+    color: #fff;
+    text-decoration: none;
+}
+
+.new-input-cancel-button:focus {
     color: #fff;
     text-decoration: none;
 }

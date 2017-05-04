@@ -27,6 +27,7 @@ namespace CodeCur.Controllers
             ProjectDetailsViewModel model = new ProjectDetailsViewModel();
             model.Files = NavService.GetProjectFiles(ID);
             model.ProjectID = ID;
+            model.ProjectName = NavService.GetProjectName(ID);
             return View(model);
 
         }
