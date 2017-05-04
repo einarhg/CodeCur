@@ -202,7 +202,6 @@
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\ViewModels\EditorViewModels.cs" />
     <Compile Include="Models\ViewModels\HomeViewModels.cs" />
-    <Compile Include="Models\ViewModels\ProjectViewModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\EditorService.cs" />
     <Compile Include="Services\NavService.cs" />

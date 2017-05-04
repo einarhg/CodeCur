@@ -1,4 +1,4 @@
-﻿@model CodeCur.Models.ViewModels.ListProjectsViewModel
+﻿@model CodeCur.Models.ViewModels.ProjectViewModel
 @{
     ViewBag.Title = "Home Page";
 }
@@ -11,7 +11,9 @@
     <div class="list-content">
         @foreach (var project in Model.Projects)
         {
-            <p>@project.Name</p>
+            <a class="" href="@Url.Action("Project", "Home", new { id = project.ID })">
+                @project.Name
+            </a>
         }
     </div>
 </div>

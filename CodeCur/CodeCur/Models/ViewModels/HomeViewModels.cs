@@ -7,9 +7,14 @@ using System.ComponentModel.DataAnnotations;
 
 namespace CodeCur.Models.ViewModels
 {
-    public class ListProjectsViewModel
+    public class ProjectViewModel
     {
         public IEnumerable<Project> Projects { get; set; }
+    }
+
+    public class ProjectDetailsViewModel
+    {
+        public IEnumerable<File> Files { get; set; }
     }
 
     public class CreateProjectViewModel

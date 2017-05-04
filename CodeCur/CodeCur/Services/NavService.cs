@@ -27,6 +27,7 @@ namespace CodeCur.Services
                                              select project).ToList();
             return projects;
         }
+
         /*
         public static IEnumerable<Project> GetOtherProjects(string ID)
         {
