@@ -1,4 +1,5 @@
 ﻿@model CodeCur.Models.ViewModels.ProjectViewModel
+@using Microsoft.AspNet.Identity
 @{
     ViewBag.Title = "Home Page";
 }
@@ -9,10 +10,13 @@
         @Html.ActionLink("New project", "CreateProject", "Home", new { @class = "custom-new-button" })
     </div>
     <div class="list-content">
+
         @foreach (var project in Model.Projects)
         {
-            <a class="" href="@Url.Action("Project", "Home", new { id = project.ID })">
-                @project.Name
+            <a href="@Url.Action("Project", "Home", new { id = project.ID })">
+                <p class="project-name">@project.Name</p>
+                <p class="project-type">@project.Type</p>
+                <p class="project-date">@project.DateCreated</p>
             </a>
         }
     </div>

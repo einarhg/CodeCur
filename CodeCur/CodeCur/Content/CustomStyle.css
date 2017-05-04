@@ -147,7 +147,7 @@
 
 .list-head h1 {
     font-weight: 300;
-    margin: 30px 0 15px 0;
+    margin: 30px 0 20px 0;
     padding: 0;
 }
 
@@ -171,10 +171,6 @@
     background: #5cb6c3;
     color: #fff;
     text-decoration: none;
-}
-
-.list-content {
-
 }
 
 .new-input-container {
@@ -279,4 +275,47 @@
     background: #d54848;
     color: #fff;
     text-decoration: none;
+}
+
+.list-content {
+    margin-top: 10px;
+}
+
+.list-content a {
+    background: #efefef;
+    border: 1px solid #e4e4e4;
+    border-radius: 2px;
+    box-sizing: border-box;
+    color: #222;
+    display: block;
+    height: 52px;
+    margin-bottom: 5px;
+    position: relative;
+    transition: background 0.2s;
+    -webkit-transition: background 0.2s;
+}
+
+.list-content a:hover {
+    background: #e4e4e4;
+    color: #222;
+    text-decoration: none;
+}
+
+.list-content p {
+    display: inline;
+    font-size: 16px;
+    font-weight: 500;
+    position: absolute;
+}
+
+.list-content .project-name {
+    
+}
+
+.list-content .project-type {
+    
+}
+
+.list-content .project-date {
+    
 }
