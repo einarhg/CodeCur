@@ -5,7 +5,7 @@
 }
 
 <div class="new-input-container">
-    @using (Html.BeginForm("CreateProject", "Home", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+    @using (Html.BeginForm("CreateProject", "Home", FormMethod.Post, new { @class = "new-input-form form-horizontal", role = "form" }))
     {
         @Html.AntiForgeryToken()
         <h2>Create new project</h2>

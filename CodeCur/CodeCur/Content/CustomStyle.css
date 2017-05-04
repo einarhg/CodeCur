@@ -279,16 +279,17 @@
 
 .list-content {
     margin-top: 10px;
+    margin-bottom: 70px;
 }
 
 .list-content a {
-    background: #efefef;
-    border: 1px solid #e4e4e4;
+    background: #ededed;
+    border: 1px solid #e1e1e1;
     border-radius: 2px;
     box-sizing: border-box;
     color: #222;
     display: block;
-    height: 52px;
+    height: 50px;
     margin-bottom: 5px;
     position: relative;
     transition: background 0.2s;
@@ -296,7 +297,7 @@
 }
 
 .list-content a:hover {
-    background: #e4e4e4;
+    background: #e1e1e1;
     color: #222;
     text-decoration: none;
 }
@@ -306,16 +307,20 @@
     font-size: 16px;
     font-weight: 500;
     position: absolute;
+    top: 14px;
 }
 
 .list-content .project-name {
-    
+    left: 20px;
 }
 
 .list-content .project-type {
-    
+    color: #777;
+    left: 50%;
 }
 
 .list-content .project-date {
-    
+    color: #777;
+    font-style: italic;
+    right: 20px;
 }
