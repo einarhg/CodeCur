@@ -26,6 +26,7 @@ namespace CodeCur.Controllers
         {
             ProjectDetailsViewModel model = new ProjectDetailsViewModel();
             model.Files = NavService.GetProjectFiles(ID);
+            model.ProjectID = ID;
             return View(model);
 
         }
@@ -52,6 +53,36 @@ namespace CodeCur.Controllers
                 };
               
                 NavService.AddProjectToDb(project);
+                return RedirectToAction("Index", "Home");
+            }
+            // If we got this far, something failed, redisplay form
+            return View(model);
+        }
+
+        [AllowAnonymous]
+        public ActionResult CreateFile(int ID)
+        {
+            CreateFileViewModel model = new CreateFileViewModel();
+            model.ProjectID = ID;
+            return View(model);
+        }
+
+        [HttpPost]
+        [AllowAnonymous]
+        [ValidateAntiForgeryToken]
+        public ActionResult CreateFile(CreateFileViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                var file = new File
+                {
+                    Name = model.Name,
+                    Type = model.FileType,
+                    DateCreated = DateTime.Now,
+                    ProjectID = model.ProjectID
+                };
+
+                NavService.AddFileToDb(file);
                 return RedirectToAction("Index", "Home");
             }
             // If we got this far, something failed, redisplay form

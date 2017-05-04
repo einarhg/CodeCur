@@ -4,7 +4,7 @@
 }
 
 <h2>Project</h2>
-
+@Html.ActionLink("New File", "CreateFile", "Home", new { id = Model.ProjectID}, new { @class = "custom-new-button" })
 <div class="list-content">
     @foreach (var file in Model.Files)
     {
