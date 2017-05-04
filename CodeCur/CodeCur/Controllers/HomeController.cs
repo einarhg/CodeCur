@@ -21,10 +21,12 @@ namespace CodeCur.Controllers
             model.Projects = NavService.GetUserProjects(User.Identity.GetUserId());
             return View(model);
         }
-        public ActionResult Project()
+
+        public ActionResult Project(int ID)
         {
-            //TODO
-            return View();
+            ProjectViewModel model = new ProjectViewModel();
+            model.Files = NavService.GetProjectFiles(ID);
+            return View(model);
         }
 
         [AllowAnonymous]
