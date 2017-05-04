@@ -1,0 +1,13 @@
+﻿@model CodeCur.Models.ViewModels.ProjectViewModel
+@{
+    ViewBag.Title = "Project";
+}
+
+<h2>Project</h2>
+
+<div class="list-content">
+    @foreach (var file in Model.Files)
+    {
+        <p>@file.Name</p>
+    }
+</div>
