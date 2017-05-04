@@ -10,6 +10,7 @@
         @Html.ActionLink("New project", "CreateProject", "Home", new { @class = "custom-new-button" })
     </div>
     <div class="list-content">
+
         @foreach (var project in Model.Projects)
         {
             <a href="@Url.Action("Project", "Home", new { id = project.ID })">
