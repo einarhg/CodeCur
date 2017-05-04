@@ -9,8 +9,7 @@ namespace CodeCur.Models.ViewModels
 {
     public class HomeViewModel
     {
-        public List<Project> Projects { get; set; }
-        public string UserName { get; set; }
+        public IEnumerable<Project> Projects { get; set; }
     }
 
     public class CreateProjectViewModel
