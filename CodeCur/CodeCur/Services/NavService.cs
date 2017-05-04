@@ -22,10 +22,20 @@ namespace CodeCur.Services
 
         public static IEnumerable<Project> GetUserProjects(string ID)
         {
-            IEnumerable<Project> projects = (from project in _db.Projects
-                                             where project.UserID == ID
-                                             select project).ToList();
-            return projects;
+            var userProjectIds = (from PP in _db.UserProjectRelations where PP.UserID == ID select PP.ID).ToList();
+
+            List<Project> Projects = new List<Project>();
+
+            foreach (var idnum in userProjectIds)
+            {
+                Projects.Add(
+                    (from prj in _db.Projects where prj.ID == idnum select prj).FirstOrDefault());
+            }
+
+            //IEnumerable<Project> projects = (from project in _db.Projects
+            //                                 where project.UserID == ID
+            //                                 select project).ToList();
+            return Projects;
         }
 
         /*
