@@ -16,17 +16,17 @@
 
             @using (Html.BeginForm("Index", "Manage", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
             {
-                @Html.Label("Username:")
+                @Html.ValidationSummary("", new { @class = "text-danger" })
+
+                @Html.LabelFor(m => User.Identity.Name, new { @class = "col-md-2 control-label" })
                 <div class="ChangeBasic">
                     @Html.TextBoxFor(m => User.Identity.Name, new { @class = "form-control" })
                 </div>
 
-                @*
-    @Html.Label("Email:")
-    <div>
-        @Html.TextBoxFor(m => User.Identity., new { @class = "form-control" })
-    </div>
-                *@
+            @Html.Label("Email:")
+            <div>
+                @*Html.TextBoxFor(m => Membership.GetUser().Email, new { @class = "form-control" })*@
+            </div>
                 <div class="ChangeBasic">
                     <div>
                         <input type="submit" value="Submit" class="btn btn-success btn-lg" />

@@ -42,5 +42,21 @@ namespace CodeCur.Services
             return projects;
         }
         */
+        public static void AddFileToDb(File file)
+        {
+            _db.Files.Add(file);
+            //Fail check?
+            _db.SaveChanges();
+        }
+
+        public static IEnumerable<File> GetProjectFiles(int ID)
+        {
+            IEnumerable<File> files = (from file in _db.Files
+                                       where file.ProjectID == ID
+                                       select file).ToList();
+            return files;
+        }
+
+
     }
 }
