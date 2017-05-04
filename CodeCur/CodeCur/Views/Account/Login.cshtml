@@ -1,58 +1,69 @@
 ﻿@using CodeCur.Models
+@using CodeCur.Controllers
+@using Microsoft.AspNet.Identity
 @model LoginViewModel
 @{
     ViewBag.Title = "Log in";
 }
 
-<div class="account-body">
-    <div class="account-container">
-        <img class="custom-image" src="~/Images/logo.svg" alt="Logo" />
-        <div class="account-login-box">
-            @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
-            {
-                @Html.AntiForgeryToken()
-                <h2>Log in</h2>
-                @Html.ValidationSummary(true, "", new { @class = "text-danger" });
-                <div class="account-form-group">
-                    @Html.LabelFor(m => m.UserName, new { @class = "" })
-                    <div class="">
-                        @Html.TextBoxFor(m => m.UserName, new { @class = "", @placeholder="Username" })
-                        @Html.ValidationMessageFor(m => m.UserName, "", new { @class = "text-danger" })
-                    </div>
-                </div>
-                <div class="account-form-group">
-                    @Html.LabelFor(m => m.Password, new { @class = "" })
-                    <div class="">
-                        @Html.PasswordFor(m => m.Password, new { @class = "", @placeholder = "Password" })
-                        @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
-                    </div>
-                </div>
-                <div class="account-form-group">
-                    <div class="">
-                        <div class="checkbox">
-                            @Html.CheckBoxFor(m => m.RememberMe)
-                            @Html.LabelFor(m => m.RememberMe)
+@if (User.Identity.IsAuthenticated)
+{
+    <p>You are already logged in, would you like to log out?</p>
+    <a href="javascript:document.getElementById('logoutForm').submit()">Log out</a>
+}
+else
+{
+    <div class="account-body">
+        <div class="account-container">
+            <img class="custom-image" src="~/Images/logo.svg" alt="Logo" />
+            <div class="account-login-box">
+                @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+                {
+                    @Html.AntiForgeryToken()
+                    <h2>Log in</h2>
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" });
+                    <div class="account-form-group">
+                        @Html.LabelFor(m => m.UserName, new { @class = "" })
+                        <div class="">
+                            @Html.TextBoxFor(m => m.UserName, new { @class = "", @placeholder = "Username" })
+                            @Html.ValidationMessageFor(m => m.UserName, "", new { @class = "text-danger" })
                         </div>
                     </div>
-                </div>
-                <div class="account-form-group">
-                    <div class="">
-                        <input type="submit" value="Log in" class="account-button" />
+                    <div class="account-form-group">
+                        @Html.LabelFor(m => m.Password, new { @class = "" })
+                        <div class="">
+                            @Html.PasswordFor(m => m.Password, new { @class = "", @placeholder = "Password" })
+                            @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
+                        </div>
                     </div>
-                </div>
-                <p>
-                    New to Codecur? @Html.ActionLink("Sign up as a new user!", "Register")
-                </p>
-                @* Enable this once you have account confirmation enabled for password reset functionality
-                <p>
-                    @Html.ActionLink("Forgot your password?", "ForgotPassword")
-                </p>*@
-            }
+                    <div class="account-form-group">
+                        <div class="">
+                            <div class="checkbox">
+                                @Html.CheckBoxFor(m => m.RememberMe)
+                                @Html.LabelFor(m => m.RememberMe)
+                            </div>
+                        </div>
+                    </div>
+                    <div class="account-form-group">
+                        <div class="">
+                            <input type="submit" value="Log in" class="account-button" />
+                        </div>
+                    </div>
+                    <p>
+                        New to Codecur? @Html.ActionLink("Sign up as a new user!", "Register")
+                    </p>
+                    @* Enable this once you have account confirmation enabled for password reset functionality
+                        <p>
+                            @Html.ActionLink("Forgot your password?", "ForgotPassword")
+                        </p>*@
+                }
+            </div>
+            <p class="about-text">Welcome! Codecur is an online group editor...</p>
         </div>
-        <p class="about-text">Welcome! Codecur is an online group editor...</p>
     </div>
-</div>
 
-@section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
+    @section Scripts {
+        @Scripts.Render("~/bundles/jqueryval")
+    }
+
 }

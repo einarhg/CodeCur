@@ -453,6 +453,11 @@ namespace CodeCur.Controllers
             return RedirectToAction("Index", "Home");
         }
 
+        public ActionResult RedirectToHome()
+        {
+            return RedirectToAction("Index", "Home");
+        }
+
         internal class ChallengeResult : HttpUnauthorizedResult
         {
             public ChallengeResult(string provider, string redirectUri)
