@@ -21,7 +21,7 @@
                 <a href="@Url.Action("Project", "Home", new { id = project.ID })">
                     <p class="project-name">@project.Name</p>
                     <p class="project-type">@project.Type</p>
-                    <p class="project-date">@project.DateCreated</p>
+                    <p class="project-date">@project.DateCreated.Day/@project.DateCreated.Month/@project.DateCreated.Year</p>
                 </a>
             }
         </div>
