@@ -5,33 +5,31 @@
 
 <div class="list-container">
     <div class="list-head">
-        <h1>@Model.ProjectName</h1>
-        @Html.ActionLink("New File", "CreateFile", "Home", new { id = Model.ProjectID }, new { @class = "custom-new-button" })
+        <h1 class="project-header"><span>Project </span>@Model.ProjectName</h1>
+        @Html.ActionLink("+", "CreateFile", "Home", new { id = Model.ProjectID }, new { @class = "new-file-button" })
     </div>
     <div class="file-list-content">
         @foreach (var file in Model.Files)
         {
-            <div class="file-box">
-                <a href="#">
-                    @if (file.Type == "JavaScript")
-                    {
-                        <img src="~/Images/javascript.svg" />
-                    }
-                    else if (file.Type == "HTML")
-                    {
-                        <img src="~/Images/html.svg" />
-                    }
-                    else if (file.Type == "CSS")
-                    {
-                        <img src="~/Images/css.svg" />
-                    }
-                    else
-                    {
-                        <img src="~/Images/txt.svg" />
-                    }
-                    <p class="file-name">@file.Name</p>
-                </a>
-            </div>
+            <a class="file-box" href="#">
+                @if (file.Type == "JavaScript")
+                {
+                    <img src="~/Images/javascript.svg" />
+                }
+                else if (file.Type == "HTML")
+                {
+                    <img src="~/Images/html.svg" />
+                }
+                else if (file.Type == "CSS")
+                {
+                    <img src="~/Images/css.svg" />
+                }
+                else
+                {
+                    <img src="~/Images/txt.svg" />
+                }
+                <p class="file-name">@file.Name</p>
+            </a>
         }
     </div>
 </div>
