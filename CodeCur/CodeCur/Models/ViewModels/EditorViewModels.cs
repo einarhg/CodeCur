@@ -9,7 +9,5 @@ namespace CodeCur.Models.ViewModels
     public class EditorViewModel
     {
         public File File { get; set; }
-        public string ProjectName { get; set; }
-        public string UserName { get; set; }
     }
 }

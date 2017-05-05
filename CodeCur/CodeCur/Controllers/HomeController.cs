@@ -29,7 +29,6 @@ namespace CodeCur.Controllers
             model.ProjectID = ID;
             model.ProjectName = NavService.GetProjectName(ID);
             return View(model);
-
         }
 
         [AllowAnonymous]

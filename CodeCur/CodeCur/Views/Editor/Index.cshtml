@@ -1,0 +1,27 @@
+﻿@model CodeCur.Models.ViewModels.EditorViewModel
+@{
+    ViewBag.Title = "Editor";
+}
+
+<script src="~/Scripts/ace-builds-1.2.6/src-noconflict/ace.js" type="text/javascript" charset="utf-8"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+<div id="editor">
+    <span>@Model.File.Data</span>
+</div>
+
+<script>
+    $(function () {
+        var editor = ace.edit("editor");
+        editor.setTheme("ace/theme/monokai");
+        if (Model.File.Type == "JavaScript") {
+            editor.getSession().setMode("ace/mode/javascript");
+        } else if (Model.File.Type == "HTML") {
+            editor.getSession().setMode("ace/mode/html");
+        } else if (Model.File.Type == "HTML") {
+            editor.getSession().setMode("ace/mode/css");
+        } else {
+            editor.getSession().setMode("ace/mode/text");
+        }
+    });
+</script>
