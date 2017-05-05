@@ -23,7 +23,9 @@
                 <div class="dropdown">
                     @Html.DropDownListFor(x => x.ProjectType, new List<SelectListItem>
                     {
-                        new SelectListItem() {Text = "JavaScript", Value="JavaScript"},
+                        new SelectListItem() {Text = "Web app", Value="Web app"},
+                        new SelectListItem() {Text = "Mobile app", Value="Mobile app"},
+                        new SelectListItem() {Text = "Example project", Value="Example project"},
                     })
                 </div>
             </div>
