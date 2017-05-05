@@ -6,13 +6,12 @@
 <script src="~/Scripts/ace-builds-1.2.6/src-noconflict/ace.js" type="text/javascript" charset="utf-8"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
-<div id="editor">
-    
-</div>
+<div id="editor"></div>
 
 <script>
     $(function () {
         var editor = ace.edit("editor");
+        editor.focus();
         var type = @Html.Raw(Json.Encode(Model.File.Type));
         editor.setTheme("ace/theme/monokai");
         if (type == "JavaScript") {
