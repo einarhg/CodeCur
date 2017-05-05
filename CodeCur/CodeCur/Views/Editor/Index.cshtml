@@ -6,7 +6,15 @@
 <script src="~/Scripts/ace-builds-1.2.6/src-noconflict/ace.js" type="text/javascript" charset="utf-8"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
-<div id="editor"></div>
+
+<div class="editor-container">
+    <menu>
+        <h1>@Model.File.Name</h1>
+        @Html.ActionLink("<", "Project", "Home", new { id = Model.File.ProjectID }, new { @class = "back-file-button" })
+    </menu>
+    <div id="editor">@Model.File.Data</div>
+</div>
+
 
 <script>
     $(function () {

@@ -436,7 +436,7 @@
 }
 
 .file-box p {
-    margin: 6px 0 2px 0;
+    margin: 6px 0 0 0;
 }
 
 .empty-list {
@@ -447,11 +447,43 @@
     text-transform: uppercase;
 }
 
-
+/* EDITOR */
 #editor {
     position: absolute;
-    top: 50px;
+    top: 80px;
     right: 0;
     bottom: 0;
     left: 0;
+    font-size: 16px;
+}
+
+.editor-container {
+    
+}
+
+.editor-container menu {
+    background: #20211c;
+    height: 80px;
+    left: 0;
+    margin: 0;
+    padding: 0;
+    position: absolute;
+    right: 0;
+    top: 0;
+    z-index: 2000;
+}
+
+.editor-container h1 {
+    color: #fff;
+    margin: 0;
+    right: 42px;
+    position: absolute;
+    top: 20px;
+}
+
+.editor-container .back-file-button {
+    left: 42px;
+    margin-right: 0;
+    position: absolute;
+    top: 13px;
 }
