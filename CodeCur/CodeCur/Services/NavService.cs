@@ -90,5 +90,10 @@ namespace CodeCur.Services
                             select project).FirstOrDefault();
             return item.Name;
         }
+
+        public static bool ValidFileName(string name, string ID)
+        {
+            return true;
+        }
     }
 }

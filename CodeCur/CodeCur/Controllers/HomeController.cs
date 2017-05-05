@@ -51,7 +51,7 @@ namespace CodeCur.Controllers
                     DateCreated =  DateTime.Now,
                     UserID = User.Identity.GetUserId()
                 };
-              
+
                 NavService.AddProjectToDb(project);
                 return RedirectToAction("Index", "Home");
             }
