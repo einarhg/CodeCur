@@ -18,7 +18,7 @@
         <div class="file-list-content">
             @foreach (var file in Model.Files)
             {
-                <a class="file-box" href="#">
+                <a class="file-box" href="@Url.Action("Index", "Editor", new { id = file.ID })">
                     @if (file.Type == "JavaScript")
                     {
                         <img src="~/Images/javascript.svg" />

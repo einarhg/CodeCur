@@ -11,6 +11,7 @@ namespace CodeCur.Models.Entities
         public int ProjectID { get; set; }
         public string Name { get; set; }
         public string Type { get; set; }
+        public string Data { get; set; }
         public DateTime DateCreated { get; set; }
     }
 }
