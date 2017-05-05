@@ -13,8 +13,16 @@
 <script>
     $(function () {
         var editor = ace.edit("editor");
-        var type = "GET TYPE";
+        var type = @Html.Raw(Json.Encode(Model.File.Type));
         editor.setTheme("ace/theme/monokai");
-        editor.getSession().setMode("ace/mode/javascript");
+        if (type == "JavaScript") {
+            editor.getSession().setMode("ace/mode/javascript");
+        } else if (type == "HTML") {
+            editor.getSession().setMode("ace/mode/html");
+        } else if (type == "CSS") {
+            editor.getSession().setMode("ace/mode/css");
+        } else {
+            editor.getSession().setMode("ace/mode/text");
+        }
     });
 </script>
