@@ -9,7 +9,7 @@
     {
         @Html.AntiForgeryToken()
         <h2>Create new File</h2>
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" });
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         <div class="new-input-form-group">
             @Html.LabelFor(m => m.Name, new { @class = ""})
             <div>
