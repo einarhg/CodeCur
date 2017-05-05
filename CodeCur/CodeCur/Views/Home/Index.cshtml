@@ -6,18 +6,24 @@
 
 <div class="list-container">
     <div class="list-head">
-        <h1>My projects</h1>
+        <h1 class="project-list-header">My projects</h1>
         @Html.ActionLink("New project", "CreateProject", "Home", new { @class = "custom-new-button" })
     </div>
-    <div class="list-content">
-
-        @foreach (var project in Model.Projects)
-        {
-            <a href="@Url.Action("Project", "Home", new { id = project.ID })">
-                <p class="project-name">@project.Name</p>
-                <p class="project-type">@project.Type</p>
-                <p class="project-date">@project.DateCreated</p>
-            </a>
-        }
-    </div>
+    @if (!Model.Projects.Any())
+    {
+        <p class="empty-list">There are no projects to display @User.Identity.Name!</p>
+    }
+    else
+    {
+        <div class="list-content">
+            @foreach (var project in Model.Projects)
+            {
+                <a href="@Url.Action("Project", "Home", new { id = project.ID })">
+                    <p class="project-name">@project.Name</p>
+                    <p class="project-type">@project.Type</p>
+                    <p class="project-date">@project.DateCreated</p>
+                </a>
+            }
+        </div>
+    }
 </div>

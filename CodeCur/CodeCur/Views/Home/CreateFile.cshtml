@@ -13,7 +13,7 @@
         <div class="new-input-form-group">
             @Html.LabelFor(m => m.Name, new { @class = ""})
             <div>
-                @Html.TextBoxFor(m => m.Name, new { @class = "", @placeholder = "Name of project" })
+                @Html.TextBoxFor(m => m.Name, new { @class = "", @placeholder = "Name of File" })
                 @Html.ValidationMessageFor(m => m.Name, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -24,6 +24,9 @@
                     @Html.DropDownListFor(x => x.FileType, new List<SelectListItem>
                     {
                         new SelectListItem() {Text = "JavaScript", Value="JavaScript"},
+                        new SelectListItem() {Text = "HTML", Value="HTML"},
+                        new SelectListItem() {Text = "CSS", Value="CSS"},
+                        new SelectListItem() {Text = "Text", Value="txt"},
                     })
                 </div>
             </div>

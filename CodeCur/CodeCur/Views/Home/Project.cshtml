@@ -3,11 +3,41 @@
     ViewBag.Title = "Project";
 }
 
-<h2>Project</h2>
-@Html.ActionLink("New File", "CreateFile", "Home", new { id = Model.ProjectID}, new { @class = "custom-new-button" })
-<div class="list-content">
-    @foreach (var file in Model.Files)
+<div class="list-container">
+    <div class="list-head">
+        <h1 class="project-header"><span>Project </span>@Model.ProjectName</h1>
+        @Html.ActionLink("<", "Index", "Home", new { @class = "back-file-button" })
+        @Html.ActionLink("+", "CreateFile", "Home", new { id = Model.ProjectID }, new { @class = "new-file-button" })
+    </div>
+    @if (!Model.Files.Any())
     {
-        <p>@file.Name</p>
+        <p class="empty-list">No files currently in @Model.ProjectName!</p>
+    }
+    else
+    {
+        <div class="file-list-content">
+            @foreach (var file in Model.Files)
+            {
+                <a class="file-box" href="#">
+                    @if (file.Type == "JavaScript")
+                    {
+                        <img src="~/Images/javascript.svg" />
+                    }
+                    else if (file.Type == "HTML")
+                    {
+                        <img src="~/Images/html.svg" />
+                    }
+                    else if (file.Type == "CSS")
+                    {
+                        <img src="~/Images/css.svg" />
+                    }
+                    else
+                    {
+                        <img src="~/Images/txt.svg" />
+                    }
+                    <p class="file-name">@file.Name</p>
+                </a>
+            }
+        </div>
     }
 </div>

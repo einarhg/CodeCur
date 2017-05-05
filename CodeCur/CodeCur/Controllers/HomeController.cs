@@ -27,6 +27,7 @@ namespace CodeCur.Controllers
             ProjectDetailsViewModel model = new ProjectDetailsViewModel();
             model.Files = NavService.GetProjectFiles(ID);
             model.ProjectID = ID;
+            model.ProjectName = NavService.GetProjectName(ID);
             return View(model);
 
         }
@@ -81,6 +82,23 @@ namespace CodeCur.Controllers
                     DateCreated = DateTime.Now,
                     ProjectID = model.ProjectID
                 };
+                if (file.Type == "JavaScript")
+                {
+
+                    file.Name = file.Name + ".js";
+                }
+                else if (file.Type == "HTML")
+                {
+                    file.Name = file.Name + ".html";
+                }
+                else if (file.Type == "CSS")
+                {
+                    file.Name = file.Name + ".css";
+                }
+                else
+                {
+                    file.Name = file.Name + ".txt";
+                }
 
                 NavService.AddFileToDb(file);
                 return RedirectToAction("Index", "Home");
