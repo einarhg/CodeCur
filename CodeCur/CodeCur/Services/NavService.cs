@@ -70,9 +70,12 @@ namespace CodeCur.Services
         */
         public static void AddFileToDb(File file)
         {
-            _db.Files.Add(file);
-            //Fail check?
-            _db.SaveChanges();
+            if (ValidFileName(file.Name, file.Type, file.ProjectID))
+            {
+                _db.Files.Add(file);
+                //Fail check?
+                _db.SaveChanges();
+            }
         }
 
         public static IEnumerable<File> GetProjectFiles(int ID)
@@ -91,8 +94,14 @@ namespace CodeCur.Services
             return item.Name;
         }
 
-        public static bool ValidFileName(string name, string ID)
+        public static bool ValidFileName(string name, string type, int projectID)
         {
+            if ((from item in _db.Files
+                where item.Name == name && item.Type == type && item.ProjectID == projectID
+                select item).Any())
+                {
+                    return false;
+                }
             return true;
         }
     }
