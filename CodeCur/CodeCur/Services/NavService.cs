@@ -70,8 +70,10 @@ namespace CodeCur.Services
 
         public static string GetProjectName(int ID)
         {
-            string name = "Get from data";
-            return name;
+            Project item = (from project in _db.Projects
+                            where project.ID == ID
+                            select project).FirstOrDefault();
+            return item.Name;
         }
     }
 }
