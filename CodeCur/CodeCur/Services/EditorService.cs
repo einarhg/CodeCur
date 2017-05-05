@@ -14,8 +14,20 @@ namespace CodeCur.Services
         {
             File file = (from item in _db.Files
                          where item.ID == ID
-                         select item).FirstOrDefault();
+                         select item).SingleOrDefault();
             return file;
+        }
+
+        public static void SaveFile(string content, int fileID)
+        {
+            File file = (from item in _db.Files
+                         where item.ID == fileID
+                         select item).SingleOrDefault();
+            file.Data = content;
+
+            // Success check?
+            _db.SaveChanges();
+            
         }
     }
 }
