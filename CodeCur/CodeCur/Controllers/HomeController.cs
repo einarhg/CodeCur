@@ -100,7 +100,7 @@ namespace CodeCur.Controllers
                 }
 
                 NavService.AddFileToDb(file);
-                return RedirectToAction("Index", "Home");
+                return RedirectToAction("Project", "Home", new { id = model.ProjectID });
             }
             // If we got this far, something failed, redisplay form
             return View(model);

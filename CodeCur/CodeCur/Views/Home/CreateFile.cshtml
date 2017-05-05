@@ -34,7 +34,7 @@
         @Html.HiddenFor(m => m.ProjectID)
         <div class="new-input-form-group">
             <div>
-                @Html.ActionLink("Cancel", "Index", "Home", new { @class = "new-input-cancel-button" })
+                @Html.ActionLink("Cancel", "Project", "Home", new { id = Model.ProjectID }, new { @class = "new-input-cancel-button" })
                 <input type="submit" value="Create" class="new-input-button" />
             </div>
         </div>

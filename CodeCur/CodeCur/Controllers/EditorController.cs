@@ -12,6 +12,7 @@ using CodeCur.Services;
 
 namespace CodeCur.Controllers
 {
+    [Authorize]
     public class EditorController : Controller
     {
         // GET: Editor
