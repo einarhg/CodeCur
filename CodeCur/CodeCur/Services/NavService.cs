@@ -20,15 +20,28 @@ namespace CodeCur.Services
             // Fail check?
             _db.SaveChanges();
 
-            AddUserProjectRelation(project.UserID, project.ID);
+            AddUserProjectRelationByID(project.UserID, project.ID);
         }
 
-        public static void AddUserProjectRelation(string userID, int projectID)
+        public static void AddUserProjectRelationByID(string userID, int projectID)
         {
             UserProjectRelation relation = new UserProjectRelation();
 
             relation.ProjectID = projectID;
             relation.UserID = userID;
+
+            _db.UserProjectRelations.Add(relation);
+            _db.SaveChanges();
+        }
+
+        public static void AddUserProjectRelationByName(string username, int projectID)
+        {
+            UserProjectRelation relation = new UserProjectRelation();
+
+            relation.ProjectID = projectID;
+            relation.UserID = (from user in _db.AspNetUsers
+                               where user.UserName == username
+                               select user.Id).SingleOrDefault();
 
             _db.UserProjectRelations.Add(relation);
             _db.SaveChanges();
