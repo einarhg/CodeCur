@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using CodeCur.Models.Entities;
 using CodeCur.Models;
+using Microsoft.AspNet.Identity;
 
 namespace CodeCur.Services
 {
@@ -18,23 +19,37 @@ namespace CodeCur.Services
 
             // Fail check?
             _db.SaveChanges();
+
+            AddUserProjectRelation(project.UserID, project.ID);
+        }
+
+        public static void AddUserProjectRelation(string userID, int projectID)
+        {
+            UserProjectRelation relation = new UserProjectRelation();
+
+            relation.ProjectID = projectID;
+            relation.UserID = userID;
+
+            _db.UserProjectRelations.Add(relation);
+            _db.SaveChanges();
         }
 
         public static IEnumerable<Project> GetUserProjects(string ID)
         {
-            /*var userProjectIds = (from PP in _db.UserProjectRelations where PP.UserID == ID select PP.ID).ToList();
+            var userProjectIds = (from PP in _db.UserProjectRelations
+                                  where PP.UserID == ID
+                                  select PP.ProjectID).ToList();
 
             List<Project> projects = new List<Project>();
 
             foreach (var idnum in userProjectIds)
             {
                 projects.Add(
-                    (from prj in _db.Projects where prj.ID == idnum select prj).FirstOrDefault());
-            }*/
+                (from prj in _db.Projects
+                where prj.ID == idnum
+                select prj).FirstOrDefault());
+            }
 
-            IEnumerable<Project> projects = (from project in _db.Projects
-                                             where project.UserID == ID
-                                             select project).ToList();
             return projects;
         }
 
@@ -68,6 +83,12 @@ namespace CodeCur.Services
             return files;
         }
 
-
+        public static string GetProjectName(int ID)
+        {
+            Project item = (from project in _db.Projects
+                            where project.ID == ID
+                            select project).FirstOrDefault();
+            return item.Name;
+        }
     }
 }
