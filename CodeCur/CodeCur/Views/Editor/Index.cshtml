@@ -10,13 +10,20 @@
 <div class="editor-container">
     <menu>
         <h1>@Model.File.Name</h1>
+        <button id="saveButton">Save</button>
         @Html.ActionLink("<", "Project", "Home", new { id = Model.File.ProjectID }, new { @class = "back-file-button" })
     </menu>
     <div id="editor">@Model.File.Data</div>
+    <div class="save-success-box"><span id="saveSuccess">Successfully saved!</span></div>
+    <div class="save-error-box"><span id="saveError">An error came up, Content not saved!</span></div>
 </div>
 
 
 <script>
+    window.setInterval(function () {
+        autoSaveFile();
+    }, 5000);
+
     $(function () {
         var editor = ace.edit("editor");
         editor.focus();
@@ -32,4 +39,48 @@
             editor.getSession().setMode("ace/mode/text");
         }
     });
+
+    $('#saveButton').click( function () {
+        saveFile();
+    });
+
+    $(document).keydown(function (event) {
+        if ((event.ctrlKey || event.metaKey) && event.which == 83) {
+            saveFile();
+            event.preventDefault();
+            return false;
+        };
+    });
+
+    function saveFile() {
+        var editor = ace.edit("editor");
+        var code = editor.getValue();
+        $.ajax({
+            type: 'POST',
+            url: "@Url.Action("Save", "Editor", new { id = Model.File.ID })",
+            data: {
+                Data: code,
+            },
+            success:function(result) {
+                $(".save-success-box").css({ 'bottom': '0', 'opacity': '1' });
+                setTimeout(function () { $(".save-success-box").css({ 'bottom': '-42px', 'opacity': '0'}); }, 2500);
+            },
+            error: function (result) {
+                $(".save-error-box").css({ 'bottom': '0', 'opacity': '1' });
+                setTimeout(function () { $(".save-error-box").css({ 'bottom': '-42px', 'opacity': '0' }); }, 2500);
+            }
+       });
+    }
+
+    function autoSaveFile() {
+        var editor = ace.edit("editor");
+        var code = editor.getValue();
+        $.ajax({
+            type: 'POST',
+            url: "@Url.Action("Save", "Editor", new { id = Model.File.ID })",
+            data: {
+                Data: code,
+            },
+       });
+    }
 </script>

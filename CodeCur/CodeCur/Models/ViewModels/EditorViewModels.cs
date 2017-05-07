@@ -10,4 +10,9 @@ namespace CodeCur.Models.ViewModels
     {
         public File File { get; set; }
     }
+
+    public class SaveViewModel
+    {
+        public string Data { get; set; }
+    }
 }

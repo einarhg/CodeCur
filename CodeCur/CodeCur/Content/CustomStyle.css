@@ -482,8 +482,75 @@
 }
 
 .editor-container .back-file-button {
+    font-size: 22px;
     left: 42px;
     margin-right: 0;
     position: absolute;
-    top: 13px;
+    top: 20px;
+    width: 39px;
+}
+
+#saveButton {
+    background: #6cc3d0;
+    border: none;
+    border-radius: 40px;
+    color: #fff;
+    display: inline-block;
+    font-size: 22px;
+    left: 96px;
+    margin: 0;
+    padding: 4px 0;
+    position: absolute;
+    text-align: center;
+    text-decoration: none;
+    top: 20px;
+    width: 84px;
+    transition: all 0.2s ease-out;
+    -webkit-transition: all 0.2s ease-out;
+}
+
+#saveButton:hover {
+    background: #5cb6c3;
+}
+
+#saveButton:focus {
+    outline: none;
+}
+
+.save-success-box, .save-error-box {
+    bottom: -42px;
+    height: 42px;
+    left: 0;
+    opacity: 0;
+    position: absolute;
+    right: 0;
+    z-index: 3000;
+    transition: all 0.4s ease-out;
+    -webkit-transition: all 0.4s ease-out;
+}
+
+.save-success-box {
+    background: #63e64f;
+}
+
+.save-error-box {
+    background: #e64f4f;
+}
+
+.save-success-box span, .save-error-box span {
+    color: #fff;
+    font-size: 16px;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+    position: absolute;
+    top: 11px;
+    text-transform: uppercase;
+}
+
+.save-success-box span {
+    left: calc(50% - 90px);
+}
+
+.save-error-box span {
+    left: calc(50% - 168px);
 }
