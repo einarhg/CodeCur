@@ -354,13 +354,13 @@
     font-weight: 300;
 }
 
-.new-file-button, .back-file-button {
+.new-file-button, .back-file-button, .share-project-button {
     border: none;
     border-radius: 50%;
     color: #fff;
     display: inline-block;
     font-size: 32px;
-    margin: 0;
+    margin: 0 5px 0 0;
     padding: 4px 0;
     text-align: center;
     text-decoration: none;
@@ -375,7 +375,6 @@
 
 .back-file-button {
     background: #e64f4f;
-    margin-right: 5px;
 }
 
 .new-file-button:hover, .back-file-button:hover {
@@ -396,6 +395,20 @@
 .new-file-button:focus, .back-file-button:focus {
     color: #fff;
     text-decoration: none;
+}
+
+.share-project-button {
+    background: #e6d837;
+}
+
+.share-project-button:hover {
+    background: #ded134;
+}
+
+.share-project-button img {
+    height: 20px;
+    margin-left: -1px;
+    margin-top: -3px;
 }
 
 .file-list-content {
@@ -504,7 +517,7 @@
     text-align: center;
     text-decoration: none;
     top: 20px;
-    width: 84px;
+    width: 74px;
     transition: all 0.2s ease-out;
     -webkit-transition: all 0.2s ease-out;
 }

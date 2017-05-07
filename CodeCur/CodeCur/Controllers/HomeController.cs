@@ -105,5 +105,28 @@ namespace CodeCur.Controllers
             // If we got this far, something failed, redisplay form
             return View(model);
         }
+
+        [AllowAnonymous]
+        public ActionResult ShareProject(int ID)
+        {
+            ShareProjectViewModel model = new ShareProjectViewModel();
+            model.ProjectID = ID;
+            model.ProjectName = NavService.GetProjectName(ID);
+            return View(model);
+        }
+
+        [HttpPost]
+        [AllowAnonymous]
+        [ValidateAntiForgeryToken]
+        public ActionResult ShareProject(ShareProjectViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                NavService.AddUserProjectRelationByName(model.UserName, model.ProjectID);
+                return RedirectToAction("Project", "Home", new { id = model.ProjectID });
+            }
+            // If we got this far, something failed, redisplay form
+            return View(model);
+        }
     }
 }

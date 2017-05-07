@@ -46,6 +46,18 @@ namespace CodeCur.Models.ViewModels
         public int ProjectID { get; set; }
     }
 
+    public class ShareProjectViewModel
+    {
+        public string ProjectName { get; set; }
+
+        [Required]
+        [Display(Name = "Username")]
+        public string UserName { get; set; }
+
+        [Required]
+        public int ProjectID { get; set; }
+    }
+
     public class FileAndProjectViewModel
     {
         public CreateFileViewModel FileModel { get; set; }

@@ -223,6 +223,7 @@
     <Content Include="Images\javascript.svg" />
     <Content Include="Images\logo.svg" />
     <Content Include="Images\navbarlogo.svg" />
+    <Content Include="Images\share.svg" />
     <Content Include="Images\txt.svg" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
@@ -276,6 +277,7 @@
     <Content Include="Views\Home\CreateProject.cshtml" />
     <Content Include="Views\Home\Project.cshtml" />
     <Content Include="Views\Home\CreateFile.cshtml" />
+    <Content Include="Views\Home\ShareProject.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
