@@ -205,7 +205,6 @@
     </Compile>
     <Compile Include="Hubs\EditorHub.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
-    <Compile Include="Models\Entities\AspNetUser.cs" />
     <Compile Include="Models\Entities\File.cs" />
     <Compile Include="Models\Entities\Project.cs" />
     <Compile Include="Models\Entities\UserProjectRelation.cs" />

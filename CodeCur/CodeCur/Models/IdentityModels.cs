@@ -25,7 +25,6 @@ namespace CodeCur.Models
         public DbSet<Project> Projects { get; set; }
         public DbSet<File> Files { get; set; }
         public DbSet<UserProjectRelation> UserProjectRelations { get; set; } 
-        public DbSet<AspNetUser> AspNetUsers { get; set; }
 
         public ApplicationDbContext()
             : base("DefaultConnection", throwIfV1Schema: false)
