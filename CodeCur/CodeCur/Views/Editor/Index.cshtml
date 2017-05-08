@@ -5,6 +5,8 @@
 
 <script src="~/Scripts/ace-builds-1.2.6/src-noconflict/ace.js" type="text/javascript" charset="utf-8"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="~/Scripts/jquery.signalR-2.2.2.min.js"></script>
+<script src="~/signalr/hubs"></script>
 
 
 <div class="editor-container">
@@ -24,21 +26,20 @@
         autoSaveFile();
     }, 5000);
 
-    $(function () {
-        var editor = ace.edit("editor");
-        editor.focus();
-        var type = @Html.Raw(Json.Encode(Model.File.Type));
-        editor.setTheme("ace/theme/monokai");
-        if (type == "JavaScript") {
-            editor.getSession().setMode("ace/mode/javascript");
-        } else if (type == "HTML") {
-            editor.getSession().setMode("ace/mode/html");
-        } else if (type == "CSS") {
-            editor.getSession().setMode("ace/mode/css");
-        } else {
-            editor.getSession().setMode("ace/mode/text");
-        }
-    });
+    
+    var editor = ace.edit("editor");
+    editor.focus();
+    var type = @Html.Raw(Json.Encode(Model.File.Type));
+    editor.setTheme("ace/theme/monokai");
+    if (type == "JavaScript") {
+        editor.getSession().setMode("ace/mode/javascript");
+    } else if (type == "HTML") {
+        editor.getSession().setMode("ace/mode/html");
+    } else if (type == "CSS") {
+        editor.getSession().setMode("ace/mode/css");
+    } else {
+        editor.getSession().setMode("ace/mode/text");
+    }
 
     $('#saveButton').click( function () {
         saveFile();
@@ -83,4 +84,12 @@
             },
        });
     }
+
+    var editorHub = $.connection.editorHub;
+    $.connection.hub.start().done(function () {
+        editor.on("change", function (obj) {
+            // log any event to console;
+            console.log(obj);
+        });
+    });
 </script>
