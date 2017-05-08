@@ -627,7 +627,8 @@
 
 .error-container a {
     font-size: 20px;
-    text-align: center;
+    margin: 5px 0;
+    margin-left: calc(50% - 90px);
 }
 
 @media (max-width: 750px) {
