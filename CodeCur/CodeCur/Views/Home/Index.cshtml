@@ -3,7 +3,6 @@
 @{
     ViewBag.Title = "Home Page";
 }
-
 <div class="list-container">
     <div class="list-head">
         <h1 class="project-list-header">My projects</h1>
@@ -16,12 +15,13 @@
     else
     {
         <div class="list-content">
-            @foreach (var project in Model.Projects)
+            @for (int i = 0; i < Model.Projects.Count; i++)
             {
-                <a href="@Url.Action("Project", "Home", new { id = project.ID })">
-                    <p class="project-name">@project.Name</p>
-                    <p class="project-type">@project.Type</p>
-                    <p class="project-date">@project.DateCreated.Day/@project.DateCreated.Month/@project.DateCreated.Year</p>
+                <a href="@Url.Action("Project", "Home", new { id = Model.Projects[i].ID })">
+                    <p class="project-name">@Model.Projects[i].Name</p>
+                    <p class="project-owner">Owner: @Model.Owners[i]</p>
+                    <p class="project-type">@Model.Projects[i].Type</p>
+                    <p class="project-date">@Model.Projects[i].DateCreated.Day/@Model.Projects[i].DateCreated.Month/@Model.Projects[i].DateCreated.Year</p>
                 </a>
             }
         </div>

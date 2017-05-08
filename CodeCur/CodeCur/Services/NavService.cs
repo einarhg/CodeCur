@@ -47,7 +47,7 @@ namespace CodeCur.Services
             _db.SaveChanges();
         }
 
-        public static IEnumerable<Project> GetUserProjects(string ID)
+        public static List<Project> GetUserProjects(string ID)
         {
             var userProjectIds = (from PP in _db.UserProjectRelations
                                   where PP.UserID == ID
@@ -105,6 +105,14 @@ namespace CodeCur.Services
                             where project.ID == ID
                             select project).FirstOrDefault();
             return item.Name;
+        }
+
+        public static string GetUserName(string ID)
+        {
+            string name = (from user in _db.Users
+                               where user.Id == ID
+                               select user.UserName).FirstOrDefault();
+            return name;
         }
 
         public static bool ValidFileName(string name, string type, int projectID)

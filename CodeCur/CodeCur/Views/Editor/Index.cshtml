@@ -7,7 +7,7 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
 
-<div class="editor-container">
+<div data-editor data-type="@Html.Raw(Json.Encode(Model.File.Type))" class="editor-container">
     <menu>
         <h1>@Model.File.Name</h1>
         <button id="saveButton">Save</button>
@@ -48,7 +48,6 @@
         if ((event.ctrlKey || event.metaKey) && event.which == 83) {
             saveFile();
             event.preventDefault();
-            return false;
         };
     });
 
@@ -61,7 +60,7 @@
             data: {
                 Data: code,
             },
-            success:function(result) {
+            success: function(result) {
                 $(".save-success-box").css({ 'bottom': '0', 'opacity': '1' });
                 setTimeout(function () { $(".save-success-box").css({ 'bottom': '-42px', 'opacity': '0'}); }, 2500);
             },

@@ -19,6 +19,11 @@ namespace CodeCur.Controllers
         {
             ProjectViewModel model = new ProjectViewModel();
             model.Projects = NavService.GetUserProjects(User.Identity.GetUserId());
+            model.Owners = new List<string>();
+            foreach (var project in model.Projects)
+            {
+                model.Owners.Add(NavService.GetUserName(project.UserID));
+            }
             return View(model);
         }
 

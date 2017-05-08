@@ -334,9 +334,14 @@
     left: 20px;
 }
 
+.list-content .project-owner {
+    color: #777;
+    left: 38%;
+}
+
 .list-content .project-type {
     color: #777;
-    left: 50%;
+    left: 67%;
 }
 
 .list-content .project-date {
