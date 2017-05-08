@@ -55,14 +55,14 @@
             url: "@Url.Action("Save", "Editor", new { id = Model.File.ID })",
             data: {
                 Data: code,
-            },
-            success: function(result) {
-                $(".save-success-box").css({ 'opacity': '1' });
-                setTimeout(function () { $(".save-success-box").css({ 'opacity': '0'}); }, 2500);
-            },
-            error: function (result) {
-                $(".save-error-box").css({ 'opacity': '1' });
-                setTimeout(function () { $(".save-error-box").css({ 'opacity': '0' }); }, 2500);
+            //},
+            //success: function(result) {
+            //    $(".save-success-box").css({ 'opacity': '1' });
+            //    setTimeout(function () { $(".save-success-box").css({ 'opacity': '0'}); }, 2500);
+            //},
+            //error: function (result) {
+            //    $(".save-error-box").css({ 'opacity': '1' });
+            //    setTimeout(function () { $(".save-error-box").css({ 'opacity': '0' }); }, 2500);
             }
        });
     }
@@ -72,7 +72,7 @@
     var silent = false;
 
     editorHub.client.onChange = function (changeData) {
-        console.log(changeData);
+        //console.log(changeData);
 
         silent = true;
         editor.getSession().getDocument().applyDelta(changeData);
@@ -84,11 +84,12 @@
         editorHub.server.joinFile(fileID);
 
         editor.on("change", function (obj) {
+            saveFile();
             if (silent) {
                 return;
             }
             // log any event to console;
-            console.log(obj);
+            //console.log(obj);
             editorHub.server.onChange(obj, fileID);
         });
     });
