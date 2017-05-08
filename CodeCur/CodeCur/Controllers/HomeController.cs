@@ -9,6 +9,7 @@ using CodeCur.Models.ViewModels;
 using CodeCur.Models.Entities;
 using Microsoft.AspNet.Identity;
 using CodeCur.Services;
+using System.ComponentModel.DataAnnotations;
 
 namespace CodeCur.Controllers
 {

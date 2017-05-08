@@ -26,9 +26,10 @@ namespace CodeCur.Controllers
 
         [HttpPost]
         [AllowAnonymous]
+        [ValidateInput(false)]
         public ActionResult Save(int ID, SaveViewModel model)
         {
-            EditorService.SaveFile(model.Data, ID);
+            EditorService.SaveFile(Server.HtmlEncode(model.Data), ID);
             return new HttpStatusCodeResult(HttpStatusCode.OK);
         }
 

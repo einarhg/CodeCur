@@ -15,7 +15,7 @@
         <button id="saveButton">Save</button>
         @Html.ActionLink("<", "Project", "Home", new { id = Model.File.ProjectID }, new { @class = "back-file-button" })
     </menu>
-    <div id="editor">@Model.File.Data</div>
+    <% <div id="editor">@Html.Raw(Model.File.Data)</div> %>
     <div class="save-success-box"><span id="saveSuccess">Successfully saved!</span></div>
     <div class="save-error-box"><span id="saveError">An error came up, Content not saved!</span></div>
 </div>
