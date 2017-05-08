@@ -606,6 +606,30 @@
     text-decoration: none;
 }
 
+.error-container {
+    margin: auto;
+    max-width: 500px;
+    padding: 80px 10px;
+    width: 100%;
+}
+
+.error-container h1 {
+    font-size: 46px;
+    margin: 20px 0;
+    text-align: center;
+}
+
+.error-container h2 {
+    font-size: 30px;
+    margin: 5px 0;
+    text-align: center;
+}
+
+.error-container a {
+    font-size: 20px;
+    text-align: center;
+}
+
 @media (max-width: 750px) {
     .list-head h1 {
         font-size: 30px;
