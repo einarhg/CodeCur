@@ -570,6 +570,42 @@
     left: calc(50% - 168px);
 }
 
+.user-settings-container {
+
+}
+
+.user-settings-container h2 {
+    font-size: 40px;
+    text-align: center;
+}
+
+.user-settings-container a {
+    background: #6cc3d0;
+    border-radius: 2px;
+    color: #fff;
+    display: block;
+    font-size: 18px;
+    margin-left: calc(50% - 95px);
+    margin-top: 10px;
+    padding: 10px 0;
+    text-align: center;
+    max-width: 190px;
+    transition: background 0.2s;
+    -webkit-transition: background 0.2s;
+}
+
+.user-settings-container a:hover {
+    background: #5cb6c3;
+    color: #fff;
+    text-decoration: none;
+}
+
+.user-settings-container a:focus {
+    color: #fff;
+    outline: none;
+    text-decoration: none;
+}
+
 @media (max-width: 750px) {
     .list-head h1 {
         font-size: 30px;

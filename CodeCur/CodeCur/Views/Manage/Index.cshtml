@@ -6,14 +6,7 @@
 }
 
 
-<div class="new-input-container">
+<div class="new-input-container user-settings-container">
     <h2>@User.Identity.Name</h2>
-    @if (Model.HasPassword)
-            {
-        @Html.ActionLink("Change your password", "ChangePassword")
-    }
-    else
-    {
-        @Html.ActionLink("Create", "SetPassword")
-    }
+    @Html.ActionLink("Change password", "ChangePassword")
 </div>
