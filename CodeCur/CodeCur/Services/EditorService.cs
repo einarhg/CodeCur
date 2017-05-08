@@ -9,9 +9,9 @@ namespace CodeCur.Services
 {
     public class EditorService
     {
-        static ApplicationDbContext _db = new ApplicationDbContext();
         public static File GetFile(int ID)
         {
+            ApplicationDbContext _db = new ApplicationDbContext();
             File file = (from item in _db.Files
                          where item.ID == ID
                          select item).SingleOrDefault();
@@ -20,6 +20,7 @@ namespace CodeCur.Services
 
         public static void SaveFile(string content, int fileID)
         {
+            ApplicationDbContext _db = new ApplicationDbContext();
             if (fileID != 0)
             {
                 File file = (from item in _db.Files

@@ -10,10 +10,9 @@ namespace CodeCur.Services
 {
     public class NavService
     {
-        static ApplicationDbContext _db = new ApplicationDbContext();
         public static void AddProjectToDb(Project project)
         {
-            
+            ApplicationDbContext _db = new ApplicationDbContext();
             // Add the new object to the Orders collection.
             _db.Projects.Add(project);
 
@@ -25,6 +24,7 @@ namespace CodeCur.Services
 
         public static void AddUserProjectRelationByID(string userID, int projectID)
         {
+            ApplicationDbContext _db = new ApplicationDbContext();
             UserProjectRelation relation = new UserProjectRelation();
 
             relation.ProjectID = projectID;
@@ -36,6 +36,7 @@ namespace CodeCur.Services
 
         public static void AddUserProjectRelationByName(string username, int projectID)
         {
+            ApplicationDbContext _db = new ApplicationDbContext();
             UserProjectRelation relation = new UserProjectRelation();
 
             relation.ProjectID = projectID;
@@ -49,6 +50,7 @@ namespace CodeCur.Services
 
         public static List<Project> GetUserProjects(string ID)
         {
+            ApplicationDbContext _db = new ApplicationDbContext();
             var userProjectIds = (from PP in _db.UserProjectRelations
                                   where PP.UserID == ID
                                   select PP.ProjectID).ToList();
@@ -83,6 +85,7 @@ namespace CodeCur.Services
         */
         public static void AddFileToDb(File file)
         {
+            ApplicationDbContext _db = new ApplicationDbContext();
             if (ValidFileName(file.Name, file.Type, file.ProjectID))
             {
                 _db.Files.Add(file);
@@ -93,6 +96,7 @@ namespace CodeCur.Services
 
         public static IEnumerable<File> GetProjectFiles(int ID)
         {
+            ApplicationDbContext _db = new ApplicationDbContext();
             IEnumerable<File> files = (from file in _db.Files
                                        where file.ProjectID == ID
                                        select file).ToList();
@@ -101,6 +105,7 @@ namespace CodeCur.Services
 
         public static string GetProjectName(int ID)
         {
+            ApplicationDbContext _db = new ApplicationDbContext();
             Project item = (from project in _db.Projects
                             where project.ID == ID
                             select project).FirstOrDefault();
@@ -109,6 +114,7 @@ namespace CodeCur.Services
 
         public static string GetUserName(string ID)
         {
+            ApplicationDbContext _db = new ApplicationDbContext();
             string name = (from user in _db.Users
                                where user.Id == ID
                                select user.UserName).FirstOrDefault();
@@ -117,6 +123,7 @@ namespace CodeCur.Services
 
         public static bool ValidFileName(string name, string type, int projectID)
         {
+            ApplicationDbContext _db = new ApplicationDbContext();
             if ((from item in _db.Files
                 where item.Name == name && item.Type == type && item.ProjectID == projectID
                 select item).Any())
