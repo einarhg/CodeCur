@@ -57,12 +57,12 @@
                 Data: code,
             },
             success: function(result) {
-                $(".save-success-box").css({ 'bottom': '0', 'opacity': '1' });
-                setTimeout(function () { $(".save-success-box").css({ 'bottom': '-42px', 'opacity': '0'}); }, 2500);
+                $(".save-success-box").css({ 'opacity': '1' });
+                setTimeout(function () { $(".save-success-box").css({ 'opacity': '0'}); }, 2500);
             },
             error: function (result) {
-                $(".save-error-box").css({ 'bottom': '0', 'opacity': '1' });
-                setTimeout(function () { $(".save-error-box").css({ 'bottom': '-42px', 'opacity': '0' }); }, 2500);
+                $(".save-error-box").css({ 'opacity': '1' });
+                setTimeout(function () { $(".save-error-box").css({ 'opacity': '0' }); }, 2500);
             }
        });
     }
