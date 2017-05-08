@@ -39,9 +39,9 @@ namespace CodeCur.Services
             UserProjectRelation relation = new UserProjectRelation();
 
             relation.ProjectID = projectID;
-            relation.UserID = (from user in _db.AspNetUsers
+            relation.UserID = (from user in _db.Users
                                where user.UserName == username
-                               select user.Id).SingleOrDefault();
+                               select user.Id).FirstOrDefault();
 
             _db.UserProjectRelations.Add(relation);
             _db.SaveChanges();
