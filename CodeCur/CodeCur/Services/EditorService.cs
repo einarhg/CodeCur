@@ -20,13 +20,16 @@ namespace CodeCur.Services
 
         public static void SaveFile(string content, int fileID)
         {
-            File file = (from item in _db.Files
-                         where item.ID == fileID
-                         select item).SingleOrDefault();
-            file.Data = content;
+            if (fileID != 0)
+            {
+                File file = (from item in _db.Files
+                             where item.ID == fileID
+                             select item).SingleOrDefault();
+                file.Data = content;
 
-            // Success check?
-            _db.SaveChanges();
+                // Success check?
+                _db.SaveChanges();
+            }
             
         }
     }

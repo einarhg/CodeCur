@@ -1,4 +1,4 @@
-@model CodeCur.Models.ViewModels.EditorViewModel
+﻿@model CodeCur.Models.ViewModels.EditorViewModel
 @{
     ViewBag.Title = "Editor";
 }
@@ -22,10 +22,6 @@
 
 
 <script>
-    window.setInterval(function () {
-        autoSaveFile();
-    }, 5000);
-
     var editor = ace.edit("editor");
     editor.focus();
     var type = @Html.Raw(Json.Encode(Model.File.Type));
@@ -71,23 +67,29 @@
        });
     }
 
-    function autoSaveFile() {
-        var editor = ace.edit("editor");
-        var code = editor.getValue();
-        $.ajax({
-            type: 'POST',
-            url: "@Url.Action("Save", "Editor", new { id = Model.File.ID })",
-            data: {
-                Data: code,
-            },
-        });
-    }
-
     var editorHub = $.connection.editorHub;
+    var fileID = @Model.File.ID;
+    var silent = false;
+
+    editorHub.client.onChange = function (changeData) {
+        console.log(changeData);
+
+        silent = true;
+        editor.getSession().getDocument().applyDelta(changeData);
+        silent = false;
+    };
+
     $.connection.hub.start().done(function () {
+
+        editorHub.server.joinFile(fileID);
+
         editor.on("change", function (obj) {
+            if (silent) {
+                return;
+            }
             // log any event to console;
             console.log(obj);
+            editorHub.server.onChange(obj, fileID);
         });
     });
 </script>

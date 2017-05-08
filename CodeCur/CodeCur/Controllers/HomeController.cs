@@ -58,6 +58,27 @@ namespace CodeCur.Controllers
                 };
 
                 NavService.AddProjectToDb(project);
+
+                //Creating default file
+                File defaultFile = new File();
+                defaultFile.ProjectID = project.ID;
+                defaultFile.DateCreated = DateTime.Now;
+                if (project.Type == "Website")
+                {
+                    defaultFile.Name += "index.html";
+                    defaultFile.Type = "HTML";
+                }
+                else if (project.Type == "Mobile app")
+                {
+                    defaultFile.Name += "index.js";
+                    defaultFile.Type = "JavaScript";
+                }
+                else
+                {
+                    defaultFile.Name += "index.txt";
+                    defaultFile.Type = "TXT";
+                }
+                NavService.AddFileToDb(defaultFile);
                 return RedirectToAction("Index", "Home");
             }
             // If we got this far, something failed, redisplay form
