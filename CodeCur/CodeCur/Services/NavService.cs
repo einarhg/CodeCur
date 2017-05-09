@@ -138,8 +138,8 @@ namespace CodeCur.Services
         {
             ApplicationDbContext _db = new ApplicationDbContext();
             var ToDelete = from project in _db.Projects
-                       where project.ID == ID
-                       select project;
+                           where project.ID == ID
+                           select project;
 
             foreach (var item in ToDelete)
             {

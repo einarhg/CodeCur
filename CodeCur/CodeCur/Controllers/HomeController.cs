@@ -155,5 +155,15 @@ namespace CodeCur.Controllers
             // If we got this far, something failed, redisplay form
             return View(model);
         }
+
+        [HttpPost]
+        [AllowAnonymous]
+        [ValidateAntiForgeryToken]
+        public ActionResult DeleteProject(int ID)
+        {
+            NavService.DeleteAllFiles(ID);
+            NavService.DeleteProject(ID);
+            return RedirectToAction("Index", "Home");
+        }
     }
 }
