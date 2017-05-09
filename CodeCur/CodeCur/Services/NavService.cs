@@ -183,5 +183,32 @@ namespace CodeCur.Services
             ToRemove.Deleted = true;
             _db.SaveChanges();
         }
+
+        public static bool AuthorizeProjectAccess(string userID, int projectID)
+        {
+            ApplicationDbContext _db = new ApplicationDbContext();
+
+            if ((from conn in _db.UserProjectRelations
+                where conn.UserID == userID && conn.ProjectID == projectID
+                select conn).Any())
+            {
+                return true;
+            }
+            return false;
+        }
+
+        public static bool AuthorizeFileAccess(string userID, int fileID)
+        {
+            ApplicationDbContext _db = new ApplicationDbContext();
+
+            if ((from conn in _db.UserProjectRelations
+                 join file in _db.Files on conn.ProjectID equals file.ProjectID
+                 where conn.UserID == userID && file.ID == fileID
+                 select conn).Any())
+            {
+                return true;
+            }
+            return false;
+        }
     }
 }
