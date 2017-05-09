@@ -138,14 +138,11 @@ namespace CodeCur.Services
         public static void DeleteProject(int ID)
         {
             ApplicationDbContext _db = new ApplicationDbContext();
-            var ToDelete = from project in _db.Projects
+            var ToDelete = (from project in _db.Projects
                            where project.ID == ID
-                           select project;
+                           select project).FirstOrDefault();
 
-            foreach (var item in ToDelete)
-            {
-                item.Deleted = true;
-            }
+            ToDelete.Deleted = true;
             _db.SaveChanges();
         }
 
@@ -165,13 +162,11 @@ namespace CodeCur.Services
         public static void DeleteFile(int ID)
         {
             ApplicationDbContext _db = new ApplicationDbContext();
-            var ToDelete = from file in _db.Files
+            var ToDelete = (from file in _db.Files
                            where file.ID == ID
-                           select file;
-            foreach (var item in ToDelete)
-            {
-                item.Deleted = true;
-            }
+                           select file).FirstOrDefault();
+
+            ToDelete.Deleted = true;
             _db.SaveChanges();
         }
     }
