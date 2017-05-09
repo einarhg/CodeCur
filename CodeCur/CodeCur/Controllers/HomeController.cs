@@ -161,8 +161,8 @@ namespace CodeCur.Controllers
         [AllowAnonymous]
         public ActionResult DeleteProject(DeleteProjectViewModel model)
         {
-            NavService.DeleteAllFiles(model.ID);
-            NavService.DeleteProject(model.ID);
+            NavService.DeleteAllFiles(model.ID+1);
+            NavService.DeleteProject(model.ID+1);
             return new HttpStatusCodeResult(HttpStatusCode.OK);
         }
 
