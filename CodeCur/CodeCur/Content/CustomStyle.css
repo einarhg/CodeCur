@@ -324,13 +324,13 @@
 
 .list-delete-button {
     background: #e64f4f;
+    border: none;
     border-radius: 0 2px 2px 0;
     box-sizing: border-box;
     color: #fff;
     display: block;
     font-size: 20px;
     max-height: 50px;
-    padding-top: 11px;
     text-align: center;
     width: 6%;
     transition: background: 0.2s;
@@ -346,6 +346,7 @@
 .list-delete-button:focus {
     color: #fff;
     text-decoration: none;
+    outline: none;
 }
 
 .list-content p {
@@ -682,7 +683,6 @@
     }
     .list-delete-button {
         font-size: 20px;
-        padding-top: 6px;
     }
 }
 
@@ -701,7 +701,6 @@
     }
     .list-delete-button {
         font-size: 14px;
-        padding-top: 11px;
     }
 }
 

@@ -64,4 +64,9 @@ namespace CodeCur.Models.ViewModels
         public CreateFileViewModel FileModel { get; set; }
         public ProjectDetailsViewModel ProjectModel { get; set; }
     }
+
+    public class DeleteProjectViewModel
+    {
+        public int ID { get; set; }
+    }
 }

@@ -10,6 +10,7 @@ using CodeCur.Models.Entities;
 using Microsoft.AspNet.Identity;
 using CodeCur.Services;
 using System.ComponentModel.DataAnnotations;
+using System.Net;
 
 namespace CodeCur.Controllers
 {
@@ -158,12 +159,11 @@ namespace CodeCur.Controllers
 
         [HttpPost]
         [AllowAnonymous]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteProject(int ID)
+        public ActionResult DeleteProject(DeleteProjectViewModel model)
         {
-            NavService.DeleteAllFiles(ID);
-            NavService.DeleteProject(ID);
-            return RedirectToAction("Index", "Home");
+            NavService.DeleteAllFiles(model.ID);
+            NavService.DeleteProject(model.ID);
+            return new HttpStatusCodeResult(HttpStatusCode.OK);
         }
 
         [HttpPost]

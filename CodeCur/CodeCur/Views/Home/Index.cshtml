@@ -29,7 +29,7 @@
                     <p class="project-type">@Model.Projects[i].Type</p>
                     <p class="project-date">@Model.Projects[i].DateCreated.Day/@Model.Projects[i].DateCreated.Month/@Model.Projects[i].DateCreated.Year</p>
                 </a>
-                <a class="list-delete-button" href="@Url.Action("DeleteProject", "Home", new { id = Model.Projects[i].ID })">&#10005;</a>
+                <button data-project-id="@Model.Projects[i].ID" class="list-delete-button">&#10005;</button>
             }
         </div>
     }
@@ -38,7 +38,25 @@
 <script>
     $(function() {
         $(".list-delete-button").click(function () {
-            confirm("Are you sure you want to delete this project?");
+            var r = confirm("Are you sure you want to delete this project?");
+            if (r == true) {
+                var id = $(".list-delete-button").data("project-id");
+                $.ajax({
+                    type: 'POST',
+                    url: "@Url.Action("DeleteProject", "Home")",
+                    data: {
+                        ID: id,
+                    },
+                    success: function(result) {
+                        
+                    },
+                    error: function (result) {
+                        
+                    }
+               });
+            } else {
+
+            }
         });
     });
 </script>
