@@ -10,5 +10,6 @@ namespace CodeCur.Models.Entities
         public int ID { get; set; }
         public string UserID { get; set; }
         public int ProjectID { get; set; }
+        public bool Deleted { get; set; }
     }
 }

@@ -170,8 +170,8 @@ namespace CodeCur.Controllers
         [AllowAnonymous]
         public ActionResult RemoveFromProject(RemoveFromProjectViewModel model)
         {
-            //DO SHIT
-            return new HttpStatusCodeResult(HttpStatusCode.OK);
+            NavService.RemoveUserFromProject(model.ID, User.Identity.GetUserId());
+            return RedirectToAction("Index", "Home");
         }
 
         [HttpPost]

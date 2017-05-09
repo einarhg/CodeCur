@@ -53,12 +53,11 @@ namespace CodeCur.Services
         {
             ApplicationDbContext _db = new ApplicationDbContext();
             var userProjectIds = (from PP in _db.UserProjectRelations
-                                  where PP.UserID == ID
+                                  where PP.UserID == ID && PP.Deleted == false
                                   select PP.ProjectID).ToList();
 
             List<Project> projects = new List<Project>();
 
-            // Added delete == false
             foreach (var idnum in userProjectIds)
             {
                 var item = (from prj in _db.Projects
@@ -171,6 +170,17 @@ namespace CodeCur.Services
                            select file).FirstOrDefault();
 
             ToDelete.Deleted = true;
+            _db.SaveChanges();
+        }
+
+        public static void RemoveUserFromProject(int ID, string username)
+        {
+            ApplicationDbContext _db = new ApplicationDbContext();
+            var ToRemove = (from user in _db.UserProjectRelations
+                            where user.ProjectID == ID && username == user.UserID
+                            select user).FirstOrDefault();
+
+            ToRemove.Deleted = true;
             _db.SaveChanges();
         }
     }
