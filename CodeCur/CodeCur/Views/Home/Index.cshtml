@@ -52,7 +52,7 @@
                             ID: id,
                         },
                         success: function (result) {
-
+                            $('.list-content').replaceWith($(result).find('.list-content'));
                         },
                         error: function (result) {
                             alert("We're sorry, Something went wrong!");
@@ -69,7 +69,7 @@
                             ID: id,
                         },
                         success: function (result) {
-
+                            $('.list-content').replaceWith($(result).find('.list-content'));
                         },
                         error: function (result) {
                             alert("We're sorry, Something went wrong!");

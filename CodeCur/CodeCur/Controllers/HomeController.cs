@@ -163,7 +163,7 @@ namespace CodeCur.Controllers
         {
             NavService.DeleteAllFiles(model.ID);
             NavService.DeleteProject(model.ID);
-            return new HttpStatusCodeResult(HttpStatusCode.OK);
+            return RedirectToAction("Index", "Home");
         }
 
         [HttpPost]
