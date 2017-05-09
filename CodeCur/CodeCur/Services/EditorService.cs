@@ -40,7 +40,7 @@ namespace CodeCur.Services
 
             if ((from conn in _db.UserProjectRelations
                  join file in _db.Files on conn.ProjectID equals file.ProjectID
-                 where conn.UserID == userID && file.ID == fileID
+                 where conn.UserID == userID && file.ID == fileID && file.Deleted == false
                  select conn).Any())
             {
                 return true;

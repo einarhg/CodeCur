@@ -189,7 +189,8 @@ namespace CodeCur.Services
             ApplicationDbContext _db = new ApplicationDbContext();
 
             if ((from conn in _db.UserProjectRelations
-                where conn.UserID == userID && conn.ProjectID == projectID
+                 join proj in _db.Projects on conn.ProjectID equals proj.ID
+                where conn.UserID == userID && conn.ProjectID == projectID && proj.Deleted == false
                 select conn).Any())
             {
                 return true;
