@@ -54,7 +54,7 @@ namespace CodeCur.Controllers
                 {
                     Name = model.Name,
                     Type = model.ProjectType,
-                    DateCreated =  DateTime.Now,
+                    DateCreated = DateTime.Now,
                     UserID = User.Identity.GetUserId()
                 };
 
@@ -174,4 +174,5 @@ namespace CodeCur.Controllers
             NavService.DeleteFile(ID);
             return RedirectToAction("Index", "Home");
         }
+    }
 }
