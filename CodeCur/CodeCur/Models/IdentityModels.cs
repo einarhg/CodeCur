@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using CodeCur.Models.Entities;
+using System;
 
 namespace CodeCur.Models
 {
@@ -35,6 +36,11 @@ namespace CodeCur.Models
         {
 
             return new ApplicationDbContext();
+        }
+
+        internal void SubmitChanges()
+        {
+            throw new NotImplementedException();
         }
     }
 }

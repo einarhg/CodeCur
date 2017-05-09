@@ -5,13 +5,14 @@ using System.Web;
 using CodeCur.Models.Entities;
 using CodeCur.Models;
 using Microsoft.AspNet.Identity;
+using System.Data.Linq;
 
 namespace CodeCur.Services
 {
     public class NavService
     {
         public static void AddProjectToDb(Project project)
-        {
+        {   
             ApplicationDbContext _db = new ApplicationDbContext();
             // Add the new object to the Orders collection.
             _db.Projects.Add(project);
@@ -131,6 +132,44 @@ namespace CodeCur.Services
                     return false;
                 }
             return true;
+        }
+
+        public static void DeleteProject(int ID)
+        {
+            ApplicationDbContext _db = new ApplicationDbContext();
+            var ToDelete = from project in _db.Projects
+                       where project.ID == ID
+                       select project;
+
+            foreach (var item in ToDelete)
+            {
+                item.Deleted = true;
+            }
+        }
+
+        public static void DeleteAllFiles(int ID)
+        {
+            ApplicationDbContext _db = new ApplicationDbContext();
+            var ToDelete = from file in _db.Files
+                           where file.ProjectID == ID
+                           select file;
+            foreach (var item in ToDelete)
+            {
+                item.Deleted = true;
+            }
+        }
+
+        public static void DeleteFile(int ID)
+        {
+            ApplicationDbContext _db = new ApplicationDbContext();
+            var ToDelete = from file in _db.Files
+                           where file.ID == ID
+                           select file;
+            foreach (var item in ToDelete)
+            {
+                item.Deleted = true;
+            }
+
         }
     }
 }

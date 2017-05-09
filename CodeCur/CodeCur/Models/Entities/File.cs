@@ -12,6 +12,7 @@ namespace CodeCur.Models.Entities
         public string Name { get; set; }
         public string Type { get; set; }
         public string Data { get; set; }
+        public bool Deleted { get; set; }
         public DateTime DateCreated { get; set; }
     }
 }
