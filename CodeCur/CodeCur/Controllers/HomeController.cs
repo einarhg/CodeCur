@@ -168,7 +168,14 @@ namespace CodeCur.Controllers
 
         [HttpPost]
         [AllowAnonymous]
-        [ValidateAntiForgeryToken]
+        public ActionResult RemoveFromProject(RemoveFromProjectViewModel model)
+        {
+            //DO SHIT
+            return new HttpStatusCodeResult(HttpStatusCode.OK);
+        }
+
+        [HttpPost]
+        [AllowAnonymous]
         public ActionResult DeleteFile(int ID)
         {
             NavService.DeleteFile(ID);

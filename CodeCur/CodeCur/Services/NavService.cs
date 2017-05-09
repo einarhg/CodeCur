@@ -61,10 +61,14 @@ namespace CodeCur.Services
             // Added delete == false
             foreach (var idnum in userProjectIds)
             {
-                projects.Add(
-                (from prj in _db.Projects
+                var item = (from prj in _db.Projects
                 where prj.ID == idnum && prj.Deleted == false
-                select prj).FirstOrDefault());
+                select prj).FirstOrDefault();
+                
+                if (item != null)
+                {
+                    projects.Add(item);
+                }
             }
 
             return projects;

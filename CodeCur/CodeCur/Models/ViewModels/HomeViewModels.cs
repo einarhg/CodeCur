@@ -69,4 +69,9 @@ namespace CodeCur.Models.ViewModels
     {
         public int ID { get; set; }
     }
+
+    public class RemoveFromProjectViewModel
+    {
+        public int ID { get; set; }
+    }
 }

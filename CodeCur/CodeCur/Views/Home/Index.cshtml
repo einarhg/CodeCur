@@ -29,33 +29,53 @@
                     <p class="project-type">@Model.Projects[i].Type</p>
                     <p class="project-date">@Model.Projects[i].DateCreated.Day/@Model.Projects[i].DateCreated.Month/@Model.Projects[i].DateCreated.Year</p>
                 </a>
-                <button data-project-id="@Model.Projects[i].ID" class="list-delete-button">&#10005;</button>
+                <button id="listDeleteButton_@Model.Projects[i].ID" data-owner="@Model.Owners[i]" data-user="@User.Identity.GetUserName()" class="list-delete-button">&#10005;</button>
             }
         </div>
     }
 </div>
 
 <script>
-    $(function() {
-        $(".list-delete-button").click(function () {
-            var r = confirm("Are you sure you want to delete this project?");
-            if (r == true) {
-                var id = $(".list-delete-button").data("project-id");
-                $.ajax({
-                    type: 'POST',
-                    url: "@Url.Action("DeleteProject", "Home")",
-                    data: {
-                        ID: id,
-                    },
-                    success: function(result) {
-                        
-                    },
-                    error: function (result) {
-                        
-                    }
-               });
-            } else {
+    $(function () {
+        $(".list-delete-button").click(function (event) {
+            event.preventDefault();
+            var owner = $(this).data('owner');
+            var user = $(this).data('user');
+            var id = $(this).attr('id').replace("listDeleteButton_", "");
+            if (owner == user) {
+                var r = confirm("Are you sure you want to delete this project?");
+                if (r == true) {
+                    $.ajax({
+                        type: 'POST',
+                        url: "@Url.Action("DeleteProject", "Home")",
+                        data: {
+                            ID: id,
+                        },
+                        success: function (result) {
 
+                        },
+                        error: function (result) {
+                            alert("We're sorry, Something went wrong!");
+                        }
+                    });
+                }
+            } else {
+                var r = confirm("Are you sure you want to be removed from this project?");
+                if (r == true) {
+                    $.ajax({
+                        type: 'POST',
+                        url: "@Url.Action("RemoveFromProject", "Home")",
+                        data: {
+                            ID: id,
+                        },
+                        success: function (result) {
+
+                        },
+                        error: function (result) {
+                            alert("We're sorry, Something went wrong!");
+                        }
+                    });
+                }
             }
         });
     });
