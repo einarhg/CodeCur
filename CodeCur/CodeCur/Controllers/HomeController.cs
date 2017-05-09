@@ -165,5 +165,13 @@ namespace CodeCur.Controllers
             NavService.DeleteProject(ID);
             return RedirectToAction("Index", "Home");
         }
-    }
+
+        [HttpPost]
+        [AllowAnonymous]
+        [ValidateAntiForgeryToken]
+        public ActionResult DeleteFile(int ID)
+        {
+            NavService.DeleteFile(ID);
+            return RedirectToAction("Index", "Home");
+        }
 }

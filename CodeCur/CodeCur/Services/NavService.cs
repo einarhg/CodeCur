@@ -58,11 +58,12 @@ namespace CodeCur.Services
 
             List<Project> projects = new List<Project>();
 
+            // Added delete == false
             foreach (var idnum in userProjectIds)
             {
                 projects.Add(
                 (from prj in _db.Projects
-                where prj.ID == idnum
+                where prj.ID == idnum && prj.Deleted == false
                 select prj).FirstOrDefault());
             }
 
@@ -145,18 +146,20 @@ namespace CodeCur.Services
             {
                 item.Deleted = true;
             }
+            _db.SaveChanges();
         }
 
         public static void DeleteAllFiles(int ID)
         {
             ApplicationDbContext _db = new ApplicationDbContext();
-            var ToDelete = from file in _db.Files
+            var ToDelete = (from file in _db.Files
                            where file.ProjectID == ID
-                           select file;
+                           select file).ToList();
             foreach (var item in ToDelete)
             {
                 item.Deleted = true;
             }
+            _db.SaveChanges();
         }
 
         public static void DeleteFile(int ID)
@@ -169,7 +172,7 @@ namespace CodeCur.Services
             {
                 item.Deleted = true;
             }
-
+            _db.SaveChanges();
         }
     }
 }
