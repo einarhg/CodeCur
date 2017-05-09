@@ -33,5 +33,19 @@ namespace CodeCur.Services
             }
             
         }
+
+        public static bool AuthorizeFileAccess(string userID, int fileID)
+        {
+            ApplicationDbContext _db = new ApplicationDbContext();
+
+            if ((from conn in _db.UserProjectRelations
+                 join file in _db.Files on conn.ProjectID equals file.ProjectID
+                 where conn.UserID == userID && file.ID == fileID
+                 select conn).Any())
+            {
+                return true;
+            }
+            return false;
+        }
     }
 }

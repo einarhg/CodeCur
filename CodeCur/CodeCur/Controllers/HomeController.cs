@@ -29,8 +29,17 @@ namespace CodeCur.Controllers
             return View(model);
         }
 
+        public ActionResult AccessDenied()
+        {
+            return View();
+        }
+
         public ActionResult Project(int ID)
         {
+            if (!NavService.AuthorizeProjectAccess(User.Identity.GetUserId(), ID))
+            {
+                return RedirectToAction("AccessDenied", "Home");
+            }
             ProjectDetailsViewModel model = new ProjectDetailsViewModel();
             model.Files = NavService.GetProjectFiles(ID);
             model.ProjectID = ID;

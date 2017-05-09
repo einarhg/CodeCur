@@ -19,6 +19,10 @@ namespace CodeCur.Controllers
         // GET: Editor
         public ActionResult Index(int ID)
         {
+            if(!EditorService.AuthorizeFileAccess(User.Identity.GetUserId(), ID))
+            {
+                return RedirectToAction("AccessDenied", "Home");
+            }
             EditorViewModel model = new EditorViewModel();
             model.File = EditorService.GetFile(ID);
             return View(model);
