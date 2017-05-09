@@ -12,7 +12,7 @@
 <div data-editor data-type="@Html.Raw(Json.Encode(Model.File.Type))" class="editor-container">
     <menu>
         <h1>@Model.File.Name</h1>
-        <button id="saveButton">Save</button>
+        <p class="autosave-on">Autosave: <span>on</span></p>
         @Html.ActionLink("<", "Project", "Home", new { id = Model.File.ProjectID }, new { @class = "back-file-button" })
     </menu>
     <% <div id="editor">@Html.Raw(Model.File.Data)</div> %>
@@ -35,10 +35,6 @@
     } else {
         editor.getSession().setMode("ace/mode/text");
     }
-
-    $('#saveButton').click( function () {
-        saveFile();
-    });
 
     $(document).keydown(function (event) {
         if ((event.ctrlKey || event.metaKey) && event.which == 83) {

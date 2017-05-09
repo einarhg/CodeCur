@@ -295,27 +295,56 @@
 }
 
 .list-content {
+    display: flex;
+    flex-wrap: wrap;
     margin-top: 15px;
     margin-bottom: 70px;
 }
 
-.list-content a {
+.list-project {
     background: #ededed;
     border: 1px solid #e1e1e1;
-    border-radius: 2px;
+    border-radius: 2px 0 0 2px;
     box-sizing: border-box;
     color: #222;
     display: block;
     height: 50px;
     margin-bottom: 5px;
     position: relative;
+    width: 94%;
     transition: background 0.2s;
     -webkit-transition: background 0.2s;
 }
 
-.list-content a:hover {
+.list-project:hover {
     background: #e1e1e1;
     color: #222;
+    text-decoration: none;
+}
+
+.list-delete-button {
+    background: #e64f4f;
+    border-radius: 0 2px 2px 0;
+    box-sizing: border-box;
+    color: #fff;
+    display: block;
+    font-size: 20px;
+    max-height: 50px;
+    padding-top: 11px;
+    text-align: center;
+    width: 6%;
+    transition: background: 0.2s;
+    -webkit-transition: background 0.2s;
+}
+
+.list-delete-button:hover {
+    background: #d54848;
+    color: #fff;
+    text-decoration: none;
+}
+
+.list-delete-button:focus {
+    color: #fff;
     text-decoration: none;
 }
 
@@ -333,12 +362,12 @@
 
 .list-content .project-owner {
     color: #777;
-    left: 38%;
+    left: 40%;
 }
 
 .list-content .project-type {
     color: #777;
-    left: 67%;
+    right: 18%;
 }
 
 .list-content .project-date {
@@ -491,10 +520,11 @@
 
 .editor-container h1 {
     color: #fff;
+    font-size: 30px;
     margin: 0;
     right: 42px;
     position: absolute;
-    top: 10px;
+    top: 13px;
 }
 
 .editor-container .back-file-button {
@@ -506,32 +536,22 @@
     width: 39px;
 }
 
-#saveButton {
-    background: #6cc3d0;
-    border: none;
-    border-radius: 40px;
-    color: #fff;
-    display: inline-block;
+.autosave-on {
+    color: #777;
     font-size: 22px;
-    left: 96px;
+    left: 101px;
     margin: 0;
     padding: 4px 0;
     position: absolute;
-    text-align: center;
-    text-decoration: none;
     top: 10px;
-    width: 74px;
     transition: all 0.2s ease-out;
     -webkit-transition: all 0.2s ease-out;
 }
 
-#saveButton:hover {
-    background: #5cb6c3;
+.autosave-on span {
+    color: #999;
 }
 
-#saveButton:focus {
-    outline: none;
-}
 
 .save-success-box, .save-error-box {
     bottom: 0;
@@ -660,6 +680,10 @@
         width: 25%;
         min-width: 25%;
     }
+    .list-delete-button {
+        font-size: 20px;
+        padding-top: 6px;
+    }
 }
 
 @media (max-width: 580px) {
@@ -674,6 +698,10 @@
         padding: 4px 1px;
         width: 33.333%;
         min-width: 33.333%;
+    }
+    .list-delete-button {
+        font-size: 14px;
+        padding-top: 11px;
     }
 }
 

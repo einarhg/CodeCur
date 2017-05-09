@@ -1,8 +1,11 @@
 ﻿@model CodeCur.Models.ViewModels.ProjectViewModel
 @using Microsoft.AspNet.Identity
 @{
-    ViewBag.Title = "Home Page";
+    ViewBag.Title = "Home";
 }
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
 <div class="list-container">
     <div class="list-head">
         <h1 class="project-list-header">My projects</h1>
@@ -17,13 +20,25 @@
         <div class="list-content">
             @for (int i = 0; i < Model.Projects.Count; i++)
             {
-                <a href="@Url.Action("Project", "Home", new { id = Model.Projects[i].ID })">
+                <a class="list-project" href="@Url.Action("Project", "Home", new { id = Model.Projects[i].ID })">
                     <p class="project-name">@Model.Projects[i].Name</p>
-                    <p class="project-owner">Owner: @Model.Owners[i]</p>
+                    @if (@Model.Owners[i] != User.Identity.GetUserName())
+                    {
+                        <p class="project-owner">Owner: @Model.Owners[i]</p>
+                    }
                     <p class="project-type">@Model.Projects[i].Type</p>
                     <p class="project-date">@Model.Projects[i].DateCreated.Day/@Model.Projects[i].DateCreated.Month/@Model.Projects[i].DateCreated.Year</p>
                 </a>
+                <a class="list-delete-button" href="@Url.Action("DeleteProject", "Home", new { id = Model.Projects[i].ID })">&#10005;</a>
             }
         </div>
     }
 </div>
+
+<script>
+    $(function() {
+        $(".list-delete-button").click(function () {
+            confirm("Are you sure you want to Delete this project?");
+        });
+    });
+</script>
