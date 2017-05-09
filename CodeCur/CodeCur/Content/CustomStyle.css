@@ -450,6 +450,34 @@
     margin-top: 15px;
 }
 
+.file-list-block {
+    position: relative;
+    width: 20%;
+}
+
+.file-list-content button {
+    background: #222;
+    border: none;
+    border-radius: 50%;
+    color: #fff;
+    font-size: 14px;
+    opacity: 0.5;
+    padding: 3px 6.5px 1px 6.5px;
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    transition: all 0.3s;
+    -webkit-transition: all 0.3s;
+}
+
+.file-list-content button:hover {
+    opacity: 1;
+}
+
+.file-list-content button:focus {
+    outline: none;
+}
+
 .file-box {
     box-sizing: border-box;
     color: #111;
@@ -457,7 +485,6 @@
     font-size: 16px;
     font-weight: 500;
     padding: 8px 4px;
-    width: 20%;
     min-width: 20%;
     overflow: hidden;
     text-align: center;
@@ -675,10 +702,12 @@
         padding: 5px 0;
         width: 80%;
     }
+    .file-list-block {
+        width: 25%;
+    }
     .file-box {
         font-size: 14px;
         padding: 6px 2px;
-        width: 25%;
         min-width: 25%;
     }
     .list-delete-button {
@@ -693,10 +722,12 @@
     .list-content .project-owner {
         left: 60%;
     }
+    .file-list-block {
+        width: 33.333%;
+    }
     .file-box {
         font-size: 12px;
         padding: 4px 1px;
-        width: 33.333%;
         min-width: 33.333%;
     }
     .list-delete-button {

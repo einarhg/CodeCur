@@ -104,7 +104,7 @@ namespace CodeCur.Services
         {
             ApplicationDbContext _db = new ApplicationDbContext();
             IEnumerable<File> files = (from file in _db.Files
-                                       where file.ProjectID == ID
+                                       where file.ProjectID == ID && file.Deleted == false
                                        select file).ToList();
             return files;
         }

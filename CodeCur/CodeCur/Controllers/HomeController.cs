@@ -176,10 +176,10 @@ namespace CodeCur.Controllers
 
         [HttpPost]
         [AllowAnonymous]
-        public ActionResult DeleteFile(int ID)
+        public ActionResult DeleteFile(DeleteFileViewModel model)
         {
-            NavService.DeleteFile(ID);
-            return RedirectToAction("Index", "Home");
+            NavService.DeleteFile(model.ID);
+            return RedirectToAction("Project", "Home", new { id = model.ProjectID });
         }
     }
 }

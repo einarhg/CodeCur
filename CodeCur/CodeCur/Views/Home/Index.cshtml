@@ -37,8 +37,7 @@
 
 <script>
     $(function () {
-        $(".list-delete-button").click(function (event) {
-            event.preventDefault();
+        $(document).on('click', '.list-delete-button', function () {
             var owner = $(this).data('owner');
             var user = $(this).data('user');
             var id = $(this).attr('id').replace("listDeleteButton_", "");
@@ -58,6 +57,7 @@
                             alert("We're sorry, Something went wrong!");
                         }
                     });
+                    return false;
                 }
             } else {
                 var r = confirm("Are you sure you want to be removed from this project?");
@@ -75,6 +75,7 @@
                             alert("We're sorry, Something went wrong!");
                         }
                     });
+                    return false;
                 }
             }
         });

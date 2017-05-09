@@ -74,4 +74,10 @@ namespace CodeCur.Models.ViewModels
     {
         public int ID { get; set; }
     }
+
+    public class DeleteFileViewModel
+    {
+        public int ID { get; set; }
+        public int ProjectID { get; set; }
+    }
 }
