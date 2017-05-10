@@ -7,6 +7,7 @@
 <div data-editor data-type="@Html.Raw(Json.Encode(Model.File.Type))" class="editor-container">
     <menu>
         <h1>@Model.File.Name</h1>
+        <ul id="listOfEditors"></ul>
         <p class="autosave-on">Autosave: <span>on</span></p>
         @Html.ActionLink("<", "Project", "Home", new { id = Model.File.ProjectID }, new { @class = "back-file-button" })
     </menu>
