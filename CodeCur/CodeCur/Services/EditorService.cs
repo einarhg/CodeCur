@@ -7,8 +7,16 @@ using CodeCur.Models;
 
 namespace CodeCur.Services
 {
+    /// <summary>
+    /// Provides service functions to editor with database access.
+    /// </summary>
     public class EditorService
     {
+        /// <summary>
+        /// Retrieves file from database.
+        /// </summary>
+        /// <param name="ID"></param>
+        /// <returns>File.</returns>
         public static File GetFile(int ID)
         {
             ApplicationDbContext _db = new ApplicationDbContext();
@@ -18,6 +26,11 @@ namespace CodeCur.Services
             return file;
         }
 
+        /// <summary>
+        /// Saves file content to database.
+        /// </summary>
+        /// <param name="content"></param>
+        /// <param name="fileID"></param>
         public static void SaveFile(string content, int fileID)
         {
             ApplicationDbContext _db = new ApplicationDbContext();
@@ -34,6 +47,12 @@ namespace CodeCur.Services
             
         }
 
+        /// <summary>
+        /// Validates user's access to file.
+        /// </summary>
+        /// <param name="userID"></param>
+        /// <param name="fileID"></param>
+        /// <returns>Boolean.</returns>
         public static bool AuthorizeFileAccess(string userID, int fileID)
         {
             ApplicationDbContext _db = new ApplicationDbContext();
