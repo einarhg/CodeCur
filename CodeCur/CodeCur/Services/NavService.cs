@@ -57,6 +57,11 @@ namespace CodeCur.Services
             ApplicationDbContext _db = new ApplicationDbContext();
             UserProjectRelation relation = new UserProjectRelation();
 
+            if (RelationExists(username, projectID))
+            {
+                return;
+            }
+
             relation.ProjectID = projectID;
             relation.UserID = (from user in _db.Users
                                where user.UserName == username
@@ -291,7 +296,7 @@ namespace CodeCur.Services
                              select user.Id).SingleOrDefault();
 
             if ((from conn in _db.UserProjectRelations
-                 where conn.UserID == userID && conn.ProjectID == projectID
+                 where conn.UserID == userID && conn.ProjectID == projectID && conn.Deleted == false
                  select conn).Any())
             {
                 return true;
@@ -309,6 +314,27 @@ namespace CodeCur.Services
             {
                 return true;
             }
+            return false;
+        }
+
+        public static bool RelationExists(string username, int projectID)
+        {
+            ApplicationDbContext _db = new ApplicationDbContext();
+            var userID = (from user in _db.Users
+                               where user.UserName == username
+                               select user.Id).FirstOrDefault();
+
+            var rel = (from relation in _db.UserProjectRelations
+                        where userID == relation.UserID && projectID == relation.ProjectID && relation.Deleted == true
+                        select relation).FirstOrDefault();
+
+            if (rel != null)
+            {
+                rel.Deleted = false;
+                _db.SaveChanges();
+                return true;
+            }
+
             return false;
         }
     }

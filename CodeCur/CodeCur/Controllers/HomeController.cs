@@ -137,7 +137,7 @@ namespace CodeCur.Controllers
                 }
                 if (!NavService.ValidFileName(file.Name, file.Type, model.ProjectID))
                 {
-                    ModelState.AddModelError("duplicateFileError", "That filename already excists in this project");
+                    ModelState.AddModelError("duplicateFileError", "That filename already excists in this project!");
                 }
                 else
                 {
@@ -169,7 +169,11 @@ namespace CodeCur.Controllers
         {
             if (!NavService.DoesUserExist(model.UserName))
             {
-                ModelState.AddModelError("shareError", "There is no user by that username");
+                ModelState.AddModelError("shareError", "There is no user by that username!");
+            }
+            else if (NavService.AlreadyHasAccesss(model.UserName, model.ProjectID))
+            {
+                ModelState.AddModelError("shareError", "This user has already been added!");
             }
             else
             {
