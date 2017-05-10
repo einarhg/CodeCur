@@ -46,7 +46,7 @@ namespace CodeCur.Services
                                select user.Id).FirstOrDefault();
 
             _db.UserProjectRelations.Add(relation);
-            _db.SaveChanges();
+            _db.SaveChanges();  
         }
 
         public static List<Project> GetUserProjects(string ID)
@@ -192,6 +192,19 @@ namespace CodeCur.Services
                  join proj in _db.Projects on conn.ProjectID equals proj.ID
                 where conn.UserID == userID && conn.ProjectID == projectID && proj.Deleted == false
                 select conn).Any())
+            {
+                return true;
+            }
+            return false;
+        }
+
+        public static bool AuthorizeShareProject(string username)
+        {
+            ApplicationDbContext _db = new ApplicationDbContext();
+
+            if ((from user in _db.Users
+                where user.UserName == username
+                select user).Any())
             {
                 return true;
             }
