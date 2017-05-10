@@ -146,6 +146,10 @@ namespace CodeCur.Controllers
         [AllowAnonymous]
         public ActionResult ShareProject(int ID)
         {
+            if (!NavService.AuthorizeProjectAccess(User.Identity.GetUserId(), ID))
+            {
+                return RedirectToAction("AccessDenied", "Home");
+            }
             ShareProjectViewModel model = new ShareProjectViewModel();
             model.ProjectID = ID;
             model.ProjectName = NavService.GetProjectName(ID);
@@ -157,6 +161,10 @@ namespace CodeCur.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult ShareProject(ShareProjectViewModel model)
         {
+            if (!NavService.AuthorizeProjectAccess(User.Identity.GetUserId(), model.ProjectID))
+            {
+                return RedirectToAction("AccessDenied", "Home");
+            }
             if (ModelState.IsValid)
             {
                 NavService.AddUserProjectRelationByName(model.UserName, model.ProjectID);
@@ -170,6 +178,10 @@ namespace CodeCur.Controllers
         [AllowAnonymous]
         public ActionResult DeleteProject(DeleteProjectViewModel model)
         {
+            if (!NavService.AuthorizeProjectAccess(User.Identity.GetUserId(), model.ID))
+            {
+                return RedirectToAction("AccessDenied", "Home");
+            }
             NavService.DeleteAllFiles(model.ID);
             NavService.DeleteProject(model.ID);
             return RedirectToAction("Index", "Home");
@@ -179,6 +191,10 @@ namespace CodeCur.Controllers
         [AllowAnonymous]
         public ActionResult RemoveFromProject(RemoveFromProjectViewModel model)
         {
+            if (!NavService.AuthorizeProjectAccess(User.Identity.GetUserId(), model.ID))
+            {
+                return RedirectToAction("AccessDenied", "Home");
+            }
             NavService.RemoveUserFromProject(model.ID, User.Identity.GetUserId());
             return RedirectToAction("Index", "Home");
         }
@@ -187,6 +203,10 @@ namespace CodeCur.Controllers
         [AllowAnonymous]
         public ActionResult DeleteFile(DeleteFileViewModel model)
         {
+            if (!EditorService.AuthorizeFileAccess(User.Identity.GetUserId(), model.ID))
+            {
+                return RedirectToAction("AccessDenied", "Home");
+            }
             NavService.DeleteFile(model.ID);
             return RedirectToAction("Project", "Home", new { id = model.ProjectID });
         }
