@@ -171,11 +171,13 @@ namespace CodeCur.Controllers
             {
                 ModelState.AddModelError("shareError", "There is no user by that username");
             }
-
-            if (ModelState.IsValid)
+            else
             {
-                NavService.AddUserProjectRelationByName(model.UserName, model.ProjectID);
-                return RedirectToAction("Project", "Home", new { id = model.ProjectID });
+                if (ModelState.IsValid)
+                {
+                    NavService.AddUserProjectRelationByName(model.UserName, model.ProjectID);
+                    return RedirectToAction("Project", "Home", new { id = model.ProjectID });
+                }
             }
             // If we got this far, something failed, redisplay form
             return View(model);
