@@ -161,7 +161,7 @@ namespace CodeCur.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult ShareProject(ShareProjectViewModel model)
         {
-            if (!NavService.AuthorizeShareProject(model.UserName))
+            if (!NavService.DoesUserExist(model.UserName))
             {
                 ModelState.AddModelError("shareError", "There is no user by that username");
             }

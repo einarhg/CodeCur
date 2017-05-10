@@ -108,12 +108,10 @@ namespace CodeCur.Services
         public static void AddFileToDb(File file)
         {
             ApplicationDbContext _db = new ApplicationDbContext();
-            if (ValidFileName(file.Name, file.Type, file.ProjectID))
-            {
+
                 _db.Files.Add(file);
                 //Fail check?
                 _db.SaveChanges();
-            }
         }
 
         /// <summary>
@@ -260,13 +258,41 @@ namespace CodeCur.Services
             return false;
         }
 
-        public static bool AuthorizeShareProject(string username)
+        /// <summary>
+        /// Checks whether user exists in database.
+        /// </summary>
+        /// <param name="username"></param>
+        /// <returns>Boolean.</returns>
+        public static bool DoesUserExist(string username)
         {
             ApplicationDbContext _db = new ApplicationDbContext();
 
             if ((from user in _db.Users
                 where user.UserName == username
                 select user).Any())
+            {
+                return true;
+            }
+            return false;
+        }
+
+        /// <summary>
+        /// Checks whether user has access to project by username.
+        /// </summary>
+        /// <param name="username"></param>
+        /// <param name="projectID"></param>
+        /// <returns>Boolean.</returns>
+        public static bool AlreadyHasAccesss(string username, int projectID)
+        {
+            ApplicationDbContext _db = new ApplicationDbContext();
+
+            string userID = (from user in _db.Users
+                             where user.UserName == username
+                             select user.Id).SingleOrDefault();
+
+            if ((from conn in _db.UserProjectRelations
+                 where conn.UserID == userID && conn.ProjectID == projectID
+                 select conn).Any())
             {
                 return true;
             }
