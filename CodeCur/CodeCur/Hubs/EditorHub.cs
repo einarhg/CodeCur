@@ -17,5 +17,16 @@ namespace CodeCur.Hubs
         {
             Clients.Group(Convert.ToString(fileID), Context.ConnectionId).OnChange(changeData);
         }
+
+        public void listEditor(string name)
+        {
+            appendToEditorList(name);
+        }
+
+        public void appendToEditorList(string name)
+        {
+            IHubContext context = GlobalHost.ConnectionManager.GetHubContext<EditorHub>();
+            context.Clients.All.appendToEditorList(name);
+        }
     }
 }

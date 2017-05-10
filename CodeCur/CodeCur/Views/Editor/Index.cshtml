@@ -70,14 +70,14 @@
         silent = false;
     };
 
-    editorHub.client.listEditors = function (name) {
+    editorHub.client.appendToEditorList = function (name) {
         $('#listOfEditors').append('<li>' + name + '</li>');
     }
 
     $.connection.hub.start().done(function () {
 
         editorHub.server.joinFile(fileID);
-        editorHub.client.listEditors($('#listOfEditors').data('name'));
+        editorHub.server.listEditor($('#listOfEditors').data('name'));
 
         editor.on("change", function (obj) {
             saveFile();
