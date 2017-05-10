@@ -77,7 +77,7 @@
     $.connection.hub.start().done(function () {
 
         editorHub.server.joinFile(fileID);
-        editorHub.server.listEditor($('#listOfEditors').data('name'));
+        editorHub.server.listEditors($('#listOfEditors').data('name'));
 
         editor.on("change", function (obj) {
             saveFile();
