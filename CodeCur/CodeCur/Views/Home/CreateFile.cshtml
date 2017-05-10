@@ -9,12 +9,11 @@
     {
         @Html.AntiForgeryToken()
         <h2>Create new File</h2>
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         <div class="new-input-form-group">
             @Html.LabelFor(m => m.Name, new { @class = ""})
             <div>
                 @Html.TextBoxFor(m => m.Name, new { @class = "", @placeholder = "Name of File" })
-                @Html.ValidationMessageFor(m => m.Name, "", new { @class = "text-danger" })
+                @Html.ValidationMessage("duplicateFileError", new { @class = "text-danger" })
             </div>
         </div>
         <div class="new-input-form-group">

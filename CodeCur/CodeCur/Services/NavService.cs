@@ -298,5 +298,18 @@ namespace CodeCur.Services
             }
             return false;
         }
+
+        public static bool NoDuplicateFileName(string filename)
+        {
+            ApplicationDbContext _db = new ApplicationDbContext();
+
+            if ((from file in _db.Files
+                 where file.Name == filename
+                 select file).Any())
+            {
+                return true;
+            }
+            return false;
+        }
     }
 }

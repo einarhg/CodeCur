@@ -135,9 +135,15 @@ namespace CodeCur.Controllers
                 {
                     file.Name = file.Name + ".txt";
                 }
-
-                NavService.AddFileToDb(file);
-                return RedirectToAction("Project", "Home", new { id = model.ProjectID });
+                if (!NavService.ValidFileName(file.Name, file.Type, model.ProjectID))
+                {
+                    ModelState.AddModelError("duplicateFileError", "That filename already excists in this project");
+                }
+                else
+                {
+                    NavService.AddFileToDb(file);
+                    return RedirectToAction("Project", "Home", new { id = model.ProjectID });
+                }
             }
             // If we got this far, something failed, redisplay form
             return View(model);
