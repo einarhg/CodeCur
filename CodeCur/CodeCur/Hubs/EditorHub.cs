@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Web;
 using Microsoft.AspNet.SignalR;
 
@@ -8,6 +9,8 @@ namespace CodeCur.Hubs
 {
     public class EditorHub : Hub
     {
+        List<string> OnlineEditors = new List<string>();
+
         public void JoinFile(int fileID)
         {
             Groups.Add(Context.ConnectionId, Convert.ToString(fileID));
@@ -18,18 +21,8 @@ namespace CodeCur.Hubs
             Clients.Group(Convert.ToString(fileID), Context.ConnectionId).OnChange(changeData);
         }
 
-        List<string> Editors = new List<string>();
+        //IHubContext context = GlobalHost.ConnectionManager.GetHubContext<EditorHub>();
+        //context.Clients.All.addToEditorList(name);
 
-        public void listEditors(string name)
-        {
-            appendToEditorList(name);
-        }
-
-        public void appendToEditorList(string name)
-        {
-            Editors.Add(name);
-            IHubContext context = GlobalHost.ConnectionManager.GetHubContext<EditorHub>();
-            context.Clients.All.appendToEditorList(name);
-        }
     }
 }
