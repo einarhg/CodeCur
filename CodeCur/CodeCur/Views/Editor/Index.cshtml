@@ -7,7 +7,7 @@
 <div data-editor data-type="@Html.Raw(Json.Encode(Model.File.Type))" class="editor-container">
     <menu>
         <h1>@Model.File.Name</h1>
-        <ul id="listOfEditors"></ul>
+        <ul id="listOfEditors" data-name="@User.Identity.Name"></ul>
         <p class="autosave-on">Autosave: <span>on</span></p>
         @Html.ActionLink("<", "Project", "Home", new { id = Model.File.ProjectID }, new { @class = "back-file-button" })
     </menu>
@@ -65,15 +65,19 @@
 
     editorHub.client.onChange = function (changeData) {
         //console.log(changeData);
-
         silent = true;
         editor.getSession().getDocument().applyDelta(changeData);
         silent = false;
     };
 
+    editorHub.client.appendToEditorList = function (name) {
+        $('#listOfEditors').append('<li>' + name + '</li>');
+    }
+
     $.connection.hub.start().done(function () {
 
         editorHub.server.joinFile(fileID);
+        editorHub.server.listEditors($('#listOfEditors').data('name'));
 
         editor.on("change", function (obj) {
             saveFile();
