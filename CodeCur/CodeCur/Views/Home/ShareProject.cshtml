@@ -8,7 +8,7 @@
     @using (Html.BeginForm("ShareProject", "Home", FormMethod.Post, new { @class = "new-input-form form-horizontal", role = "form" }))
     {
         @Html.AntiForgeryToken()
-        <h2>Share '@Model.ProjectName'</h2>
+        <h2>Share @Model.ProjectName</h2>
         <div class="new-input-form-group">
             @Html.LabelFor(m => m.UserName, new { @class = "" })
             <div>
