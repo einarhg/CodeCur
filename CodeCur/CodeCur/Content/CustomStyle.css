@@ -580,6 +580,33 @@ h6,
     width: 39px;
 }
 
+.editor-container ul {
+   left: 243px;
+   list-style-type: none;
+   margin: 0;
+   max-height: 28px;
+   max-width: 600px;
+   overflow: auto;
+   padding: 0;
+   position: absolute;
+   top: 16px;
+}
+
+.editor-container ul li {
+    background: #6cc3d0;
+    border-radius: 4px;
+    color: #fff;
+    display: inline;
+    float: left;
+    font-size: 16px;
+    font-weight: 500;
+    margin: 0 4px;
+    padding: 3px 9px;
+    text-align: center;
+    transition: all 0.4s;
+    -webkit-transition: all 0.4s;
+}
+
 .autosave-on {
     color: #777;
     font-size: 22px;
