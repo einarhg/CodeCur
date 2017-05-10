@@ -14,13 +14,19 @@ namespace CodeCur.Services
     /// </summary>
     public class NavService
     {
+        private readonly IAppDataContext _db;
+
+        public NavService(IAppDataContext context)
+        {
+            _db = context ?? new ApplicationDbContext();
+        }
+
         /// <summary>
         /// Adds project to database.
         /// </summary>
         /// <param name="project"></param>
-        public static void AddProjectToDb(Project project)
-        {   
-            ApplicationDbContext _db = new ApplicationDbContext();
+        public void AddProjectToDb(Project project)
+        {
             // Add the new object to the Orders collection.
             _db.Projects.Add(project);
 
@@ -35,9 +41,8 @@ namespace CodeCur.Services
         /// </summary>
         /// <param name="userID"></param>
         /// <param name="projectID"></param>
-        public static void AddUserProjectRelationByID(string userID, int projectID)
+        public void AddUserProjectRelationByID(string userID, int projectID)
         {
-            ApplicationDbContext _db = new ApplicationDbContext();
             UserProjectRelation relation = new UserProjectRelation();
 
             relation.ProjectID = projectID;
@@ -52,9 +57,8 @@ namespace CodeCur.Services
         /// </summary>
         /// <param name="username"></param>
         /// <param name="projectID"></param>
-        public static void AddUserProjectRelationByName(string username, int projectID)
+        public void AddUserProjectRelationByName(string username, int projectID)
         {
-            ApplicationDbContext _db = new ApplicationDbContext();
             UserProjectRelation relation = new UserProjectRelation();
 
             if (RelationExists(username, projectID))
@@ -76,10 +80,8 @@ namespace CodeCur.Services
         /// </summary>
         /// <param name="userID"></param>
         /// <returns>List of projects user has access to.</returns>
-        public static List<Project> GetUserProjects(string userID)
+        public List<Project> GetUserProjects(string userID)
         {
-            ApplicationDbContext _db = new ApplicationDbContext();
-
             List<Project> projects = (from conn in _db.UserProjectRelations
                                       join proj in _db.Projects on conn.ProjectID equals proj.ID
                                       where conn.UserID == userID && proj.Deleted == false && conn.Deleted == false
@@ -110,10 +112,8 @@ namespace CodeCur.Services
         /// Adds file to database.
         /// </summary>
         /// <param name="file"></param>
-        public static void AddFileToDb(File file)
+        public void AddFileToDb(File file)
         {
-            ApplicationDbContext _db = new ApplicationDbContext();
-
                 _db.Files.Add(file);
                 //Fail check?
                 _db.SaveChanges();
@@ -124,9 +124,8 @@ namespace CodeCur.Services
         /// </summary>
         /// <param name="ID"></param>
         /// <returns>Files in project.</returns>
-        public static IEnumerable<File> GetProjectFiles(int ID)
+        public IEnumerable<File> GetProjectFiles(int ID)
         {
-            ApplicationDbContext _db = new ApplicationDbContext();
             IEnumerable<File> files = (from file in _db.Files
                                        where file.ProjectID == ID && file.Deleted == false
                                        select file).ToList();
@@ -138,9 +137,8 @@ namespace CodeCur.Services
         /// </summary>
         /// <param name="ID"></param>
         /// <returns>Name of project.</returns>
-        public static string GetProjectName(int ID)
+        public string GetProjectName(int ID)
         {
-            ApplicationDbContext _db = new ApplicationDbContext();
             Project item = (from project in _db.Projects
                             where project.ID == ID
                             select project).FirstOrDefault();
@@ -152,9 +150,8 @@ namespace CodeCur.Services
         /// </summary>
         /// <param name="ID"></param>
         /// <returns>Username.</returns>
-        public static string GetUserName(string ID)
+        public string GetUserName(string ID)
         {
-            ApplicationDbContext _db = new ApplicationDbContext();
             string name = (from user in _db.Users
                                where user.Id == ID
                                select user.UserName).FirstOrDefault();
@@ -168,9 +165,8 @@ namespace CodeCur.Services
         /// <param name="type"></param>
         /// <param name="projectID"></param>
         /// <returns>Boolean.</returns>
-        public static bool ValidFileName(string name, string type, int projectID)
+        public bool ValidFileName(string name, string type, int projectID)
         {
-            ApplicationDbContext _db = new ApplicationDbContext();
             if ((from item in _db.Files
                 where item.Name == name && item.Type == type && item.ProjectID == projectID
                 select item).Any())
@@ -184,9 +180,8 @@ namespace CodeCur.Services
         /// Marks project as deleted.
         /// </summary>
         /// <param name="ID"></param>
-        public static void DeleteProject(int ID)
+        public void DeleteProject(int ID)
         {
-            ApplicationDbContext _db = new ApplicationDbContext();
             var ToDelete = (from project in _db.Projects
                            where project.ID == ID
                            select project).FirstOrDefault();
@@ -199,9 +194,8 @@ namespace CodeCur.Services
         /// Deletes all files in a project.
         /// </summary>
         /// <param name="ID"></param>
-        public static void DeleteAllFiles(int ID)
+        public void DeleteAllFiles(int ID)
         {
-            ApplicationDbContext _db = new ApplicationDbContext();
             var ToDelete = (from file in _db.Files
                            where file.ProjectID == ID
                            select file).ToList();
@@ -216,9 +210,8 @@ namespace CodeCur.Services
         /// Marks file as deleted.
         /// </summary>
         /// <param name="ID"></param>
-        public static void DeleteFile(int ID)
+        public void DeleteFile(int ID)
         {
-            ApplicationDbContext _db = new ApplicationDbContext();
             var ToDelete = (from file in _db.Files
                            where file.ID == ID
                            select file).FirstOrDefault();
@@ -232,9 +225,8 @@ namespace CodeCur.Services
         /// </summary>
         /// <param name="ID"></param>
         /// <param name="username"></param>
-        public static void RemoveUserFromProject(int ID, string username)
+        public void RemoveUserFromProject(int ID, string username)
         {
-            ApplicationDbContext _db = new ApplicationDbContext();
             var ToRemove = (from user in _db.UserProjectRelations
                             where user.ProjectID == ID && username == user.UserID
                             select user).FirstOrDefault();
@@ -249,10 +241,8 @@ namespace CodeCur.Services
         /// <param name="userID"></param>
         /// <param name="projectID"></param>
         /// <returns>Boolean.</returns>
-        public static bool AuthorizeProjectAccess(string userID, int projectID)
+        public bool AuthorizeProjectAccess(string userID, int projectID)
         {
-            ApplicationDbContext _db = new ApplicationDbContext();
-
             if ((from conn in _db.UserProjectRelations
                  join proj in _db.Projects on conn.ProjectID equals proj.ID
                 where conn.UserID == userID && conn.ProjectID == projectID && proj.Deleted == false
@@ -268,10 +258,8 @@ namespace CodeCur.Services
         /// </summary>
         /// <param name="username"></param>
         /// <returns>Boolean.</returns>
-        public static bool DoesUserExist(string username)
+        public bool DoesUserExist(string username)
         {
-            ApplicationDbContext _db = new ApplicationDbContext();
-
             if ((from user in _db.Users
                 where user.UserName == username
                 select user).Any())
@@ -287,10 +275,8 @@ namespace CodeCur.Services
         /// <param name="username"></param>
         /// <param name="projectID"></param>
         /// <returns>Boolean.</returns>
-        public static bool AlreadyHasAccesss(string username, int projectID)
+        public bool AlreadyHasAccesss(string username, int projectID)
         {
-            ApplicationDbContext _db = new ApplicationDbContext();
-
             string userID = (from user in _db.Users
                              where user.UserName == username
                              select user.Id).SingleOrDefault();
@@ -304,10 +290,8 @@ namespace CodeCur.Services
             return false;
         }
 
-        public static bool NoDuplicateFileName(string filename)
+        public bool NoDuplicateFileName(string filename)
         {
-            ApplicationDbContext _db = new ApplicationDbContext();
-
             if ((from file in _db.Files
                  where file.Name == filename
                  select file).Any())
@@ -317,9 +301,8 @@ namespace CodeCur.Services
             return false;
         }
 
-        public static bool RelationExists(string username, int projectID)
+        public bool RelationExists(string username, int projectID)
         {
-            ApplicationDbContext _db = new ApplicationDbContext();
             var userID = (from user in _db.Users
                                where user.UserName == username
                                select user.Id).FirstOrDefault();

@@ -16,15 +16,17 @@ namespace CodeCur.Controllers
     [Authorize]
     public class EditorController : Controller
     {
+        EditorService service = new EditorService(null);
+
         // GET: Editor
         public ActionResult Index(int ID)
         {
-            if(!EditorService.AuthorizeFileAccess(User.Identity.GetUserId(), ID))
+            if(!service.AuthorizeFileAccess(User.Identity.GetUserId(), ID))
             {
                 return RedirectToAction("AccessDenied", "Home");
             }
             EditorViewModel model = new EditorViewModel();
-            model.File = EditorService.GetFile(ID);
+            model.File = service.GetFile(ID);
             return View(model);
         }
 
@@ -33,7 +35,7 @@ namespace CodeCur.Controllers
         [ValidateInput(false)]
         public ActionResult Save(int ID, SaveViewModel model)
         {
-            EditorService.SaveFile(Server.HtmlEncode(model.Data), ID);
+            service.SaveFile(Server.HtmlEncode(model.Data), ID);
             return new HttpStatusCodeResult(HttpStatusCode.OK);
         }
 

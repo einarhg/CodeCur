@@ -12,14 +12,20 @@ namespace CodeCur.Services
     /// </summary>
     public class EditorService
     {
+        private readonly IAppDataContext _db;
+
+        public EditorService(IAppDataContext context)
+        {
+            _db = context ?? new ApplicationDbContext();
+        }
+
         /// <summary>
         /// Retrieves file from database.
         /// </summary>
         /// <param name="ID"></param>
         /// <returns>File.</returns>
-        public static File GetFile(int ID)
+        public File GetFile(int ID)
         {
-            ApplicationDbContext _db = new ApplicationDbContext();
             File file = (from item in _db.Files
                          where item.ID == ID
                          select item).SingleOrDefault();
@@ -31,9 +37,8 @@ namespace CodeCur.Services
         /// </summary>
         /// <param name="content"></param>
         /// <param name="fileID"></param>
-        public static void SaveFile(string content, int fileID)
+        public void SaveFile(string content, int fileID)
         {
-            ApplicationDbContext _db = new ApplicationDbContext();
             if (fileID != 0)
             {
                 File file = (from item in _db.Files
@@ -53,9 +58,8 @@ namespace CodeCur.Services
         /// <param name="userID"></param>
         /// <param name="fileID"></param>
         /// <returns>Boolean.</returns>
-        public static bool AuthorizeFileAccess(string userID, int fileID)
+        public bool AuthorizeFileAccess(string userID, int fileID)
         {
-            ApplicationDbContext _db = new ApplicationDbContext();
 
             if ((from conn in _db.UserProjectRelations
                  join file in _db.Files on conn.ProjectID equals file.ProjectID

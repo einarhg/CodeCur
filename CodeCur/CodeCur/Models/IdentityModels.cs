@@ -21,11 +21,20 @@ namespace CodeCur.Models
         }
     }
 
-    public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
+    public interface IAppDataContext
     {
-        public DbSet<Project> Projects { get; set; }
-        public DbSet<File> Files { get; set; }
-        public DbSet<UserProjectRelation> UserProjectRelations { get; set; } 
+        IDbSet<Project> Projects { get; set; }
+        IDbSet<File> Files { get; set; }
+        IDbSet<UserProjectRelation> UserProjectRelations { get; set; }
+        IDbSet<ApplicationUser> Users { get; set; }
+        int SaveChanges();
+    }
+
+    public class ApplicationDbContext : IdentityDbContext<ApplicationUser>, IAppDataContext
+    {
+        public IDbSet<Project> Projects { get; set; }
+        public IDbSet<File> Files { get; set; }
+        public IDbSet<UserProjectRelation> UserProjectRelations { get; set; } 
 
         public ApplicationDbContext()
             : base("DefaultConnection", throwIfV1Schema: false)
