@@ -7,7 +7,7 @@
 <div data-editor data-type="@Html.Raw(Json.Encode(Model.File.Type))" class="editor-container">
     <menu>
         <h1>@Model.File.Name</h1>
-        <ul id="listOfEditors" data-name="@User.Identity.Name"></ul>
+        <ul id="joinedEditor" data-name="@User.Identity.Name"></ul>
         <p class="autosave-on">Autosave: <span>on</span></p>
         @Html.ActionLink("<", "Project", "Home", new { id = Model.File.ProjectID }, new { @class = "back-file-button" })
     </menu>
@@ -70,9 +70,27 @@
         silent = false;
     };
 
+    editorHub.client.onJoin = function (username) {
+        silent = true;
+        $('#joinedEditor').append('<li>' + username + ' just joined! </li>');
+        setTimeout(function () { $('#joinedEditor').html(''); }, 3000);
+        silent = false;
+    };
+
+    editorHub.client.onLeave = function (username) {
+        silent = true;
+        $('#joinedEditor').append('<li>' + username + ' just left! </li>');
+        setTimeout(function () { $('#joinedEditor').html(''); }, 3000);
+        silent = false;
+    };
+
+    $(document).on('click', '.back-file-button', function () {
+        editorHub.server.leaveFile(fileID);
+    });
+
     $.connection.hub.start().done(function () {
         editorHub.server.joinFile(fileID);
-        
+
         editor.on("change", function (obj) {
             saveFile();
             if (silent) {
