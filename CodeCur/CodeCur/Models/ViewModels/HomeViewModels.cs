@@ -35,7 +35,7 @@ namespace CodeCur.Models.ViewModels
     public class CreateFileViewModel
     {
         [Required]
-        [StringLength(30, ErrorMessage = "The {0} cannot be longer then 30 characters")]
+        [StringLength(25, ErrorMessage = "The {0} cannot be longer then 25 characters")]
         [Display(Name = "Name")]
         public string Name { get; set; }
 
