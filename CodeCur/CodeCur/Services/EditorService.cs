@@ -14,6 +14,10 @@ namespace CodeCur.Services
     {
         private readonly IAppDataContext _db;
 
+        /// <summary>
+        /// Constructor which allows for access to mock database for unit testing.
+        /// </summary>
+        /// <param name="context"></param>
         public EditorService(IAppDataContext context)
         {
             _db = context ?? new ApplicationDbContext();

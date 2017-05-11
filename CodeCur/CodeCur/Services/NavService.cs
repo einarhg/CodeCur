@@ -16,6 +16,10 @@ namespace CodeCur.Services
     {
         private readonly IAppDataContext _db;
 
+        /// <summary>
+        /// Constructor which allows for access to mock database for unit testing.
+        /// </summary>
+        /// <param name="context"></param>
         public NavService(IAppDataContext context)
         {
             _db = context ?? new ApplicationDbContext();
@@ -53,7 +57,7 @@ namespace CodeCur.Services
         }
 
         /// <summary>
-        /// Adds a user -project pair to the UserProjectRelations table. Using username.
+        /// Adds a user-project pair to the UserProjectRelations table. Using username.
         /// </summary>
         /// <param name="username"></param>
         /// <param name="projectID"></param>
@@ -86,25 +90,6 @@ namespace CodeCur.Services
                                       join proj in _db.Projects on conn.ProjectID equals proj.ID
                                       where conn.UserID == userID && proj.Deleted == false && conn.Deleted == false
                                       select proj).ToList();
-
-            //var userProjectIds = (from PP in _db.UserProjectRelations
-            //                      where PP.UserID == ID && PP.Deleted == false
-            //                      select PP.ProjectID).ToList();
-
-            //List<Project> projects = new List<Project>();
-
-            //foreach (var idnum in userProjectIds)
-            //{
-            //    var item = (from prj in _db.Projects
-            //                where prj.ID == idnum && prj.Deleted == false
-            //                select prj).FirstOrDefault();
-
-            //    if (item != null)
-            //    {
-            //        projects.Add(item);
-            //    }
-            //}
-
             return projects;
         }
 
@@ -153,8 +138,8 @@ namespace CodeCur.Services
         public string GetUserName(string ID)
         {
             string name = (from user in _db.Users
-                               where user.Id == ID
-                               select user.UserName).FirstOrDefault();
+                           where user.Id == ID
+                           select user.UserName).FirstOrDefault();
             return name;
         }
 
@@ -168,8 +153,8 @@ namespace CodeCur.Services
         public bool ValidFileName(string name, string type, int projectID)
         {
             if ((from item in _db.Files
-                where item.Name == name && item.Type == type && item.ProjectID == projectID
-                select item).Any())
+                 where item.Name == name && item.Type == type && item.ProjectID == projectID
+                 select item).Any())
                 {
                     return false;
                 }
@@ -183,8 +168,8 @@ namespace CodeCur.Services
         public void DeleteProject(int ID)
         {
             var ToDelete = (from project in _db.Projects
-                           where project.ID == ID
-                           select project).FirstOrDefault();
+                            where project.ID == ID
+                            select project).FirstOrDefault();
 
             ToDelete.Deleted = true;
             _db.SaveChanges();
@@ -197,8 +182,8 @@ namespace CodeCur.Services
         public void DeleteAllFiles(int ID)
         {
             var ToDelete = (from file in _db.Files
-                           where file.ProjectID == ID
-                           select file).ToList();
+                            where file.ProjectID == ID
+                            select file).ToList();
             foreach (var item in ToDelete)
             {
                 item.Deleted = true;
@@ -213,8 +198,8 @@ namespace CodeCur.Services
         public void DeleteFile(int ID)
         {
             var ToDelete = (from file in _db.Files
-                           where file.ID == ID
-                           select file).FirstOrDefault();
+                            where file.ID == ID
+                            select file).FirstOrDefault();
 
             ToDelete.Deleted = true;
             _db.SaveChanges();
@@ -245,8 +230,8 @@ namespace CodeCur.Services
         {
             if ((from conn in _db.UserProjectRelations
                  join proj in _db.Projects on conn.ProjectID equals proj.ID
-                where conn.UserID == userID && conn.ProjectID == projectID && proj.Deleted == false
-                select conn).Any())
+                 where conn.UserID == userID && conn.ProjectID == projectID && proj.Deleted == false
+                 select conn).Any())
             {
                 return true;
             }
@@ -261,8 +246,8 @@ namespace CodeCur.Services
         public bool DoesUserExist(string username)
         {
             if ((from user in _db.Users
-                where user.UserName == username
-                select user).Any())
+                 where user.UserName == username
+                 select user).Any())
             {
                 return true;
             }
@@ -290,26 +275,21 @@ namespace CodeCur.Services
             return false;
         }
 
-        public bool NoDuplicateFileName(string filename)
-        {
-            if ((from file in _db.Files
-                 where file.Name == filename
-                 select file).Any())
-            {
-                return true;
-            }
-            return false;
-        }
-
+        /// <summary>
+        /// Checks whether a relation between user and project already exists in UserProjectRelations table.
+        /// </summary>
+        /// <param name="username"></param>
+        /// <param name="projectID"></param>
+        /// <returns>Boolean.</returns>
         public bool RelationExists(string username, int projectID)
         {
             var userID = (from user in _db.Users
-                               where user.UserName == username
-                               select user.Id).FirstOrDefault();
+                          where user.UserName == username
+                          select user.Id).FirstOrDefault();
 
             var rel = (from relation in _db.UserProjectRelations
-                        where userID == relation.UserID && projectID == relation.ProjectID && relation.Deleted == true
-                        select relation).FirstOrDefault();
+                       where userID == relation.UserID && projectID == relation.ProjectID && relation.Deleted == true
+                       select relation).FirstOrDefault();
 
             if (rel != null)
             {
