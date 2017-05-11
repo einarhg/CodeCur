@@ -13,7 +13,7 @@
         <div class="new-input-form-group">
             @Html.LabelFor(m => m.Name, new { @class = "" })
             <div>
-                @Html.TextBoxFor(m => m.Name, new { @class = "", @placeholder = "Name of project" })
+                @Html.TextBoxFor(m => m.Name, new { @class = "new-project-name-input", @placeholder = "Name of project" })
                 @Html.ValidationMessage("tooManyProjects", new { @class = "text-danger" })
                 @Html.ValidationMessageFor(m => m.Name, "", new { @class = "text-danger" })
             </div>
@@ -39,3 +39,13 @@
         </div>
     }
 </div>
+
+<script>
+    window.setInterval(function () {
+        if ($('.new-project-name-input').val() == "tilt") {
+            $('body').css({ '-webkit-transform': 'rotate(5deg)' });
+        } else if ($('.new-project-name-input').val() == "do a barrell roll") {
+            $('body').css({ '-webkit-transform': 'rotate(360deg)', '-webkit-transition-duration': '3s'});
+        }
+    }, 2000);
+</script>
