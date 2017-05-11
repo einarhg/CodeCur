@@ -300,5 +300,33 @@ namespace CodeCur.Services
 
             return false;
         }
+
+        /// <summary>
+        /// Checks whether user has created too many projects.
+        /// </summary>
+        /// <param name="project"></param>
+        /// <returns>Boolean.</returns>
+        public bool TooManyProjects(Project project)
+        {
+            if (GetUserProjects(project.UserID).Count() < 100)
+            {
+                return false;
+            }
+            return true;
+        }
+
+        /// <summary>
+        /// Checks whether project has too many files.
+        /// </summary>
+        /// <param name="file"></param>
+        /// <returns>Boolean.</returns>
+        public bool TooManyFiles(File file)
+        {
+            if (GetProjectFiles(file.ProjectID).Count() < 100)
+            {
+                return false;
+            }
+            return true;
+        }
     }
 }
