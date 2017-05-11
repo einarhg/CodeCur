@@ -96,6 +96,11 @@ namespace CodeCur.Controllers
                     UserID = User.Identity.GetUserId()
                 };
 
+                if (_service.TooManyProjects(project))
+                {
+
+                }
+
                 _service.AddProjectToDb(project);
 
                 //Creating default file
