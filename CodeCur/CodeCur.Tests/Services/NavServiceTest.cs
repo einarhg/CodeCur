@@ -1,10 +1,10 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using CodeCur.Services;
-using CodeCur.Tests;
 using CodeCur.Models;
 using CodeCur.Models.Entities;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace CodeCur.Tests.Services
 {
@@ -243,6 +243,71 @@ namespace CodeCur.Tests.Services
 
             // Assert
             Assert.AreEqual(4, result.Count);
+        }
+
+        [TestMethod]
+        public void TestAddUserProjectRelationByID()
+        {
+            // Arrange
+            const string userID = "b";
+            const int projectID = 1;
+
+            // Act
+            _service.AddUserProjectRelationByID(userID, projectID);
+            List<Project> result = _service.GetUserProjects(userID);
+
+            // Assert
+            Assert.AreEqual(2, result.Count);
+        }
+
+        [TestMethod]
+        public void TestAddUserProjectRelationByName()
+        {
+            // Arrange
+            const string username = "jonni";
+            const string userID = "b";
+            const int projectID = 1;
+
+            // Act
+            _service.AddUserProjectRelationByName(username, projectID);
+            List<Project> result = _service.GetUserProjects(userID);
+
+            // Assert
+            Assert.AreEqual(2, result.Count);
+        }
+
+        [TestMethod]
+        public void TestAddFileToDb()
+        {
+            // Arrange
+            var file = new File
+            {
+                ProjectID = 1,
+                Name = "testfile",
+                Type = "JavaScript",
+                Data = "asdf",
+                Deleted = false
+            };
+
+            // Act
+            _service.AddFileToDb(file);
+            List<File> result = _service.GetProjectFiles(file.ProjectID).ToList();
+
+            // Assert
+            Assert.AreEqual(2, result.Count);
+        }
+
+            [TestMethod]
+        public void TestGetProjectFiles()
+        {
+            // Arrange
+            const int projectID = 1;
+
+            // Act
+            List<File> result = _service.GetProjectFiles(projectID).ToList();
+
+            // Assert
+            Assert.AreEqual(1, result.Count);
         }
     }
 }
