@@ -14,12 +14,19 @@ using System.Net;
 
 namespace CodeCur.Controllers
 {
+    /// <summary>
+    /// Provides all the fundemental functions in the home view
+    /// </summary>
     [Authorize]
     public class HomeController : Controller
     {
         EditorService _editorService = new EditorService(null);
         NavService _service = new NavService(null);
 
+        /// <summary>
+        /// Displays all projest this user created and/or is a part of
+        /// </summary>
+        /// <returns></returns>
         public ActionResult Index()
         {
             ProjectViewModel model = new ProjectViewModel();
@@ -32,11 +39,20 @@ namespace CodeCur.Controllers
             return View(model);
         }
 
+        /// <summary>
+        /// If the user is trying to access something he should not be accessing
+        /// </summary>
+        /// <returns></returns>
         public ActionResult AccessDenied()
         {
             return View();
         }
 
+        /// <summary>
+        /// If project is valid it is created with an automatic index file
+        /// </summary>
+        /// <param name="ID"></param>
+        /// <returns></returns>
         public ActionResult Project(int ID)
         {
             if (!_service.AuthorizeProjectAccess(User.Identity.GetUserId(), ID))
@@ -50,12 +66,21 @@ namespace CodeCur.Controllers
             return View(model);
         }
 
+        /// <summary>
+        /// Gets the view for create project
+        /// </summary>
+        /// <returns></returns>
         [AllowAnonymous]
         public ActionResult CreateProject()
         {
             return View();
         }
 
+        /// <summary>
+        /// Posts the view if model is valid for create project
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
@@ -99,6 +124,11 @@ namespace CodeCur.Controllers
             return View(model);
         }
 
+        /// <summary>
+        /// Gets the crate view model
+        /// </summary>
+        /// <param name="ID"></param>
+        /// <returns></returns>
         [AllowAnonymous]
         public ActionResult CreateFile(int ID)
         {
@@ -107,6 +137,11 @@ namespace CodeCur.Controllers
             return View(model);
         }
 
+        /// <summary>
+        /// Post the view if model state is valid for create file
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
@@ -138,6 +173,7 @@ namespace CodeCur.Controllers
                 {
                     file.Name = file.Name + ".txt";
                 }
+                // Checks if 2 files have the same name and type
                 if (!_service.ValidFileName(file.Name, file.Type, model.ProjectID))
                 {
                     ModelState.AddModelError("duplicateFileError", "That filename already excists in this project!");
@@ -152,6 +188,11 @@ namespace CodeCur.Controllers
             return View(model);
         }
 
+        /// <summary>
+        /// Gets the model for share share project and returns the view
+        /// </summary>
+        /// <param name="ID"></param>
+        /// <returns></returns>
         [AllowAnonymous]
         public ActionResult ShareProject(int ID)
         {
@@ -165,6 +206,11 @@ namespace CodeCur.Controllers
             return View(model);
         }
 
+        /// <summary>
+        /// Posts the view for share project if model state is valid
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
@@ -190,6 +236,11 @@ namespace CodeCur.Controllers
             return View(model);
         }
 
+        /// <summary>
+        /// Posts the view without the removed project if model is valid, then the project is deleted from the database. Redirects to access denied otherwise
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
         [HttpPost]
         [AllowAnonymous]
         public ActionResult DeleteProject(DeleteProjectViewModel model)
@@ -203,6 +254,11 @@ namespace CodeCur.Controllers
             return RedirectToAction("Index", "Home");
         }
 
+        /// <summary>
+        /// Posts the view without the removed project if model state is valid, redirects to access denied
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
         [HttpPost]
         [AllowAnonymous]
         public ActionResult RemoveFromProject(RemoveFromProjectViewModel model)
@@ -215,6 +271,11 @@ namespace CodeCur.Controllers
             return RedirectToAction("Index", "Home");
         }
 
+        /// <summary>
+        /// Posts the view without the deleted project if model state is valid, redirect to access denied
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
         [HttpPost]
         [AllowAnonymous]
         public ActionResult DeleteFile(DeleteFileViewModel model)
