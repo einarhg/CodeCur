@@ -17,17 +17,17 @@ namespace CodeCur.Controllers
     [Authorize]
     public class HomeController : Controller
     {
-        EditorService editorService = new EditorService(null);
-        NavService service = new NavService(null);
+        EditorService _editorService = new EditorService(null);
+        NavService _service = new NavService(null);
 
         public ActionResult Index()
         {
             ProjectViewModel model = new ProjectViewModel();
-            model.Projects = service.GetUserProjects(User.Identity.GetUserId());
+            model.Projects = _service.GetUserProjects(User.Identity.GetUserId());
             model.Owners = new List<string>();
             foreach (var project in model.Projects)
             {
-                model.Owners.Add(service.GetUserName(project.UserID));
+                model.Owners.Add(_service.GetUserName(project.UserID));
             }
             return View(model);
         }
@@ -39,14 +39,14 @@ namespace CodeCur.Controllers
 
         public ActionResult Project(int ID)
         {
-            if (!service.AuthorizeProjectAccess(User.Identity.GetUserId(), ID))
+            if (!_service.AuthorizeProjectAccess(User.Identity.GetUserId(), ID))
             {
                 return RedirectToAction("AccessDenied", "Home");
             }
             ProjectDetailsViewModel model = new ProjectDetailsViewModel();
-            model.Files = service.GetProjectFiles(ID);
+            model.Files = _service.GetProjectFiles(ID);
             model.ProjectID = ID;
-            model.ProjectName = service.GetProjectName(ID);
+            model.ProjectName = _service.GetProjectName(ID);
             return View(model);
         }
 
@@ -71,7 +71,7 @@ namespace CodeCur.Controllers
                     UserID = User.Identity.GetUserId()
                 };
 
-                service.AddProjectToDb(project);
+                _service.AddProjectToDb(project);
 
                 //Creating default file
                 File defaultFile = new File();
@@ -92,7 +92,7 @@ namespace CodeCur.Controllers
                     defaultFile.Name += "index.txt";
                     defaultFile.Type = "TXT";
                 }
-                service.AddFileToDb(defaultFile);
+                _service.AddFileToDb(defaultFile);
                 return RedirectToAction("Index", "Home");
             }
             // If we got this far, something failed, redisplay form
@@ -138,13 +138,13 @@ namespace CodeCur.Controllers
                 {
                     file.Name = file.Name + ".txt";
                 }
-                if (!service.ValidFileName(file.Name, file.Type, model.ProjectID))
+                if (!_service.ValidFileName(file.Name, file.Type, model.ProjectID))
                 {
                     ModelState.AddModelError("duplicateFileError", "That filename already excists in this project!");
                 }
                 else
                 {
-                    service.AddFileToDb(file);
+                    _service.AddFileToDb(file);
                     return RedirectToAction("Project", "Home", new { id = model.ProjectID });
                 }
             }
@@ -155,13 +155,13 @@ namespace CodeCur.Controllers
         [AllowAnonymous]
         public ActionResult ShareProject(int ID)
         {
-            if (!service.AuthorizeProjectAccess(User.Identity.GetUserId(), ID))
+            if (!_service.AuthorizeProjectAccess(User.Identity.GetUserId(), ID))
             {
                 return RedirectToAction("AccessDenied", "Home");
             }
             ShareProjectViewModel model = new ShareProjectViewModel();
             model.ProjectID = ID;
-            model.ProjectName = service.GetProjectName(ID);
+            model.ProjectName = _service.GetProjectName(ID);
             return View(model);
         }
 
@@ -170,11 +170,11 @@ namespace CodeCur.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult ShareProject(ShareProjectViewModel model)
         {
-            if (!service.DoesUserExist(model.UserName))
+            if (!_service.DoesUserExist(model.UserName))
             {
                 ModelState.AddModelError("shareError", "There is no user by that username!");
             }
-            else if (service.AlreadyHasAccesss(model.UserName, model.ProjectID))
+            else if (_service.AlreadyHasAccesss(model.UserName, model.ProjectID))
             {
                 ModelState.AddModelError("shareError", "This user has already been added!");
             }
@@ -182,7 +182,7 @@ namespace CodeCur.Controllers
             {
                 if (ModelState.IsValid)
                 {
-                    service.AddUserProjectRelationByName(model.UserName, model.ProjectID);
+                    _service.AddUserProjectRelationByName(model.UserName, model.ProjectID);
                     return RedirectToAction("Project", "Home", new { id = model.ProjectID });
                 }
             }
@@ -194,12 +194,12 @@ namespace CodeCur.Controllers
         [AllowAnonymous]
         public ActionResult DeleteProject(DeleteProjectViewModel model)
         {
-            if (!service.AuthorizeProjectAccess(User.Identity.GetUserId(), model.ID))
+            if (!_service.AuthorizeProjectAccess(User.Identity.GetUserId(), model.ID))
             {
                 return RedirectToAction("AccessDenied", "Home");
             }
-            service.DeleteAllFiles(model.ID);
-            service.DeleteProject(model.ID);
+            _service.DeleteAllFiles(model.ID);
+            _service.DeleteProject(model.ID);
             return RedirectToAction("Index", "Home");
         }
 
@@ -207,11 +207,11 @@ namespace CodeCur.Controllers
         [AllowAnonymous]
         public ActionResult RemoveFromProject(RemoveFromProjectViewModel model)
         {
-            if (!service.AuthorizeProjectAccess(User.Identity.GetUserId(), model.ID))
+            if (!_service.AuthorizeProjectAccess(User.Identity.GetUserId(), model.ID))
             {
                 return RedirectToAction("AccessDenied", "Home");
             }
-            service.RemoveUserFromProject(model.ID, User.Identity.GetUserId());
+            _service.RemoveUserFromProject(model.ID, User.Identity.GetUserId());
             return RedirectToAction("Index", "Home");
         }
 
@@ -219,11 +219,11 @@ namespace CodeCur.Controllers
         [AllowAnonymous]
         public ActionResult DeleteFile(DeleteFileViewModel model)
         {
-            if (!editorService.AuthorizeFileAccess(User.Identity.GetUserId(), model.ID))
+            if (!_editorService.AuthorizeFileAccess(User.Identity.GetUserId(), model.ID))
             {
                 return RedirectToAction("AccessDenied", "Home");
             }
-            service.DeleteFile(model.ID);
+            _service.DeleteFile(model.ID);
             return RedirectToAction("Project", "Home", new { id = model.ProjectID });
         }
     }
