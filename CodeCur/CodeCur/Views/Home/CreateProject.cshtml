@@ -14,6 +14,7 @@
             @Html.LabelFor(m => m.Name, new { @class = "" })
             <div>
                 @Html.TextBoxFor(m => m.Name, new { @class = "", @placeholder = "Name of project" })
+                @Html.ValidationMessage("tooManyProjects", new { @class = "text-danger" })
                 @Html.ValidationMessageFor(m => m.Name, "", new { @class = "text-danger" })
             </div>
         </div>

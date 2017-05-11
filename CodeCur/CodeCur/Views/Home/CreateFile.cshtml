@@ -14,6 +14,7 @@
             <div>
                 @Html.TextBoxFor(m => m.Name, new { @class = "", @placeholder = "Name of File" })
                 @Html.ValidationMessage("duplicateFileError", new { @class = "text-danger" })
+                @Html.ValidationMessage("tooManyFiles", new { @class = "text-danger" })
                 @Html.ValidationMessageFor(m => m.Name, "", new { @class = "text-danger" })
             </div>
         </div>
