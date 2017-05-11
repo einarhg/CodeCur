@@ -98,7 +98,7 @@ namespace CodeCur.Controllers
 
                 if (_service.TooManyProjects(project))
                 {
-
+                    ModelState.AddModelError("tooManyProjects", "Too many projects created! Delete a project if you want to add more!");
                 }
 
                 _service.AddProjectToDb(project);
@@ -182,6 +182,10 @@ namespace CodeCur.Controllers
                 if (!_service.ValidFileName(file.Name, file.Type, model.ProjectID))
                 {
                     ModelState.AddModelError("duplicateFileError", "That filename already excists in this project!");
+                }
+                else if (_service.TooManyFiles(file))
+                {
+                    ModelState.AddModelError("tooManyFiles", "Too many files created! Delete a file if you want to add more!");
                 }
                 else
                 {
