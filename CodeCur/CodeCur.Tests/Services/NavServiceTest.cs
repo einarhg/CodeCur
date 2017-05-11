@@ -63,13 +63,13 @@ namespace CodeCur.Tests.Services
         [TestMethod]
         public void TestGetUserProjects()
         {
-            // Arrange: 
+            // Arrange
             const string userID = "a";
 
-            // Act:
+            // Act
             List<Project> result = _service.GetUserProjects(userID);
 
-            // Assert:
+            // Assert
             Assert.AreEqual(1, result.Count);
         }
     }
