@@ -99,6 +99,7 @@ namespace CodeCur.Controllers
                 if (_service.TooManyProjects(project))
                 {
                     ModelState.AddModelError("tooManyProjects", "Too many projects created! Delete a project if you want to add more!");
+                    return View(model);
                 }
 
                 _service.AddProjectToDb(project);

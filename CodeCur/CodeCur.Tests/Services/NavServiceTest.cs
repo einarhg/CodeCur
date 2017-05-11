@@ -297,7 +297,7 @@ namespace CodeCur.Tests.Services
             Assert.AreEqual(2, result.Count);
         }
 
-            [TestMethod]
+        [TestMethod]
         public void TestGetProjectFiles()
         {
             // Arrange
