@@ -5,6 +5,9 @@ using System.Web;
 
 namespace CodeCur.Models.Entities
 {
+    /// <summary>
+    /// Relations between users and projects, keeps track of the projects a user has access to.
+    /// </summary>
     public class UserProjectRelation
     {
         public int ID { get; set; }

@@ -5,6 +5,9 @@ using System.Web;
 
 namespace CodeCur.Models.Entities
 {
+    /// <summary>
+    /// File entity class, keeps track of information about files.
+    /// </summary>
     public class File
     {
         public int ID { get; set; }

@@ -5,6 +5,9 @@ using System.Web;
 
 namespace CodeCur.Models.Entities
 {
+    /// <summary>
+    /// Project entity class, keeps track of information about projects.
+    /// </summary>
     public class Project
     {
         public int ID { get; set; }
