@@ -145,6 +145,24 @@ namespace CodeCur.Tests.Services
             };
             MockDb.UserProjectRelations.Add(r5);
 
+            var r6 = new UserProjectRelation
+            {
+                ID = 6,
+                UserID = "a",
+                ProjectID = 3,
+                Deleted = true
+            };
+            MockDb.UserProjectRelations.Add(r6);
+
+            var r7 = new UserProjectRelation
+            {
+                ID = 1,
+                UserID = "a",
+                ProjectID = 4,
+                Deleted = false
+            };
+            MockDb.UserProjectRelations.Add(r7);
+
             // Add files
             var f1 = new File
             {
@@ -152,11 +170,43 @@ namespace CodeCur.Tests.Services
                 ProjectID = 1,
                 Name = "file",
                 Type = "HTML",
-                //DateCreated = actual datetimer format,
                 Data = null,
                 Deleted = false
             };
             MockDb.Files.Add(f1);
+
+            var f2 = new File
+            {
+                ID = 2,
+                ProjectID = 3,
+                Name = "file2",
+                Type = "HTML",
+                Data = null,
+                Deleted = false
+            };
+            MockDb.Files.Add(f2);
+
+            var f3 = new File
+            {
+                ID = 3,
+                ProjectID = 3,
+                Name = "file3",
+                Type = "JavaScript",
+                Data = "asdf",
+                Deleted = false
+            };
+            MockDb.Files.Add(f3);
+
+            var f4 = new File
+            {
+                ID = 4,
+                ProjectID = 4,
+                Name = "file4",
+                Type = "JavaScript",
+                Data = null,
+                Deleted = true
+            };
+            MockDb.Files.Add(f4);
 
 
             _service = new NavService(MockDb);
@@ -172,7 +222,7 @@ namespace CodeCur.Tests.Services
             List<Project> result = _service.GetUserProjects(userID);
 
             // Assert
-            Assert.AreEqual(2, result.Count);
+            Assert.AreEqual(3, result.Count);
         }
 
         //[TestMethod]
