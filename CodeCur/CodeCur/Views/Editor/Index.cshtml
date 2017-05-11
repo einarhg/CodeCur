@@ -5,6 +5,7 @@
 
 
 <div data-editor data-type="@Html.Raw(Json.Encode(Model.File.Type))" class="editor-container">
+    <p id="userIsEditing"></p>
     <menu>
         <h1>@Model.File.Name</h1>
         <ul id="joinedEditor" data-name="@User.Identity.Name"></ul>
@@ -79,6 +80,7 @@
 
     editorHub.client.onLeave = function (username) {
         silent = true;
+        $('#userIsEditing').html('');
         $('#joinedEditor').append('<li>' + username + ' just left! </li>');
         setTimeout(function () { $('#joinedEditor').html(''); }, 3000);
         silent = false;
@@ -87,6 +89,13 @@
     $(document).on('click', '.back-file-button', function () {
         editorHub.server.leaveFile(fileID);
     });
+
+    editorHub.client.moveCursor = function (row, column, username) {
+        silent = true;
+        $('#userIsEditing').css({ 'padding': '5px 10px' });
+        $('#userIsEditing').html(username + ' in row: ' + row);
+        silent = false;
+    };
 
     $.connection.hub.start().done(function () {
         editorHub.server.joinFile(fileID);
@@ -99,6 +108,7 @@
             // log any event to console;
             //console.log(obj);
             editorHub.server.onChange(obj, fileID);
+            editorHub.server.moveCursor(editor.getCursorPosition().row + 1, editor.getCursorPosition().column + 1, fileID);
         });
     });
 </script>
