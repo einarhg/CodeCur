@@ -100,8 +100,9 @@
     $.connection.hub.start().done(function () {
         editorHub.server.joinFile(fileID);
 
+        setInterval(function () {saveFile()}, 2000);
+
         editor.on("change", function (obj) {
-            saveFile();
             if (silent) {
                 return;
             }
