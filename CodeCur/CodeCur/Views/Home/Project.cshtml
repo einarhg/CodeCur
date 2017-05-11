@@ -6,9 +6,9 @@
 <div class="list-container">
     <div class="list-head">
         <h1 class="project-header"><span>Project </span>@Model.ProjectName</h1>
-        @Html.ActionLink("<", "Index", "Home", new { @class = "back-file-button" })
-        @Html.ActionLink("+", "CreateFile", "Home", new { id = Model.ProjectID }, new { @class = "new-file-button" })
-        <a class="share-project-button" href="@Url.Action("ShareProject", "Home", new { id = Model.ProjectID })">
+        @Html.ActionLink("<", "Index", "Home", new { @class = "back-file-button", @title = "Go back" })
+        @Html.ActionLink("+", "CreateFile", "Home", new { id = Model.ProjectID }, new { @class = "new-file-button", @title = "New file" })
+        <a class="share-project-button" title="Share project" href="@Url.Action("ShareProject", "Home", new { id = Model.ProjectID })">
             <img src="~/Images/share.svg" />
         </a>
     </div>
