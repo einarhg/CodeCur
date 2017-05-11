@@ -723,6 +723,16 @@ h6,
     margin-left: calc(50% - 82px);
 }
 
+#userIsEditing {
+    background: #111;
+    border-radius: 0 0 0 4px;
+    color: #fff;
+    position: absolute;
+    right: 0;
+    top: 60px;
+    z-index: 6000;
+}
+
 @media (max-width: 750px) {
     .list-head h1 {
         font-size: 30px;

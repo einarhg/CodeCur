@@ -33,9 +33,9 @@ namespace CodeCur.Hubs
             Clients.Group(Convert.ToString(fileID), Context.ConnectionId).OnChange(changeData);
         }
 
-        public void PopulateList(int fileID, string username)
+        public void MoveCursor(int row, int column, int fileID)
         {
-            Clients.Group(Convert.ToString(fileID)).PopulateList(username);
+            Clients.Group(Convert.ToString(fileID), Context.ConnectionId).MoveCursor(row, column, Context.User.Identity.Name);
         }
     }
 }
