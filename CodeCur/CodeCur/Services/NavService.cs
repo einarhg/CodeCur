@@ -153,7 +153,7 @@ namespace CodeCur.Services
         public bool ValidFileName(string name, string type, int projectID)
         {
             if ((from item in _db.Files
-                 where item.Name == name && item.Type == type && item.ProjectID == projectID
+                 where item.Name == name && item.Type == type && item.ProjectID == projectID && item.Deleted == false
                  select item).Any())
                 {
                     return false;
