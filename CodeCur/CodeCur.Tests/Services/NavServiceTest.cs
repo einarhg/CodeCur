@@ -225,17 +225,24 @@ namespace CodeCur.Tests.Services
             Assert.AreEqual(3, result.Count);
         }
 
-        //[TestMethod]
-        //public void TestGetUserProjects()
-        //{
-        //    // Arrange
-        //    const string userID = "a";
+        [TestMethod]
+        public void TestAddProjectToDb()
+        {
+            // Arrange
+            Project project = new Project
+            {
+                UserID = "a",
+                Name = "testproject",
+                Type = "Website",
+                Deleted = false
+            };
 
-        //    // Act
-        //    List<Project> result = _service.GetUserProjects(userID);
+            // Act
+            _service.AddProjectToDb(project);
+            List<Project> result = _service.GetUserProjects(project.UserID);
 
-        //    // Assert
-        //    Assert.AreEqual(1, result.Count);
-        //}
+            // Assert
+            Assert.AreEqual(4, result.Count);
+        }
     }
 }
