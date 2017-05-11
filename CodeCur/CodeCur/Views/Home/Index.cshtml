@@ -27,7 +27,7 @@
                     <p class="project-type">@Model.Projects[i].Type</p>
                     <p class="project-date">@Model.Projects[i].DateCreated.Day/@Model.Projects[i].DateCreated.Month/@Model.Projects[i].DateCreated.Year</p>
                 </a>
-                <button id="listDeleteButton_@Model.Projects[i].ID" data-owner="@Model.Owners[i]" data-user="@User.Identity.GetUserName()" class="list-delete-button">&#10005;</button>
+                <button id="listDeleteButton_@Model.Projects[i].ID" title="Remove" data-owner="@Model.Owners[i]" data-user="@User.Identity.GetUserName()" class="list-delete-button">&#10005;</button>
             }
         </div>
     }
