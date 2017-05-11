@@ -7,7 +7,7 @@ using System.Data.Entity;
 using CodeCur.Models;
 using CodeCur.Models.Entities;
 
-namespace CodeCurr.Tests
+namespace CodeCur.Tests
 {
     /// <summary>
     /// This is an example of how we'd create a fake database by implementing the 
