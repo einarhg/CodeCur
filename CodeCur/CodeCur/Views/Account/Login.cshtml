@@ -7,7 +7,7 @@
 }
 
 <!-- Checking if user is already logged in. -->
-@if (User.Identity.IsAuthenticated)
+@if(User.Identity.IsAuthenticated)
 {
     <p>You are already logged in, would you like to log out?</p>
     <a href="javascript:document.getElementById('logoutForm').submit()">Log out</a>

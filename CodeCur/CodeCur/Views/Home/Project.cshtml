@@ -13,26 +13,26 @@
         </a>
     </div>
     <!-- Checking if there are any files in the open project. -->
-    @if (!Model.Files.Any())
+    @if(!Model.Files.Any())
     {
         <p class="empty-list">No files currently in @Model.ProjectName!</p>
     }
     else
     {
         <div class="file-list-content">
-            @foreach (var file in Model.Files)
+            @foreach(var file in Model.Files)
             {
                 <div class="file-list-block">
                     <a class="file-box" href="@Url.Action("Index", "Editor", new { id = file.ID })">
-                        @if (file.Type == "JavaScript")
+                        @if(file.Type == "JavaScript")
                         {
                             <img src="~/Images/javascript.svg" />
                         }
-                        else if (file.Type == "HTML")
+                        else if(file.Type == "HTML")
                         {
                             <img src="~/Images/html.svg" />
                         }
-                        else if (file.Type == "CSS")
+                        else if(file.Type == "CSS")
                         {
                             <img src="~/Images/css.svg" />
                         }
@@ -56,7 +56,7 @@
             var id = $(this).attr('id').replace("fileListDeleteButton_", "");
             var projectID = $(this).data("project-id");
             var r = confirm("Are you sure you want to delete this file?");
-            if (r == true) {
+            if(r == true) {
                 $.ajax({
                     type: 'POST',
                     url: "@Url.Action("DeleteFile", "Home")",

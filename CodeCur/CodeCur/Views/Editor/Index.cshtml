@@ -25,11 +25,11 @@
     editor.focus();
     var type = @Html.Raw(Json.Encode(Model.File.Type));
     editor.setTheme("ace/theme/monokai");
-    if (type == "JavaScript") {
+    if(type == "JavaScript") {
         editor.getSession().setMode("ace/mode/javascript");
-    } else if (type == "HTML") {
+    } else if(type == "HTML") {
         editor.getSession().setMode("ace/mode/html");
-    } else if (type == "CSS") {
+    } else if(type == "CSS") {
         editor.getSession().setMode("ace/mode/css");
     } else {
         editor.getSession().setMode("ace/mode/text");
@@ -37,7 +37,7 @@
 
     // Saving with ctrl+s and Cmd+s.
     $(document).keydown(function (event) {
-        if ((event.ctrlKey || event.metaKey) && event.which == 83) {
+        if((event.ctrlKey || event.metaKey) && event.which == 83) {
             saveFile();
             event.preventDefault();
         };

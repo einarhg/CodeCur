@@ -43,7 +43,7 @@ namespace CodeCur.Services
         /// <param name="fileID"></param>
         public void SaveFile(string content, int fileID)
         {
-            if (fileID != 0)
+            if(fileID != 0)
             {
                 File file = (from item in _db.Files
                              where item.ID == fileID
@@ -53,7 +53,6 @@ namespace CodeCur.Services
                 // Success check?
                 _db.SaveChanges();
             }
-            
         }
 
         /// <summary>
@@ -64,11 +63,10 @@ namespace CodeCur.Services
         /// <returns>Boolean.</returns>
         public bool AuthorizeFileAccess(string userID, int fileID)
         {
-
-            if ((from conn in _db.UserProjectRelations
-                 join file in _db.Files on conn.ProjectID equals file.ProjectID
-                 where conn.UserID == userID && file.ID == fileID && file.Deleted == false
-                 select conn).Any())
+            if((from conn in _db.UserProjectRelations
+                join file in _db.Files on conn.ProjectID equals file.ProjectID
+                where conn.UserID == userID && file.ID == fileID && file.Deleted == false
+                select conn).Any())
             {
                 return true;
             }

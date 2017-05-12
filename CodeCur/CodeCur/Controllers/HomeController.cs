@@ -32,7 +32,7 @@ namespace CodeCur.Controllers
             ProjectViewModel model = new ProjectViewModel();
             model.Projects = _service.GetUserProjects(User.Identity.GetUserId());
             model.Owners = new List<string>();
-            foreach (var project in model.Projects)
+            foreach(var project in model.Projects)
             {
                 model.Owners.Add(_service.GetUserName(project.UserID));
             }
@@ -55,7 +55,7 @@ namespace CodeCur.Controllers
         /// <returns></returns>
         public ActionResult Project(int ID)
         {
-            if (!_service.AuthorizeProjectAccess(User.Identity.GetUserId(), ID))
+            if(!_service.AuthorizeProjectAccess(User.Identity.GetUserId(), ID))
             {
                 return RedirectToAction("AccessDenied", "Home");
             }
@@ -86,7 +86,7 @@ namespace CodeCur.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult CreateProject(CreateProjectViewModel model)
         {
-            if (ModelState.IsValid)
+            if(ModelState.IsValid)
             {
                 var project = new Project
                 {
@@ -96,7 +96,7 @@ namespace CodeCur.Controllers
                     UserID = User.Identity.GetUserId()
                 };
 
-                if (_service.TooManyProjects(project))
+                if(_service.TooManyProjects(project))
                 {
                     ModelState.AddModelError("tooManyProjects", "Too many projects created! Delete a project if you want to add more!");
                     return View(model);
@@ -108,12 +108,13 @@ namespace CodeCur.Controllers
                 File defaultFile = new File();
                 defaultFile.ProjectID = project.ID;
                 defaultFile.DateCreated = DateTime.Now;
-                if (project.Type == "Website")
+
+                if(project.Type == "Website")
                 {
                     defaultFile.Name += "index.html";
                     defaultFile.Type = "HTML";
                 }
-                else if (project.Type == "Mobile app")
+                else if(project.Type == "Mobile app")
                 {
                     defaultFile.Name += "index.js";
                     defaultFile.Type = "JavaScript";
@@ -153,7 +154,7 @@ namespace CodeCur.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult CreateFile(CreateFileViewModel model)
         {
-            if (ModelState.IsValid)
+            if(ModelState.IsValid)
             {
                 var file = new File
                 {
@@ -162,16 +163,16 @@ namespace CodeCur.Controllers
                     DateCreated = DateTime.Now,
                     ProjectID = model.ProjectID
                 };
-                if (file.Type == "JavaScript")
+                if(file.Type == "JavaScript")
                 {
 
                     file.Name = file.Name + ".js";
                 }
-                else if (file.Type == "HTML")
+                else if(file.Type == "HTML")
                 {
                     file.Name = file.Name + ".html";
                 }
-                else if (file.Type == "CSS")
+                else if(file.Type == "CSS")
                 {
                     file.Name = file.Name + ".css";
                 }
@@ -180,11 +181,11 @@ namespace CodeCur.Controllers
                     file.Name = file.Name + ".txt";
                 }
                 // Checks if 2 files have the same name and type
-                if (!_service.ValidFileName(file.Name, file.Type, model.ProjectID))
+                if(!_service.ValidFileName(file.Name, file.Type, model.ProjectID))
                 {
                     ModelState.AddModelError("duplicateFileError", "That filename already excists in this project!");
                 }
-                else if (_service.TooManyFiles(file))
+                else if(_service.TooManyFiles(file))
                 {
                     ModelState.AddModelError("tooManyFiles", "Too many files created! Delete a file if you want to add more!");
                 }
@@ -206,7 +207,7 @@ namespace CodeCur.Controllers
         [AllowAnonymous]
         public ActionResult ShareProject(int ID)
         {
-            if (!_service.AuthorizeProjectAccess(User.Identity.GetUserId(), ID))
+            if(!_service.AuthorizeProjectAccess(User.Identity.GetUserId(), ID))
             {
                 return RedirectToAction("AccessDenied", "Home");
             }
@@ -226,13 +227,13 @@ namespace CodeCur.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult ShareProject(ShareProjectViewModel model)
         {
-            if (ModelState.IsValid)
+            if(ModelState.IsValid)
             {
-                if (!_service.DoesUserExist(model.UserName))
+                if(!_service.DoesUserExist(model.UserName))
                 {
                     ModelState.AddModelError("shareError", "There is no user by that username!");
                 }
-                else if (_service.HasAccess(model.UserName, model.ProjectID))
+                else if(_service.HasAccess(model.UserName, model.ProjectID))
                 {
                     ModelState.AddModelError("shareError", "This user has already been added!");
                 }
@@ -255,7 +256,7 @@ namespace CodeCur.Controllers
         [AllowAnonymous]
         public ActionResult DeleteProject(DeleteProjectViewModel model)
         {
-            if (!_service.AuthorizeProjectAccess(User.Identity.GetUserId(), model.ID))
+            if(!_service.AuthorizeProjectAccess(User.Identity.GetUserId(), model.ID))
             {
                 return RedirectToAction("AccessDenied", "Home");
             }
@@ -273,7 +274,7 @@ namespace CodeCur.Controllers
         [AllowAnonymous]
         public ActionResult RemoveFromProject(RemoveFromProjectViewModel model)
         {
-            if (!_service.AuthorizeProjectAccess(User.Identity.GetUserId(), model.ID))
+            if(!_service.AuthorizeProjectAccess(User.Identity.GetUserId(), model.ID))
             {
                 return RedirectToAction("AccessDenied", "Home");
             }
@@ -290,7 +291,7 @@ namespace CodeCur.Controllers
         [AllowAnonymous]
         public ActionResult DeleteFile(DeleteFileViewModel model)
         {
-            if (!_editorService.AuthorizeFileAccess(User.Identity.GetUserId(), model.ID))
+            if(!_editorService.AuthorizeFileAccess(User.Identity.GetUserId(), model.ID))
             {
                 return RedirectToAction("AccessDenied", "Home");
             }

@@ -65,7 +65,7 @@ namespace CodeCur.Services
         {
             UserProjectRelation relation = new UserProjectRelation();
 
-            if (RelationExists(username, projectID))
+            if(RelationExists(username, projectID))
             {
                 return;
             }
@@ -152,12 +152,12 @@ namespace CodeCur.Services
         /// <returns>Boolean.</returns>
         public bool ValidFileName(string name, string type, int projectID)
         {
-            if ((from item in _db.Files
-                 where item.Name == name && item.Type == type && item.ProjectID == projectID && item.Deleted == false
-                 select item).Any())
-                {
-                    return false;
-                }
+            if((from item in _db.Files
+                where item.Name == name && item.Type == type && item.ProjectID == projectID && item.Deleted == false
+                select item).Any())
+            {
+                return false;
+            }
             return true;
         }
 
@@ -184,7 +184,7 @@ namespace CodeCur.Services
             var ToDelete = (from file in _db.Files
                             where file.ProjectID == ID
                             select file).ToList();
-            foreach (var item in ToDelete)
+            foreach(var item in ToDelete)
             {
                 item.Deleted = true;
             }
@@ -228,10 +228,10 @@ namespace CodeCur.Services
         /// <returns>Boolean.</returns>
         public bool AuthorizeProjectAccess(string userID, int projectID)
         {
-            if ((from conn in _db.UserProjectRelations
-                 join proj in _db.Projects on conn.ProjectID equals proj.ID
-                 where conn.UserID == userID && conn.ProjectID == projectID && proj.Deleted == false
-                 select conn).Any())
+            if((from conn in _db.UserProjectRelations
+                join proj in _db.Projects on conn.ProjectID equals proj.ID
+                where conn.UserID == userID && conn.ProjectID == projectID && proj.Deleted == false
+                select conn).Any())
             {
                 return true;
             }
@@ -245,9 +245,9 @@ namespace CodeCur.Services
         /// <returns>Boolean.</returns>
         public bool DoesUserExist(string username)
         {
-            if ((from user in _db.Users
-                 where user.UserName == username
-                 select user).Any())
+            if((from user in _db.Users
+                where user.UserName == username
+                select user).Any())
             {
                 return true;
             }
@@ -266,9 +266,9 @@ namespace CodeCur.Services
                              where user.UserName == username
                              select user.Id).SingleOrDefault();
 
-            if ((from conn in _db.UserProjectRelations
-                 where conn.UserID == userID && conn.ProjectID == projectID && conn.Deleted == false
-                 select conn).Any())
+            if((from conn in _db.UserProjectRelations
+                where conn.UserID == userID && conn.ProjectID == projectID && conn.Deleted == false
+                select conn).Any())
             {
                 return true;
             }
@@ -293,13 +293,12 @@ namespace CodeCur.Services
                        where userID == relation.UserID && projectID == relation.ProjectID && relation.Deleted == true
                        select relation).FirstOrDefault();
 
-            if (rel != null)
+            if(rel != null)
             {
                 rel.Deleted = false;
                 _db.SaveChanges();
                 return true;
             }
-
             return false;
         }
 
@@ -310,7 +309,7 @@ namespace CodeCur.Services
         /// <returns>Boolean.</returns>
         public bool TooManyProjects(Project project)
         {
-            if (GetUserProjects(project.UserID).Count() < 100)
+            if(GetUserProjects(project.UserID).Count() < 100)
             {
                 return false;
             }
@@ -324,7 +323,7 @@ namespace CodeCur.Services
         /// <returns>Boolean.</returns>
         public bool TooManyFiles(File file)
         {
-            if (GetProjectFiles(file.ProjectID).Count() < 100)
+            if(GetProjectFiles(file.ProjectID).Count() < 100)
             {
                 return false;
             }

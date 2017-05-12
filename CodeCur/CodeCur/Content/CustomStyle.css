@@ -87,7 +87,7 @@ h6,
     margin-right: 5%;
 }
 
-.account-form-group input[type=text], .account-form-group input[type=password] {
+.account-form-group input[type="text"], .account-form-group input[type="password"] {
     background: #eee;
     border: 1px solid #ddd;
     box-sizing: border-box;
@@ -104,7 +104,7 @@ h6,
     outline: none;
 }
 
-.account-form-group input[type=text]:focus, .account-form-group input[type=password]:focus {
+.account-form-group input[type="text"]:focus, .account-form-group input[type="password"]:focus {
     border: 1px solid #6cc3d0;
 }
 
@@ -224,7 +224,7 @@ h6,
     text-align: center;
 }
 
-.new-input-form-group input[type=text], .new-input-form-group input[type=password] {
+.new-input-form-group input[type="text"], .new-input-form-group input[type="password"] {
     background: #eee;
     border: 1px solid #ddd;
     box-sizing: border-box;
@@ -241,7 +241,7 @@ h6,
     outline: none;
 }
 
-.new-input-form-group input[type=text]:focus, .new-input-form-group input[type=password]:focus {
+.new-input-form-group input[type="text"]:focus, .new-input-form-group input[type="password"]:focus {
     border: 1px solid #6cc3d0;
 }
 
