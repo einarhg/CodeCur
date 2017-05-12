@@ -206,6 +206,16 @@ namespace CodeCur.Tests.Services
             };
             MockDb.Files.Add(f4);
 
+            var f5 = new File
+            {
+                ID = 5,
+                ProjectID = 3,
+                Name = "file5",
+                Type = "JavaScript",
+                Data = "asdf",
+                Deleted = false
+            };
+            MockDb.Files.Add(f5);
 
             _service = new EditorService(MockDb);
         }

@@ -144,7 +144,7 @@ namespace CodeCur.Services
         }
 
         /// <summary>
-        /// Validates that the file is not a duplicate.
+        /// Validates that a new file is not a duplicate.
         /// </summary>
         /// <param name="name"></param>
         /// <param name="type"></param>

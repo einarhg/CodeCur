@@ -208,6 +208,16 @@ namespace CodeCur.Tests.Services
             };
             MockDb.Files.Add(f4);
 
+            var f5 = new File
+            {
+                ID = 5,
+                ProjectID = 3,
+                Name = "file5",
+                Type = "JavaScript",
+                Data = "asdf",
+                Deleted = false
+            };
+            MockDb.Files.Add(f5);
 
             _service = new NavService(MockDb);
         }
@@ -280,7 +290,7 @@ namespace CodeCur.Tests.Services
         public void TestAddFileToDb()
         {
             // Arrange
-            var file = new File
+            File file = new File
             {
                 ProjectID = 1,
                 Name = "testfile",
@@ -308,6 +318,116 @@ namespace CodeCur.Tests.Services
 
             // Assert
             Assert.AreEqual(1, result.Count);
+        }
+
+        [TestMethod]
+        public void TestGetProjectName()
+        {
+            // Arrange
+            const int projectID = 1;
+
+            // Act
+            var result = _service.GetProjectName(projectID);
+
+            // Assert
+            Assert.AreEqual("proj", result);
+        }
+
+        [TestMethod]
+        public void TestGetUserName()
+        {
+            // Arrange
+            const string UserID = "a";
+
+            // Act
+            var result = _service.GetUserName(UserID);
+
+            // Assert
+            Assert.AreEqual("nonni", result);
+        }
+
+        [TestMethod]
+        public void TestValidFileNameInvalid()
+        {
+            // Arrange
+            File file = new File
+            {
+                ProjectID = 1,
+                Name = "file",
+                Type = "HTML",
+                Data = null,
+                Deleted = false
+            };
+
+            // Act
+            var result = _service.ValidFileName(file.Name, file.Type, file.ProjectID);
+
+            // Assert
+            Assert.AreEqual(false, result);
+        }
+
+        [TestMethod]
+        public void TestValidFileNameValid()
+        {
+            // Arrange
+            File file = new File
+            {
+                ProjectID = 1,
+                Name = "Validfile",
+                Type = "HTML",
+                Data = null,
+                Deleted = false
+            };
+
+            // Act
+            var result = _service.ValidFileName(file.Name, file.Type, file.ProjectID);
+
+            // Assert
+            Assert.AreEqual(true, result);
+        }
+
+        [TestMethod]
+        public void TestDeleteProject()
+        {
+            // Arrange
+            const int projectID = 1;
+            const string userID = "a";
+
+            // Act
+            _service.DeleteProject(projectID);
+            List<Project> result = _service.GetUserProjects(userID);
+
+            // Assert
+            Assert.AreEqual(2, result.Count);
+        }
+
+        [TestMethod]
+        public void TestDeleteAllFiles()
+        {
+            // Arrange
+            const int projectID = 3;
+
+            // Act
+            _service.DeleteAllFiles(projectID);
+            List<File> result = _service.GetProjectFiles(projectID).ToList();
+
+            // Assert
+            Assert.AreEqual(0, result.Count);
+        }
+
+        [TestMethod]
+        public void TestDeleteFile()
+        {
+            // Arrange
+            const int fileID = 5;
+            const int projectID = 3;
+
+            // Act
+            _service.DeleteFile(fileID);
+            List<File> result = _service.GetProjectFiles(projectID).ToList();
+
+            // Assert
+            Assert.AreEqual(2, result.Count);
         }
     }
 }
