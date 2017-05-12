@@ -275,8 +275,10 @@ namespace CodeCur.Services
             return false;
         }
 
+        
         /// <summary>
         /// Checks whether a relation between user and project already exists in UserProjectRelations table.
+        /// And marks it not deleted if it is deleted.
         /// </summary>
         /// <param name="username"></param>
         /// <param name="projectID"></param>

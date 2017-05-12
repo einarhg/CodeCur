@@ -231,5 +231,51 @@ namespace CodeCur.Tests.Services
             // Assert
             Assert.AreEqual("asdf", result.Data);
         }
+
+        [TestMethod]
+        public void TestSaveFile()
+        {
+            // Arrange
+            const int id = 3;
+            const string content = "new content";
+
+
+            // Act
+            _service.SaveFile(content, id);
+            File result = _service.GetFile(id);
+
+            // Assert
+            Assert.AreEqual(content, result.Data);
+        }
+
+        [TestMethod]
+        public void TestAuthorizeFileAccessTrue()
+        {
+            // Arrange
+            const int fileID = 1;
+            const string userID = "a";
+
+
+            // Act
+            bool result = _service.AuthorizeFileAccess(userID, fileID);
+
+            // Assert
+            Assert.AreEqual(true, result);
+        }
+
+        [TestMethod]
+        public void TestAuthorizeFileAccessFalse()
+        {
+            // Arrange
+            const int fileID = 1;
+            const string userID = "b";
+
+
+            // Act
+            bool result = _service.AuthorizeFileAccess(userID, fileID);
+
+            // Assert
+            Assert.AreEqual(false, result);
+        }
     }
 }

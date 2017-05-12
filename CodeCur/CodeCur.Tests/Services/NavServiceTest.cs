@@ -477,10 +477,10 @@ namespace CodeCur.Tests.Services
         public void TestDoesUserExistTrue()
         {
             // Arrange
-            const string userID = "nonni";
+            const string username = "nonni";
 
             // Act
-            bool result = _service.DoesUserExist(userID);
+            bool result = _service.DoesUserExist(username);
 
             // Assert
             Assert.AreEqual(true, result);
@@ -503,11 +503,11 @@ namespace CodeCur.Tests.Services
         public void TestHasAccessTrue()
         {
             // Arrange
-            const string userID = "nonni";
+            const string username = "nonni";
             const int projectID = 1;
 
             // Act
-            bool result = _service.HasAccess(userID, projectID);
+            bool result = _service.HasAccess(username, projectID);
 
             // Assert
             Assert.AreEqual(true, result);
@@ -517,11 +517,156 @@ namespace CodeCur.Tests.Services
         public void TestHasAccessFalse()
         {
             // Arrange
-            const string userID = "jonni";
+            const string username = "jonni";
             const int projectID = 1;
 
             // Act
-            bool result = _service.HasAccess(userID, projectID);
+            bool result = _service.HasAccess(username, projectID);
+
+            // Assert
+            Assert.AreEqual(false, result);
+        }
+
+        [TestMethod]
+        public void TestRelationExists()
+        {
+            // Arrange
+            const string username = "nonni";
+            const string userID = "a";
+            const int projectID = 3;
+
+            // Act
+            bool result1 = _service.RelationExists(username, projectID);
+            List<Project> result2 = _service.GetUserProjects(userID);
+
+            // Assert
+            Assert.AreEqual(true, result1);
+            Assert.AreEqual(4, result2.Count);
+        }
+
+        [TestMethod]
+        public void TestTooManyProjectsTrue()
+        {
+            // Arrange
+            for (int i = 0; i < 95; i++)
+            {
+                Project proj = new Project
+                {
+                    ID = i + 4,
+                    UserID = "a",
+                    Name = "proj4",
+                    Type = "Mobile app",
+                    Deleted = false
+                };
+                _service.AddProjectToDb(proj);
+            }
+            var project = new Project
+            {
+                UserID = "a",
+                Name = "proj4",
+                Type = "Mobile app",
+                Deleted = false
+            };
+
+            // Act
+            bool result = _service.TooManyProjects(project);
+
+            // Assert
+            Assert.AreEqual(true, result);
+        }
+
+        [TestMethod]
+        public void TestTooManyProjectsFalse()
+        {
+            // Arrange
+            for (int i = 0; i < 94; i++)
+            {
+                Project proj = new Project
+                {
+                    ID = i + 4,
+                    UserID = "a",
+                    Name = "proj4",
+                    Type = "Mobile app",
+                    Deleted = false
+                };
+                _service.AddProjectToDb(proj);
+            }
+            var project = new Project
+            {
+                UserID = "a",
+                Name = "proj4",
+                Type = "Mobile app",
+                Deleted = false
+            };
+
+            // Act
+            bool result = _service.TooManyProjects(project);
+
+            // Assert
+            Assert.AreEqual(false, result);
+        }
+
+        [TestMethod]
+        public void TestTooManyFilesTrue()
+        {
+            // Arrange
+            for (int i = 0; i < 97; i++)
+            {
+                File fil = new File
+                {
+                    ID = i + 1,
+                    ProjectID = 3,
+                    Name = "file5",
+                    Type = "JavaScript",
+                    Data = "asdf",
+                    Deleted = false
+                };
+                _service.AddFileToDb(fil);
+            }
+            File file = new File
+            {
+                ProjectID = 3,
+                Name = "file5",
+                Type = "JavaScript",
+                Data = "asdf",
+                Deleted = false
+            };
+
+            // Act
+            bool result = _service.TooManyFiles(file);
+
+            // Assert
+            Assert.AreEqual(true, result);
+        }
+
+        [TestMethod]
+        public void TestTooManyFilesFalse()
+        {
+            // Arrange
+            for (int i = 0; i < 96; i++)
+            {
+                File fil = new File
+                {
+                    ID = i + 1,
+                    ProjectID = 3,
+                    Name = "file5",
+                    Type = "JavaScript",
+                    Data = "asdf",
+                    Deleted = false
+                };
+                _service.AddFileToDb(fil);
+            }
+            File file = new File
+            {
+                ProjectID = 3,
+                Name = "file5",
+                Type = "JavaScript",
+                Data = "asdf",
+                Deleted = false
+            };
+
+            // Act
+            bool result = _service.TooManyFiles(file);
 
             // Assert
             Assert.AreEqual(false, result);
