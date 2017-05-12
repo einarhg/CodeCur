@@ -6,6 +6,7 @@
     ViewBag.Title = "Log in";
 }
 
+<!-- Checking if user is already logged in. -->
 @if (User.Identity.IsAuthenticated)
 {
     <p>You are already logged in, would you like to log out?</p>
@@ -52,10 +53,6 @@ else
                     <p>
                         New to Codecur? @Html.ActionLink("Sign up as a new user!", "Register")
                     </p>
-                    @* Enable this once you have account confirmation enabled for password reset functionality
-                        <p>
-                            @Html.ActionLink("Forgot your password?", "ForgotPassword")
-                        </p>*@
                 }
             </div>
             <p class="about-text">Welcome! Codecur is an online group editor...</p>

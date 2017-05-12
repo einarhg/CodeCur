@@ -12,6 +12,7 @@
             <img src="~/Images/share.svg" />
         </a>
     </div>
+    <!-- Checking if there are any files in the open project. -->
     @if (!Model.Files.Any())
     {
         <p class="empty-list">No files currently in @Model.ProjectName!</p>

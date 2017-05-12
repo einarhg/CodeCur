@@ -12,6 +12,7 @@
         <p class="autosave-on">Autosave: <span>on</span></p>
         @Html.ActionLink("<", "Project", "Home", new { id = Model.File.ProjectID }, new { @class = "back-file-button" })
     </menu>
+    <!-- We have to encode html so users can not inject code into our server. -->
     <% <div id="editor">@Html.Raw(Model.File.Data)</div> %>
     <div class="save-success-box"><span id="saveSuccess">Successfully saved!</span></div>
     <div class="save-error-box"><span id="saveError">An error came up, Content not saved!</span></div>
