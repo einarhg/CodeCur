@@ -183,7 +183,7 @@ namespace CodeCur.Controllers
                 // Checks if 2 files have the same name and type
                 if(!_service.ValidFileName(file.Name, file.Type, model.ProjectID))
                 {
-                    ModelState.AddModelError("duplicateFileError", "That filename already excists in this project!");
+                    ModelState.AddModelError("duplicateFileError", "That filename already exists in this project!");
                 }
                 else if(_service.TooManyFiles(file))
                 {
