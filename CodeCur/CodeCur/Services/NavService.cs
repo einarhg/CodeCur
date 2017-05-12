@@ -260,7 +260,7 @@ namespace CodeCur.Services
         /// <param name="username"></param>
         /// <param name="projectID"></param>
         /// <returns>Boolean.</returns>
-        public bool AlreadyHasAccesss(string username, int projectID)
+        public bool HasAccess(string username, int projectID)
         {
             string userID = (from user in _db.Users
                              where user.UserName == username

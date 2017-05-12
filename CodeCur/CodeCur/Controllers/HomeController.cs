@@ -232,7 +232,7 @@ namespace CodeCur.Controllers
                 {
                     ModelState.AddModelError("shareError", "There is no user by that username!");
                 }
-                else if (_service.AlreadyHasAccesss(model.UserName, model.ProjectID))
+                else if (_service.HasAccess(model.UserName, model.ProjectID))
                 {
                     ModelState.AddModelError("shareError", "This user has already been added!");
                 }

@@ -472,5 +472,59 @@ namespace CodeCur.Tests.Services
             // Assert
             Assert.AreEqual(false, result);
         }
+
+        [TestMethod]
+        public void TestDoesUserExistTrue()
+        {
+            // Arrange
+            const string userID = "nonni";
+
+            // Act
+            bool result = _service.DoesUserExist(userID);
+
+            // Assert
+            Assert.AreEqual(true, result);
+        }
+
+        [TestMethod]
+        public void TestDoesUserExistFalse()
+        {
+            // Arrange
+            const string userID = "noexist";
+
+            // Act
+            bool result = _service.DoesUserExist(userID);
+
+            // Assert
+            Assert.AreEqual(false, result);
+        }
+
+        [TestMethod]
+        public void TestHasAccessTrue()
+        {
+            // Arrange
+            const string userID = "nonni";
+            const int projectID = 1;
+
+            // Act
+            bool result = _service.HasAccess(userID, projectID);
+
+            // Assert
+            Assert.AreEqual(true, result);
+        }
+
+        [TestMethod]
+        public void TestHasAccessFalse()
+        {
+            // Arrange
+            const string userID = "jonni";
+            const int projectID = 1;
+
+            // Act
+            bool result = _service.HasAccess(userID, projectID);
+
+            // Assert
+            Assert.AreEqual(false, result);
+        }
     }
 }
