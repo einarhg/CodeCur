@@ -21,6 +21,9 @@ namespace CodeCur.Models
         }
     }
 
+    /// <summary>
+    /// Interface for mock database.
+    /// </summary>
     public interface IAppDataContext
     {
         IDbSet<Project> Projects { get; set; }
@@ -30,6 +33,9 @@ namespace CodeCur.Models
         int SaveChanges();
     }
 
+    /// <summary>
+    /// Database connection.
+    /// </summary>
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>, IAppDataContext
     {
         public IDbSet<Project> Projects { get; set; }

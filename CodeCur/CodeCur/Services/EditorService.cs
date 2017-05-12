@@ -50,7 +50,6 @@ namespace CodeCur.Services
                              select item).SingleOrDefault();
                 file.Data = content;
 
-                // Success check?
                 _db.SaveChanges();
             }
         }

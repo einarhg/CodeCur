@@ -51,15 +51,7 @@
             type: 'POST',
             url: "@Url.Action("Save", "Editor", new { id = Model.File.ID })",
             data: {
-                Data: code,
-            //},
-            //success: function(result) {
-            //    $(".save-success-box").css({ 'opacity': '1' });
-            //    setTimeout(function () { $(".save-success-box").css({ 'opacity': '0'}); }, 2500);
-            //},
-            //error: function (result) {
-            //    $(".save-error-box").css({ 'opacity': '1' });
-            //    setTimeout(function () { $(".save-error-box").css({ 'opacity': '0' }); }, 2500);
+                Data: code
             }
         });
     }
