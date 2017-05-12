@@ -226,17 +226,17 @@ namespace CodeCur.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult ShareProject(ShareProjectViewModel model)
         {
-            if (!_service.DoesUserExist(model.UserName))
+            if (ModelState.IsValid)
             {
-                ModelState.AddModelError("shareError", "There is no user by that username!");
-            }
-            else if (_service.AlreadyHasAccesss(model.UserName, model.ProjectID))
-            {
-                ModelState.AddModelError("shareError", "This user has already been added!");
-            }
-            else
-            {
-                if (ModelState.IsValid)
+                if (!_service.DoesUserExist(model.UserName))
+                {
+                    ModelState.AddModelError("shareError", "There is no user by that username!");
+                }
+                else if (_service.AlreadyHasAccesss(model.UserName, model.ProjectID))
+                {
+                    ModelState.AddModelError("shareError", "This user has already been added!");
+                }
+                else
                 {
                     _service.AddUserProjectRelationByName(model.UserName, model.ProjectID);
                     return RedirectToAction("Project", "Home", new { id = model.ProjectID });
