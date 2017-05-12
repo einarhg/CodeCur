@@ -34,6 +34,7 @@
 </div>
 
 <script>
+    // Uses ajax to delete projects, and removes user from project if he doesn't own it.
     $(function () {
         $(document).on('click', '.list-delete-button', function () {
             var owner = $(this).data('owner');

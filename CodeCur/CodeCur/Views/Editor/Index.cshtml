@@ -19,6 +19,7 @@
 
 
 <script>
+    // Settings for the editor, checking which kind of file is being edited.
     var editor = ace.edit("editor");
     editor.focus();
     var type = @Html.Raw(Json.Encode(Model.File.Type));
@@ -33,6 +34,7 @@
         editor.getSession().setMode("ace/mode/text");
     }
 
+    // Saving with ctrl+s and Cmd+s.
     $(document).keydown(function (event) {
         if ((event.ctrlKey || event.metaKey) && event.which == 83) {
             saveFile();
@@ -40,6 +42,7 @@
         };
     });
 
+    // Taking data from editor and storing it in the database.
     function saveFile() {
         var editor = ace.edit("editor");
         var code = editor.getValue();
@@ -64,6 +67,7 @@
     var fileID = @Model.File.ID;
     var silent = false;
 
+    // Live editing. For users to see each others every move.
     editorHub.client.onChange = function (changeData) {
         //console.log(changeData);
         silent = true;
@@ -71,6 +75,7 @@
         silent = false;
     };
 
+    // Letting other users know who joined the file.
     editorHub.client.onJoin = function (username) {
         silent = true;
         $('#joinedEditor').append('<li>' + username + ' just joined! </li>');
@@ -78,6 +83,7 @@
         silent = false;
     };
 
+    // Letting other users know who left the file.
     editorHub.client.onLeave = function (username) {
         silent = true;
         $('#userIsEditing').html('');
@@ -90,6 +96,7 @@
         editorHub.server.leaveFile(fileID);
     });
 
+    // Letting other users know where they are positioned in the file.
     editorHub.client.moveCursor = function (row, column, username) {
         silent = true;
         $('#userIsEditing').css({ 'padding': '5px 10px' });
@@ -97,9 +104,10 @@
         silent = false;
     };
 
+    // Starting the SignalR connection
     $.connection.hub.start().done(function () {
         editorHub.server.joinFile(fileID);
-
+        // Autosaving file every 2 seconds. May change when better servers can handle the website.
         setInterval(function () {saveFile()}, 2000);
 
         editor.on("change", function (obj) {
