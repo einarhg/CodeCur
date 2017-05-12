@@ -575,6 +575,7 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Images\404.gif" />
     <Content Include="Images\css.svg" />
     <Content Include="Images\favicon.ico" />
     <Content Include="Images\html.svg" />
@@ -641,7 +642,7 @@
     <Content Include="Views\Home\CreateFile.cshtml" />
     <Content Include="Views\Home\ShareProject.cshtml" />
     <Content Include="Views\Home\AccessDenied.cshtml" />
-    <Content Include="Views\Shared\Error404.cshtml" />
+    <Content Include="Views\Shared\ErrorNotFound.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
