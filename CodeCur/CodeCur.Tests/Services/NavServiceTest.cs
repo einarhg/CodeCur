@@ -429,5 +429,21 @@ namespace CodeCur.Tests.Services
             // Assert
             Assert.AreEqual(2, result.Count);
         }
+
+        //[TestMethod]
+        //public void TestRemoveUserFromProject()
+        //{
+        //    // Arrange
+        //    const int projectID = 4;
+        //    const string username = "nonni";
+        //    const string userID = "a";
+
+        //    // Act
+        //    _service.RemoveUserFromProject(projectID, username);
+        //    List<Project> result = _service.GetUserProjects(userID);
+
+        //    // Assert
+        //    Assert.AreEqual(2, result.Count);
+        //}
     }
 }
