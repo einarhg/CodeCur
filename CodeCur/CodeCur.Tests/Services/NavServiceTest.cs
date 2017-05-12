@@ -156,7 +156,7 @@ namespace CodeCur.Tests.Services
 
             var r7 = new UserProjectRelation
             {
-                ID = 1,
+                ID = 7,
                 UserID = "a",
                 ProjectID = 4,
                 Deleted = false
@@ -430,20 +430,47 @@ namespace CodeCur.Tests.Services
             Assert.AreEqual(2, result.Count);
         }
 
-        //[TestMethod]
-        //public void TestRemoveUserFromProject()
-        //{
-        //    // Arrange
-        //    const int projectID = 4;
-        //    const string username = "nonni";
-        //    const string userID = "a";
+        [TestMethod]
+        public void TestRemoveUserFromProject()
+        {
+            // Arrange
+            const int projectID = 4;
+            const string userID = "a";
 
-        //    // Act
-        //    _service.RemoveUserFromProject(projectID, username);
-        //    List<Project> result = _service.GetUserProjects(userID);
+            // Act
+            _service.RemoveUserFromProject(projectID, userID);
+            List<Project> result = _service.GetUserProjects(userID);
 
-        //    // Assert
-        //    Assert.AreEqual(2, result.Count);
-        //}
+            // Assert
+            Assert.AreEqual(2, result.Count);
+        }
+
+        [TestMethod]
+        public void TestAuthorizeProjectAccessAccept()
+        {
+            // Arrange
+            const int projectID = 4;
+            const string userID = "a";
+
+            // Act
+            bool result = _service.AuthorizeProjectAccess(userID, projectID);
+
+            // Assert
+            Assert.AreEqual(true, result);
+        }
+
+        [TestMethod]
+        public void TestAuthorizeProjectAccessDeny()
+        {
+            // Arrange
+            const int projectID = 4;
+            const string userID = "b";
+
+            // Act
+            bool result = _service.AuthorizeProjectAccess(userID, projectID);
+
+            // Assert
+            Assert.AreEqual(false, result);
+        }
     }
 }

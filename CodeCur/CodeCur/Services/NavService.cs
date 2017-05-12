@@ -210,10 +210,10 @@ namespace CodeCur.Services
         /// </summary>
         /// <param name="ID"></param>
         /// <param name="username"></param>
-        public void RemoveUserFromProject(int ID, string username)
+        public void RemoveUserFromProject(int ID, string userID)
         {
             var ToRemove = (from user in _db.UserProjectRelations
-                            where user.ProjectID == ID && username == user.UserID
+                            where user.ProjectID == ID && userID == user.UserID
                             select user).FirstOrDefault();
 
             ToRemove.Deleted = true;
