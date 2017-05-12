@@ -15,7 +15,7 @@
                 <div class="account-form-group">
                     @Html.LabelFor(m => m.UserName, new { @class = "" })
                     <div class="">
-                        @Html.TextBoxFor(m => m.UserName, new { @class = "", @placeholder = "Username" })
+                        @Html.TextBoxFor(m => m.UserName, new { @class = "", @placeholder = "Username", @autofocus = "autofocus" })
                         @Html.ValidationMessageFor(m => m.UserName, "", new { @class = "text-danger" })
                     </div>
                 </div>

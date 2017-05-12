@@ -13,7 +13,7 @@
             @Html.LabelFor(m => m.UserName, new { @class = "" })
             <div>
                 @Html.ValidationMessage("shareError", new { @class = "text-danger" })
-                @Html.TextBoxFor(m => m.UserName, new { @class = "", @placeholder = "The user you want to share with" })
+                @Html.TextBoxFor(m => m.UserName, new { @class = "", @placeholder = "The user you want to share with", @autofocus = "autofocus" })
             </div>
         </div>
         @Html.HiddenFor(m => m.ProjectID)
