@@ -66,10 +66,12 @@ namespace CodeCur.Models
     public class RegisterViewModel
     {
         [Required]
+        [StringLength(42, ErrorMessage = "The {0} cannot be longer than 42 characters.")]
         [Display(Name = "Username")]
         public string UserName { get; set; }
 
         [Required]
+        [StringLength(100, ErrorMessage = "The {0} cannot be longer than 100 characters.")]
         [EmailAddress]
         [Display(Name = "Email")]
         public string Email { get; set; }
