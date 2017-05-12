@@ -548,7 +548,7 @@ namespace CodeCur.Tests.Services
         public void TestTooManyProjectsTrue()
         {
             // Arrange
-            for (int i = 0; i < 95; i++)
+            for(int i = 0; i < 95; i++)
             {
                 Project proj = new Project
                 {
@@ -579,7 +579,7 @@ namespace CodeCur.Tests.Services
         public void TestTooManyProjectsFalse()
         {
             // Arrange
-            for (int i = 0; i < 94; i++)
+            for(int i = 0; i < 94; i++)
             {
                 Project proj = new Project
                 {
@@ -610,7 +610,7 @@ namespace CodeCur.Tests.Services
         public void TestTooManyFilesTrue()
         {
             // Arrange
-            for (int i = 0; i < 97; i++)
+            for(int i = 0; i < 97; i++)
             {
                 File fil = new File
                 {
@@ -643,7 +643,7 @@ namespace CodeCur.Tests.Services
         public void TestTooManyFilesFalse()
         {
             // Arrange
-            for (int i = 0; i < 96; i++)
+            for(int i = 0; i < 96; i++)
             {
                 File fil = new File
                 {

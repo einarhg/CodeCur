@@ -27,7 +27,7 @@ namespace FakeDbSet
         {
             get
             {
-                if (_nonStaticData == null)
+                if(_nonStaticData == null)
                 {
                     return _staticData;
                 }
@@ -74,7 +74,7 @@ namespace FakeDbSet
         /// <param name="clearDownExistingData"></param>
         public InMemoryDbSet(bool clearDownExistingData)
         {
-            if (clearDownExistingData)
+            if(clearDownExistingData)
             {
                 Clear();
             }
@@ -110,7 +110,7 @@ namespace FakeDbSet
 
         public virtual T Find(params object[] keyValues)
         {
-            if (FindFunction == null)
+            if(FindFunction == null)
             {
                 return FindFunction(Data, keyValues);
             }
